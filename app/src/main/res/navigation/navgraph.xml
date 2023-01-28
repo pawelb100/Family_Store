@@ -8,15 +8,24 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.familystore.familystore.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="homeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_appFragment"
+            app:destination="@id/appFragment" />
+    </fragment>
     <fragment
         android:id="@+id/appFragment"
         android:name="com.familystore.familystore.fragments.AppFragment"
-        android:label="fragment_app"
+        android:label="appFragment"
         tools:layout="@layout/fragment_app" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.familystore.familystore.fragments.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="settingsFragment" />
+    <fragment
+        android:id="@+id/filesFragment"
+        android:name="com.familystore.familystore.fragments.FilesFragment"
+        android:label="filesFragment"
+        tools:layout="@layout/fragment_files" />
 </navigation>
