@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.familystore.familystore.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/appFragment"
+        android:name="com.familystore.familystore.fragments.AppFragment"
+        android:label="fragment_app"
+        tools:layout="@layout/fragment_app" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.familystore.familystore.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
+</navigation>
