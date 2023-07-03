@@ -59,4 +59,7 @@ dependencies {
     //sharedViewModel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
+
 }

@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.familystore.familystore.databinding.FragmentAppBinding;
+import com.familystore.familystore.listeners.database.SingleAppListener;
+import com.familystore.familystore.models.App;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
 public class AppFragment extends Fragment {
@@ -23,6 +25,15 @@ public class AppFragment extends Fragment {
 
         ViewModelProvider viewModelProvider = new ViewModelProvider(requireActivity());
         viewModel = viewModelProvider.get(MainViewModel.class);
+
+        String id = getArguments().getString("appId");
+
+        viewModel.getAppById(id, new SingleAppListener() {
+            @Override
+            public void onResult(App result) {
+
+            }
+        });
 
 
         return binding.getRoot();

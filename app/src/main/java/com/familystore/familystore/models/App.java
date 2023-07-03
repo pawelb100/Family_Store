@@ -5,7 +5,7 @@ import java.util.List;
 public class App extends AppPreview {
 
 
-    private String author;
+    private String authorId;
 
     private int lastUpdated;
 
@@ -15,21 +15,28 @@ public class App extends AppPreview {
 
     private List<String> pictureUrls;
 
-    public App(String id, String name, String pictureUrl, String version, String author, int lastUpdated, String description, String changelog, List<String> pictureUrls) {
+    private String downloadUrl;
+
+    public App() {
+        super();
+    }
+
+    public App(String id, String name, String pictureUrl, String version, String author, int lastUpdated, String description, String changelog, List<String> pictureUrls, String downloadUrl) {
         super(id, name, pictureUrl, version);
-        this.author = author;
+        this.authorId = author;
         this.lastUpdated = lastUpdated;
         this.description = description;
         this.changelog = changelog;
         this.pictureUrls = pictureUrls;
+        this.downloadUrl = downloadUrl;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
     public int getLastUpdated() {
@@ -62,6 +69,14 @@ public class App extends AppPreview {
 
     public void setPictureUrls(List<String> pictureUrls) {
         this.pictureUrls = pictureUrls;
+    }
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
     }
 }
 

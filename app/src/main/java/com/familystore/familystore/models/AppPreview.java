@@ -1,5 +1,7 @@
 package com.familystore.familystore.models;
 
+import java.util.Objects;
+
 public class AppPreview {
 
     private String id;
@@ -8,6 +10,8 @@ public class AppPreview {
     private String logoUrl;
 
     private String version;
+
+    public AppPreview() {}
 
     public AppPreview(String id, String name, String pictureUrl, String version) {
         this.id = id;
@@ -46,5 +50,19 @@ public class AppPreview {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppPreview that = (AppPreview) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
