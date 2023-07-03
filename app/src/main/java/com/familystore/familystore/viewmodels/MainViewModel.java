@@ -7,8 +7,10 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.familystore.familystore.listeners.database.AppListListener;
 import com.familystore.familystore.listeners.database.SingleAppListener;
+import com.familystore.familystore.listeners.database.UserListener;
 import com.familystore.familystore.models.App;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,7 +65,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void removeAppListListener() {
-        if (appListListener !=null) {
+        if (appListListener != null) {
             appListReference.removeEventListener(appListListener);
             appListListener = null;
         }
@@ -83,7 +85,21 @@ public class MainViewModel extends AndroidViewModel {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
 
+    public void getUserById(String id, UserListener listener) {
+
+        usersReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                listener.onResult(user);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+    }
 }
