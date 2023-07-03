@@ -1,136 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".fragments.AppFragment">
 
     <RelativeLayout
-        android:id="@+id/appHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/baseline_settings_24"
-            />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="25sp"
-            android:textColor="@color/black"
-
-            android:layout_toEndOf="@+id/logo"
-
-            />
-
-        <TextView
-            android:id="@+id/version"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="18sp"
-
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/logo"
-            android:layout_below="@id/name"
-
-            />
-
-        <TextView
-            android:id="@+id/author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="20sp"
-            android:textColor="@color/grey_700"
-
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/logo"
-            android:layout_below="@id/version"
-
-            />
-
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/download"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Pobierz"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-
-        android:layout_below="@id/appHeader"
-        />
-
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/download"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:text="aaa"
-        />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/changelogCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="6dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="@color/purple_200"
-        android:layout_below="@id/description">
+        android:padding="10dp">
 
         <RelativeLayout
+            android:id="@+id/appHeader"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/baseline_settings_24" />
 
             <TextView
-                android:id="@+id/changelogTitle"
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/logo"
+                android:text="@string/app_name"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="Lista zmian:" />
+
+                android:textSize="25sp"
+
+                />
 
             <TextView
-                android:id="@+id/changelogContent"
+                android:id="@+id/version"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/changelogTitle"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/black"
+                android:layout_below="@id/name"
+                android:layout_marginTop="5dp"
+
+                android:layout_toEndOf="@+id/logo"
+                android:text="@string/app_name"
                 android:textSize="18sp"
-                android:text="aaa" />
+
+                />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/version"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/logo"
+
+                android:text="Autor: "
+                android:textColor="@color/grey_700"
+                android:textSize="20sp"
+
+                />
 
         </RelativeLayout>
 
+        <Button
+            android:id="@+id/download"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/appHeader"
+            android:layout_marginTop="10dp"
+            android:text="Pobierz"
+
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/download"
+            android:text="aaa"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pictures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:orientation="horizontal"
+
+            />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/changelogCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pictures"
+            app:cardBackgroundColor="@color/purple_200"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/changelogTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Lista zmian:"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/changelogContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/changelogTitle"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="aaa"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
+            </RelativeLayout>
 
 
-</RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+
+</ScrollView>

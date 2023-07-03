@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.familystore.familystore.adapters.PictureListAdapter;
 import com.familystore.familystore.databinding.FragmentAppBinding;
 import com.familystore.familystore.listeners.database.SingleAppListener;
 import com.familystore.familystore.listeners.database.UserListener;
@@ -21,6 +23,8 @@ public class AppFragment extends Fragment {
     private FragmentAppBinding binding;
 
     private MainViewModel viewModel;
+
+    private PictureListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +52,11 @@ public class AppFragment extends Fragment {
                 Picasso.get()
                         .load(result.getLogoUrl())
                         .into(binding.logo);
+
+            adapter = new PictureListAdapter(getContext(), result.getPictureUrls());
+            binding.pictures.setAdapter(adapter);
+            binding.pictures.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
         });
 
 
