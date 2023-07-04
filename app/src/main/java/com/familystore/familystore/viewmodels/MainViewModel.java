@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +27,24 @@ public class MainViewModel extends AndroidViewModel {
 
     private final FirebaseDatabase database;
     private final FirebaseAuth auth;
+    private final FirebaseStorage storage;
 
     private ValueEventListener appListListener = null;
 
     private final DatabaseReference appListReference;
     private final DatabaseReference usersReference;
+    private final StorageReference appDataReference;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
+
         appListReference = database.getReference().child("Family Store 2/Apps");
         usersReference = database.getReference().child("Family Store 2/Users");
+
+        appDataReference = storage.getReference().child("Family Store 2/Apps");
     }
 
     public void addAppListListener(AppListListener listener) {
@@ -49,6 +57,15 @@ public class MainViewModel extends AndroidViewModel {
                 if (snapshot.exists())
                     for (DataSnapshot child : snapshot.getChildren()) {
                         AppPreview app = child.getValue(AppPreview.class);
+                        if (app.getLogoUrl() == null) {
+                            appDataReference
+                                    .child(app.getId())
+                                    .child("logo.png")
+                                    .getDownloadUrl()
+                                    .addOnSuccessListener(uri -> {
+                                        app.setLogoUrl(uri.toString());
+                                    });
+                        }
                         apps.add(app);
                     }
 
