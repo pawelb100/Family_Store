@@ -36,6 +36,8 @@ public class HomeFragment extends Fragment {
         ViewModelProvider viewModelProvider = new ViewModelProvider(requireActivity());
         viewModel = viewModelProvider.get(MainViewModel.class);
 
+        adapter = null;
+
         viewModel.addAppListListener(result -> {
 
             if (adapter == null) {

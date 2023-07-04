@@ -89,6 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/description"
             android:orientation="horizontal"
+            tools:listitem="@layout/list_item_picture"
 
             />
 
