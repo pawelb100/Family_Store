@@ -54,22 +54,21 @@ public class MainViewModel extends AndroidViewModel {
 
                 List<AppPreview> apps = new ArrayList<>();
 
-                if (snapshot.exists())
+                if (snapshot.exists()) {
                     for (DataSnapshot child : snapshot.getChildren()) {
                         AppPreview app = child.getValue(AppPreview.class);
-                        if (app.getLogoUrl() == null) {
-                            appDataReference
-                                    .child(app.getId())
-                                    .child("logo.png")
-                                    .getDownloadUrl()
-                                    .addOnSuccessListener(uri -> {
-                                        app.setLogoUrl(uri.toString());
-                                    });
-                        }
+                        assert app != null;
+                        appDataReference
+                                .child(app.getId())
+                                .child("logo.png")
+                                .getDownloadUrl()
+                                .addOnSuccessListener(uri -> {
+                                    app.setLogoUrl(uri.toString());
+                                });
                         apps.add(app);
                     }
-
-                listener.onResult(apps);
+                    listener.onResult(apps);
+                }
             }
 
             @Override
@@ -95,7 +94,52 @@ public class MainViewModel extends AndroidViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 App app = snapshot.getValue(App.class);
+                // just in case to avoid crashes
+                if (app == null) {
+                    return;
+                }
+                // fix line breaks
+                app.setDescription(
+                        app.getDescription().replace("\\n", "\n")
+                );
+                app.setChangelog(
+                        app.getChangelog().replace("\\n", "\n")
+                );
+                // initial load
                 listener.onResult(app);
+                // add download urls for missing properties
+                // logo
+                appDataReference
+                        .child(app.getId())
+                        .child("logo.png")
+                        .getDownloadUrl()
+                        .addOnSuccessListener(uri -> {
+                            app.setLogoUrl(uri.toString());
+                            listener.onResult(app);
+                        });
+                // app download url
+                appDataReference
+                        .child(app.getId())
+                        .child("latest.apk")
+                        .getDownloadUrl()
+                        .addOnSuccessListener(uri -> {
+                            app.setDownloadUrl(uri.toString());
+                            listener.onResult(app);
+                        });
+                // picture urls
+                appDataReference
+                        .child(app.getId())
+                        .child("pictures")
+                        .listAll()
+                        .addOnSuccessListener(listResult -> {
+                            List<String> pictureUrls = new ArrayList<>();
+                            for (StorageReference pictureRef : listResult.getItems()) {
+                                pictureRef.getDownloadUrl()
+                                        .addOnSuccessListener(uri -> pictureUrls.add(uri.toString()));
+                            }
+                            app.setPictureUrls(pictureUrls);
+                            listener.onResult(app);
+                        });
             }
 
             @Override
