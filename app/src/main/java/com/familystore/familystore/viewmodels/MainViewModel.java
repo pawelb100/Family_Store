@@ -64,6 +64,8 @@ public class MainViewModel extends AndroidViewModel {
                                 .getDownloadUrl()
                                 .addOnSuccessListener(uri -> {
                                     app.setLogoUrl(uri.toString());
+                                    // refresh logos
+                                    listener.onResult(apps);
                                 });
                         apps.add(app);
                     }
@@ -128,10 +130,13 @@ public class MainViewModel extends AndroidViewModel {
                             List<String> pictureUrls = new ArrayList<>();
                             for (StorageReference pictureRef : listResult.getItems()) {
                                 pictureRef.getDownloadUrl()
-                                        .addOnSuccessListener(uri -> pictureUrls.add(uri.toString()));
+                                        .addOnSuccessListener(uri -> {
+                                            pictureUrls.add(uri.toString());
+                                            // refresh picture list
+                                            listener.onResult(app);
+                                        });
                             }
                             app.setPictureUrls(pictureUrls);
-                            listener.onResult(app);
                         });
             }
 
