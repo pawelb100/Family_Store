@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/logo"
-                android:text="@string/app_name"
+                android:text=""
                 android:textColor="@color/black"
 
                 android:textSize="25sp"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="5dp"
 
                 android:layout_toEndOf="@+id/logo"
-                android:text="@string/app_name"
+                android:text=""
                 android:textSize="18sp"
 
                 />
@@ -56,7 +56,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/logo"
 
-                android:text="Autor: "
+                android:text=""
                 android:textColor="@color/grey_700"
                 android:textSize="20sp"
 
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/download"
-            android:text="aaa"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/pictures"
-            app:cardBackgroundColor="@color/purple_200"
+            app:cardBackgroundColor="@color/purple_100"
             app:cardCornerRadius="8dp"
             app:cardElevation="6dp"
             app:cardPreventCornerOverlap="true"
@@ -130,7 +130,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="aaa"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
