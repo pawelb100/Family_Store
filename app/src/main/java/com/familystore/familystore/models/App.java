@@ -1,5 +1,6 @@
 package com.familystore.familystore.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class App extends AppPreview {
@@ -7,15 +8,15 @@ public class App extends AppPreview {
 
     private String authorId;
 
-    private long lastUpdated;
+    private long lastUpdated = -1;
 
-    private String description;
+    private String description = "";
 
-    private String changelog;
+    private String changelog = "";
 
-    private List<String> pictureUrls;
+    private List<String> pictureUrls = new ArrayList<>();
 
-    private String downloadUrl;
+    private String downloadUrl = "";
 
     public App() {
         super();

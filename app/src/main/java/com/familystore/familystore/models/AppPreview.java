@@ -7,9 +7,9 @@ public class AppPreview {
     private String id;
     private String name;
 
-    private String logoUrl;
+    private String logoUrl = "";
 
-    private String version;
+    private String version = "";
 
     public AppPreview() {}
 
