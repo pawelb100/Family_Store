@@ -98,13 +98,6 @@ public class MainViewModel extends AndroidViewModel {
                 if (app == null) {
                     return;
                 }
-                // fix line breaks
-                app.setDescription(
-                        app.getDescription().replace("\\n", "\n")
-                );
-                app.setChangelog(
-                        app.getChangelog().replace("\\n", "\n")
-                );
                 // initial load
                 listener.onResult(app);
                 // add download urls for missing properties
