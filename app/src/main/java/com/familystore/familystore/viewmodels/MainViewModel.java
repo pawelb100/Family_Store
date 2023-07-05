@@ -55,21 +55,26 @@ public class MainViewModel extends AndroidViewModel {
                 List<AppPreview> apps = new ArrayList<>();
 
                 if (snapshot.exists()) {
+                    int i = 0;
                     for (DataSnapshot child : snapshot.getChildren()) {
                         AppPreview app = child.getValue(AppPreview.class);
                         assert app != null;
+
+                        int finalI = i;
                         appDataReference
                                 .child(app.getId())
                                 .child("logo.png")
                                 .getDownloadUrl()
                                 .addOnSuccessListener(uri -> {
                                     app.setLogoUrl(uri.toString());
-                                    // refresh logos
-                                    listener.onResult(apps);
+                                    // refresh logo
+                                    listener.onResult(apps, finalI);
                                 });
                         apps.add(app);
+                        i++;
                     }
-                    listener.onResult(apps);
+                    // initial list load
+                    listener.onResult(apps, -1);
                 }
             }
 
