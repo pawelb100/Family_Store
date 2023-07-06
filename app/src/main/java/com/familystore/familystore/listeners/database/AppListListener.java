@@ -5,6 +5,6 @@ import com.familystore.familystore.models.AppPreview;
 import java.util.List;
 
 public interface AppListListener {
-     void onResult(List<AppPreview> result);
+     void onResult(List<AppPreview> result, int changedItemId);
 
 }

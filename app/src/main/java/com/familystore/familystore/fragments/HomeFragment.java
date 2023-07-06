@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
 
         adapter = null;
 
-        viewModel.addAppListListener(result -> {
+        viewModel.addAppListListener((result, changedItemId) -> {
 
             if (adapter == null) {
 
@@ -46,17 +46,20 @@ public class HomeFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString("appId", id);
 
-                    Navigation.findNavController(binding.getRoot()).navigate(R.id.action_homeFragment_to_appFragment, bundle);
+                    Navigation.findNavController(binding.getRoot())
+                            .navigate(R.id.action_homeFragment_to_appFragment, bundle);
                 });
 
                 binding.rvAppList.setAdapter(adapter);
                 binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
             }
-            else
+            else {
                 adapter.updateData(result);
-
-
-
+                // refresh app logo
+                if (changedItemId != -1) {
+                    adapter.notifyItemChanged(changedItemId);
+                }
+            }
         });
 
         return binding.getRoot();
