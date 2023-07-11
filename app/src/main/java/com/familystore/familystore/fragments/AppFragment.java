@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.familystore.familystore.adapters.PictureListAdapter;
 import com.familystore.familystore.databinding.FragmentAppBinding;
+import com.familystore.familystore.utils.ApkDownloader;
 import com.familystore.familystore.utils.DateUtils;
 import com.familystore.familystore.viewmodels.MainViewModel;
 import com.squareup.picasso.Picasso;
@@ -23,6 +24,8 @@ public class AppFragment extends Fragment {
     private MainViewModel viewModel;
 
     private PictureListAdapter adapter;
+
+    private ApkDownloader apkDownloader;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +73,19 @@ public class AppFragment extends Fragment {
                     getContext(),
                     LinearLayoutManager.HORIZONTAL,
                     false
-                    ));
+            ));
+
+
+            // app downloader
+            if (apkDownloader == null)
+                if (!app.getDownloadUrl().equals("")) {
+                    apkDownloader = new ApkDownloader(getContext(), app.getDownloadUrl(), app.getName(), app.getVersion());
+                    binding.download.setOnClickListener(view -> {
+                        apkDownloader.download();
+                        view.setEnabled(false);
+                    });
+                }
+
         });
         return binding.getRoot();
     }
