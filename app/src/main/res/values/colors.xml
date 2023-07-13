@@ -8,9 +8,9 @@
     <color name="test">#FFFF0000</color>
 
     <!-- Classic theme -->
-    <color name="primary_classic">#FF6200EE</color>
-    <color name="primary_variant_classic">#FF3700B3</color>
-    <color name="status_bar_classic">#FF3700B3</color>
+    <color name="primary_classic">#FF6600CD</color>
+    <color name="primary_variant_classic">#FF6600CD</color>
+    <color name="status_bar_classic">#FF6600CD</color>
     <color name="background_card_classic">#ede7f6</color>
 
     <!-- Blue theme -->
