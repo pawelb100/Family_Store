@@ -1,6 +1,7 @@
 package com.familystore.familystore.activities;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -11,9 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.familystore.familystore.R;
 import com.familystore.familystore.databinding.ActivityMainBinding;
+import com.familystore.familystore.utils.SettingsManager;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SettingsManager settingsManager = new SettingsManager(PreferenceManager.getDefaultSharedPreferences(this), this);
+        settingsManager.setTheme();
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.topAppBar);
@@ -36,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
         requestPermissions();
+
+
+
+
     }
 
     @Override

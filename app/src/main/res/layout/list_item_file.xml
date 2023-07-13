@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="Aplikacja wersja 1.0"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_primary"
             android:layout_toEndOf="@id/fileIcon"
 
             />
