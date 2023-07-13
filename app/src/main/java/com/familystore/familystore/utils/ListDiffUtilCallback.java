@@ -2,18 +2,15 @@ package com.familystore.familystore.utils;
 
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.familystore.familystore.models.App;
-import com.familystore.familystore.models.AppPreview;
-
 import java.util.List;
 
 
-public class AppListDiffUtilCallback extends DiffUtil.Callback {
+public class ListDiffUtilCallback<T> extends DiffUtil.Callback {
 
-    private List<AppPreview> oldList;
-    private List<AppPreview> newList;
+    private List<T> oldList;
+    private List<T> newList;
 
-    public AppListDiffUtilCallback(List<AppPreview> oldList, List<AppPreview> newList) {
+    public ListDiffUtilCallback(List<T> oldList, List<T> newList) {
         this.oldList = oldList;
         this.newList = newList;
     }
