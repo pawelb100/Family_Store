@@ -1,12 +1,31 @@
 <resources>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="theme_entries">
+        <item>Systemowy</item>
+        <item>Jasny</item>
+        <item>Ciemny</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>system</item>
+        <item>light</item>
+        <item>dark</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="color_light_entries">
+        <item>Klasyczny</item>
+        <item>Niebieski</item>
+        <item>Pomarańczowy</item>
     </string-array>
+    <string-array name="color_light_values">
+        <item>classic</item>
+        <item>blue</item>
+        <item>orange</item>
+    </string-array>
+
+    <string-array name="color_dark_entries">
+        <item>Niebieski</item>
+    </string-array>
+    <string-array name="color_dark_values">
+        <item>blue</item>
+    </string-array>
+
 </resources>

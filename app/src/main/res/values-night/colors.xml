@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_classic">#90caf9</color>
+    <color name="primary_variant_classic">#FF282828</color>
+    <color name="status_bar_classic">#FF000000</color>
+    <color name="background_card_classic">#FF2B2B2B</color>
+
+    <color name="text_primary">#f5f5f5</color>
+    <color name="text_secondary">#FF616161</color>
+    <color name="text_accent">#FF03DAC5</color>
+    <color name="text_title">#f5f5f5</color>
+    <color name="background">#FF121212</color>
+    <color name="test">#FFFF0000</color>
+</resources>

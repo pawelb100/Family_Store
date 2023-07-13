@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_primary"
             android:layout_toEndOf="@+id/logo"
 
             />
