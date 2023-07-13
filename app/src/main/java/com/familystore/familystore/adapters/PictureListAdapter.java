@@ -5,16 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.listeners.lists.AppListClickListener;
-import com.familystore.familystore.models.AppPreview;
-import com.familystore.familystore.utils.AppListDiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.familystore.familystore.R;
 import com.familystore.familystore.listeners.lists.AppListClickListener;
 import com.familystore.familystore.models.AppPreview;
-import com.familystore.familystore.utils.AppListDiffUtilCallback;
+import com.familystore.familystore.utils.ListDiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -73,7 +73,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
 
     public void updateData(List<AppPreview> newData) {
 
-        AppListDiffUtilCallback diffUtilCallback = new AppListDiffUtilCallback(appPreviewList, newData);
+        ListDiffUtilCallback<AppPreview> diffUtilCallback = new ListDiffUtilCallback<>(appPreviewList, newData);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback);
 
         appPreviewList = newData;

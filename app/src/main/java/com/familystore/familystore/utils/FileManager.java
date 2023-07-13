@@ -46,5 +46,10 @@ public class FileManager {
         context.startActivity(intent);
     }
 
+    public boolean deleteFile(File file) {
+        return file.delete();
+    }
+
+
 
 }
