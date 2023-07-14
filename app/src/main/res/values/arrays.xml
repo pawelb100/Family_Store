@@ -14,11 +14,15 @@
         <item>Klasyczny</item>
         <item>Niebieski</item>
         <item>Pomarańczowy</item>
+        <item>Pełny niebieski</item>
+        <item>Pełny pomarańczowy</item>
     </string-array>
     <string-array name="color_values">
         <item>classic</item>
         <item>blue</item>
         <item>orange</item>
+        <item>deepblue</item>
+        <item>deeporange</item>
     </string-array>
 
 </resources>
