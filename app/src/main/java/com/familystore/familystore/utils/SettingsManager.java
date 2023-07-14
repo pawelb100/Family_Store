@@ -45,6 +45,12 @@ public class SettingsManager {
             case "orange":
                 context.setTheme(R.style.Theme_FamilyStoreOrange);
                 break;
+            case "deepblue":
+                context.setTheme(R.style.Theme_FamilyStoreDeepBlue);
+                break;
+            case "deeporange":
+                context.setTheme(R.style.Theme_FamilyStoreDeepOrange);
+                break;
             default:
         }
     }

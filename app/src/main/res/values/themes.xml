@@ -10,10 +10,8 @@
     <!-- Classic theme -->
     <style name="Theme.FamilyStoreClassic" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_classic</item>
-        <item name="colorPrimaryVariant">@color/primary_variant_classic</item>
-        <item name="colorOnPrimary">@color/background</item>
+        <item name="colorOnPrimary">@color/text_title</item>
         <item name="colorSecondary">@color/text_accent</item>
-        <item name="colorSecondaryVariant">@color/test</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_classic</item>
         <item name="materialCardViewStyle">@style/CardViewStyleClassic</item>
@@ -25,10 +23,8 @@
     <!-- Blue theme -->
     <style name="Theme.FamilyStoreBlue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_blue</item>
-        <item name="colorPrimaryVariant">@color/primary_variant_blue</item>
-        <item name="colorOnPrimary">@color/background</item>
+        <item name="colorOnPrimary">@color/text_title</item>
         <item name="colorSecondary">@color/text_accent</item>
-        <item name="colorSecondaryVariant">@color/test</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_blue</item>
         <item name="materialCardViewStyle">@style/CardViewStyleBlue</item>
@@ -40,16 +36,46 @@
     <!-- Orange theme -->
     <style name="Theme.FamilyStoreOrange" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_orange</item>
-        <item name="colorPrimaryVariant">@color/primary_variant_orange</item>
-        <item name="colorOnPrimary">@color/background</item>
+        <item name="colorOnPrimary">@color/text_title</item>
         <item name="colorSecondary">@color/text_accent</item>
-        <item name="colorSecondaryVariant">@color/test</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_orange</item>
         <item name="materialCardViewStyle">@style/CardViewStyleOrange</item>
     </style>
     <style name="CardViewStyleOrange" parent="BaseCardViewStyle">
         <item name="cardBackgroundColor">@color/background_card_orange</item>
+    </style>
+
+    <!-- Deep Blue theme -->
+    <style name="Theme.FamilyStoreDeepBlue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_deepblue</item>
+        <item name="colorOnPrimary">@color/text_title</item>
+        <item name="colorSecondary">@color/text_accent_deepblue</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/status_bar_deepblue</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleFullBlue</item>
+        <item name="android:windowBackground">@color/background_deepblue</item>
+        <item name="colorSurface">@color/bottomnav_deepblue</item>
+        <item name="android:navigationBarColor">@color/navbar_deepblue</item>
+    </style>
+    <style name="CardViewStyleFullBlue" parent="BaseCardViewStyle">
+        <item name="cardBackgroundColor">@color/background_card_deepblue</item>
+    </style>
+
+    <!-- Deep Orange theme -->
+    <style name="Theme.FamilyStoreDeepOrange" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_deeporange</item>
+        <item name="colorOnPrimary">@color/text_title</item>
+        <item name="colorSecondary">@color/text_accent_deeporange</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/status_bar_deeporange</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleFullOrange</item>
+        <item name="android:windowBackground">@color/background_deeporange</item>
+        <item name="colorSurface">@color/bottomnav_deeporange</item>
+        <item name="android:navigationBarColor">@color/navbar_deeporange</item>
+    </style>
+    <style name="CardViewStyleFullOrange" parent="BaseCardViewStyle">
+        <item name="cardBackgroundColor">@color/background_card_deeporange</item>
     </style>
 
 </resources>
