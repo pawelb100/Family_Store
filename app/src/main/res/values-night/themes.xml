@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.FamilyStoreBlue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Classic theme -->
+    <style name="Theme.FamilyStoreClassic" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_classic</item>
         <item name="colorPrimaryVariant">@color/primary_variant_classic</item>
         <item name="colorOnPrimary">@color/background</item>
@@ -7,5 +8,39 @@
         <item name="colorSecondaryVariant">@color/test</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_classic</item>
+        <item name="cardViewStyle">@style/CardViewStyleClassic</item>
+    </style>
+    <style name="CardViewStyleClassic" parent="BaseCardViewStyle">
+        <item name="cardBackgroundColor">@color/background_card_classic</item>
+    </style>
+
+    <!-- Blue theme -->
+    <style name="Theme.FamilyStoreBlue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryVariant">@color/primary_variant_blue</item>
+        <item name="colorOnPrimary">@color/background</item>
+        <item name="colorSecondary">@color/text_accent</item>
+        <item name="colorSecondaryVariant">@color/test</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/status_bar_blue</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleBlue</item>
+    </style>
+    <style name="CardViewStyleBlue" parent="BaseCardViewStyle">
+        <item name="cardBackgroundColor">@color/background_card_blue</item>
+    </style>
+
+    <!-- Orange theme -->
+    <style name="Theme.FamilyStoreOrange" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_orange</item>
+        <item name="colorPrimaryVariant">@color/primary_variant_orange</item>
+        <item name="colorOnPrimary">@color/background</item>
+        <item name="colorSecondary">@color/text_accent</item>
+        <item name="colorSecondaryVariant">@color/test</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/status_bar_orange</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleOrange</item>
+    </style>
+    <style name="CardViewStyleOrange" parent="BaseCardViewStyle">
+        <item name="cardBackgroundColor">@color/background_card_orange</item>
     </style>
 </resources>
