@@ -10,22 +10,15 @@
         <item>dark</item>
     </string-array>
 
-    <string-array name="color_light_entries">
+    <string-array name="color_entries">
         <item>Klasyczny</item>
         <item>Niebieski</item>
         <item>Pomarańczowy</item>
     </string-array>
-    <string-array name="color_light_values">
+    <string-array name="color_values">
         <item>classic</item>
         <item>blue</item>
         <item>orange</item>
-    </string-array>
-
-    <string-array name="color_dark_entries">
-        <item>Niebieski</item>
-    </string-array>
-    <string-array name="color_dark_values">
-        <item>blue</item>
     </string-array>
 
 </resources>
