@@ -8,7 +8,7 @@
         <item name="colorSecondaryVariant">@color/test</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_classic</item>
-        <item name="cardViewStyle">@style/CardViewStyleClassic</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleClassic</item>
     </style>
     <style name="CardViewStyleClassic" parent="BaseCardViewStyle">
         <item name="cardBackgroundColor">@color/background_card_classic</item>

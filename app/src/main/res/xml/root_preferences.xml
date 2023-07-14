@@ -12,18 +12,10 @@
 
         <ListPreference
             app:defaultValue="classic"
-            app:entries="@array/color_light_entries"
-            app:entryValues="@array/color_light_values"
-            app:key="color_light"
-            app:title="Kolor dla trybu jasnego"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="blue"
-            app:entries="@array/color_dark_entries"
-            app:entryValues="@array/color_dark_values"
-            app:key="color_dark"
-            app:title="Kolor dla trybu ciemnego"
+            app:entries="@array/color_entries"
+            app:entryValues="@array/color_values"
+            app:key="color"
+            app:title="Kolor"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
