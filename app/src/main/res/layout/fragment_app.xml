@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/download"
-            android:text="@string/hello_world_message"
+            android:text=""
             android:textSize="16sp"
             android:layout_marginBottom="5dp"
             android:textStyle="italic" />
