@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.PictureListAdapter;
 import com.familystore.familystore.databinding.FragmentAppBinding;
 import com.familystore.familystore.utils.ApkDownloader;
@@ -38,19 +39,24 @@ public class AppFragment extends Fragment {
 
         viewModel.getAppById(id, app -> {
             binding.name.setText(app.getName());
-            binding.version.setText("Wersja: " + app.getVersion());
+            binding.version.setText(getString(
+                    R.string.version_info,
+                    app.getVersion()
+            ));
             binding.description.setText(app.getDescription());
 
             viewModel.getUserById(
                     app.getAuthorId(),
-                    user -> binding.author.setText("Autor: " + user.getName())
+                    user -> binding.author.setText(getString(R.string.author_info, user.getName()))
             );
             // last updated
             if (app.getLastUpdated() == -1) {
                 binding.lastUpdated.setVisibility(View.GONE);
             } else {
-                binding.lastUpdated.setText("Ostatnia aktualizacja: " +
-                        DateUtils.getDateStrFromEpochMilli(app.getLastUpdated()));
+                binding.lastUpdated.setText(getString(
+                        R.string.last_updated_date,
+                        DateUtils.getDateStrFromEpochMilli(app.getLastUpdated())
+                ));
             }
 
             // changelog

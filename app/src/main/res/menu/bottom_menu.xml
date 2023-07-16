@@ -3,19 +3,19 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:title="@string/aplikacje"
+        android:title="@string/apps"
         android:icon="@drawable/baseline_view_list_24"
         />
 
     <item
         android:id="@+id/filesFragment"
-        android:title="@string/pobrane"
+        android:title="@string/downloads"
         android:icon="@drawable/baseline_file_download_24"
         />
 
     <item
         android:id="@+id/settingsFragment"
-        android:title="@string/ustawienia"
+        android:title="@string/settings"
         android:icon="@drawable/baseline_settings_24"
         />
 

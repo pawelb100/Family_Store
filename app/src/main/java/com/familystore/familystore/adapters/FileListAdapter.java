@@ -53,7 +53,10 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         File currentItem = files.get(position);
 
         viewHolder.filename.setText(currentItem.getName().replace(".apk", ""));
-        viewHolder.downloadDate.setText("Pobrano: "+ DateUtils.getDateStrFromEpochMilli(currentItem.lastModified()));
+        viewHolder.downloadDate.setText(context.getString(
+                R.string.download_date_info,
+                DateUtils.getDateStrFromEpochMilli(currentItem.lastModified())
+        ));
 
         viewHolder.view.setOnClickListener(view -> listener.onClick(currentItem));
 

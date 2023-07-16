@@ -1,8 +1,8 @@
 <resources>
     <string-array name="theme_entries">
-        <item>Systemowy</item>
-        <item>Jasny</item>
-        <item>Ciemny</item>
+        <item>@string/system_theme</item>
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
     </string-array>
     <string-array name="theme_values">
         <item>system</item>

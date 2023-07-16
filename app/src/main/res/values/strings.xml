@@ -1,21 +1,29 @@
 <resources>
     <string name="app_name">Family Store</string>
-    <string name="hello_world_message">Hello World</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- App list tile and fragment -->
+    <string name="version_info">Wersja: %1$s</string>
+    <string name="download_button">Pobierz</string>
+    <string name="author_info">Autor: %1$s</string>
+    <string name="last_updated_date">Ostatnia aktualizacja: %1$s</string>
+    <string name="changelog_title">Lista zmian:</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="aplikacje">Aplikacje</string>
-    <string name="pobrane">Pobrane</string>
-    <string name="ustawienia">Ustawienia</string>
+    <!-- Files cards -->
+    <string name="download_date_info">Pobrano: %1$s</string>
+
+    <!-- bottom menu -->
+    <string name="apps">Aplikacje</string>
+    <string name="downloads">Pobrane</string>
+    <string name="settings">Ustawienia</string>
+
+    <!-- Theme strings -->
+    <string name="system_theme">Systemowy</string>
+    <string name="light_theme">Jasny</string>
+    <string name="dark_theme">Ciemny</string>
+    <string name="classic_color">Klasyczny</string>
+    <string name="blue_color">Niebieski</string>
+    <string name="orange_color">Pomarańczowy</string>
+    <string name="deepblue_color">Pełny niebieski</string>
+    <string name="deeporange_color">Pełny pomarańczowy</string>
+
 </resources>
