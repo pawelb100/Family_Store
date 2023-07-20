@@ -18,7 +18,6 @@
         <item>@string/deepblue_color</item>
         <item>@string/deeporange_color</item>
         <item>@string/deepgreen_color</item>
-
     </string-array>
     <string-array name="color_values">
         <item>classic</item>
