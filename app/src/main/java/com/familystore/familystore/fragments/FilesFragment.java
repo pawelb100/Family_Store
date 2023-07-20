@@ -46,11 +46,19 @@ public class FilesFragment extends Fragment {
                         .setMessage(file.getName())
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                             if (fileManager.deleteFile(file)) {
-                                Toast.makeText(getContext(), "Plik usunięty", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(
+                                        getContext(),
+                                        getString(R.string.file_deleted_confirmation),
+                                        Toast.LENGTH_SHORT
+                                ).show();
                                 refreshList(position);
                             }
                             else
-                                Toast.makeText(getContext(), "Plik nie został usunięty", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(
+                                        getContext(),
+                                        getString(R.string.file_not_deleted_confirmation),
+                                        Toast.LENGTH_SHORT
+                                ).show();
                         })
                         .setNegativeButton(getString(R.string.cancel), null)
                         .create().show();

@@ -14,6 +14,8 @@
     <!-- Files fragment -->
     <string name="download_date_info">Pobrano: %1$s</string>
     <string name="delete_file_prompt">Czy chcesz to usunąć?</string>
+    <string name="file_deleted_confirmation">Plik usunięty</string>
+    <string name="file_not_deleted_confirmation">Plik nie został usunięty</string>
 
     <!-- settings fragment -->
     <string name="interface_label">Interfejs</string>
