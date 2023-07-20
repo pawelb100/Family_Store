@@ -1,13 +1,13 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="Interfejs">
+    <PreferenceCategory app:title="@string/interface_label">
 
         <ListPreference
             app:defaultValue="system"
             app:entries="@array/theme_entries"
             app:entryValues="@array/theme_values"
             app:key="theme"
-            app:title="Motyw"
+            app:title="@string/theme"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
@@ -15,19 +15,19 @@
             app:entries="@array/color_entries"
             app:entryValues="@array/color_values"
             app:key="color"
-            app:title="Kolor"
+            app:title="@string/color"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="Powiadomienia">
+    <PreferenceCategory app:title="@string/notifs_label">
 
         <SwitchPreferenceCompat
             app:key="notifications"
-            app:title="Otrzymuj powiadomienia"
+            app:title="@string/receive_notifs"
             app:defaultValue="false"
             app:enabled="false"
-            app:summaryOff="Dostępne wkrótce"
+            app:summaryOff="@string/coming_soon"
             />
 
     </PreferenceCategory>

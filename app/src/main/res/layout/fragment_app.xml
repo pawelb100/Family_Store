@@ -71,7 +71,7 @@
             android:layout_height="60dp"
             android:layout_below="@id/appHeader"
             android:layout_marginTop="10dp"
-            android:text="Pobierz"
+            android:text="@string/download_button"
             android:textSize="18sp" />
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/download"
-            android:text="@string/hello_world_message"
+            android:text=""
             android:textSize="16sp"
             android:layout_marginBottom="5dp"
             android:textStyle="italic" />
@@ -123,7 +123,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Lista zmian:"
+                    android:text="@string/changelog_title"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />

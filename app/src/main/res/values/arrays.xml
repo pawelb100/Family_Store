@@ -1,8 +1,8 @@
 <resources>
     <string-array name="theme_entries">
-        <item>Systemowy</item>
-        <item>Jasny</item>
-        <item>Ciemny</item>
+        <item>@string/system_theme</item>
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
     </string-array>
     <string-array name="theme_values">
         <item>system</item>
@@ -11,23 +11,22 @@
     </string-array>
 
     <string-array name="color_entries">
-        <item>Klasyczny</item>
-        <item>Niebieski</item>
-        <item>Pomarańczowy</item>
-        <item>Pełny niebieski</item>
-        <item>Pełny pomarańczowy</item>
-        <item>Pełny zielony</item>
-        <item>Niebiesko-szary</item>
-
+        <item>@string/classic_color</item>
+        <item>@string/blue_color</item>
+        <item>@string/bluegrey_color</item>
+        <item>@string/orange_color</item>
+        <item>@string/deepblue_color</item>
+        <item>@string/deeporange_color</item>
+        <item>@string/deepgreen_color</item>
     </string-array>
     <string-array name="color_values">
         <item>classic</item>
         <item>blue</item>
+        <item>bluegrey</item>
         <item>orange</item>
         <item>deepblue</item>
         <item>deeporange</item>
         <item>deepgreen</item>
-        <item>bluegrey</item>
     </string-array>
 
 </resources>

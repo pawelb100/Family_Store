@@ -56,7 +56,10 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
         AppPreview currentItem = appPreviewList.get(position);
 
         viewHolder.tvName.setText(currentItem.getName());
-        viewHolder.tvVersion.setText("Wersja: "+currentItem.getVersion());
+        viewHolder.tvVersion.setText(context.getString(
+                R.string.version_info,
+                currentItem.getVersion()
+        ));
 
         if (!"".equals(currentItem.getLogoUrl()))
             Picasso.get()
