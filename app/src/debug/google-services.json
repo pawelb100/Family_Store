@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1088252679631",
+    "firebase_url": "https://family-store.firebaseio.com",
+    "project_id": "family-store",
+    "storage_bucket": "family-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088252679631:android:d9d2a19982b981e671aeba",
+        "android_client_info": {
+          "package_name": "com.familystore.familystore.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088252679631-mq9g89f82f1r75im3ej7l8rbsjnuq067.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyLdSej-Yf8n2D5QyA-6xf8dkE5XBw2iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088252679631-mq9g89f82f1r75im3ej7l8rbsjnuq067.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

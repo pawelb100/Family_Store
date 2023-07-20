@@ -29,8 +29,6 @@ public class MainViewModel extends AndroidViewModel {
     private final FirebaseAuth auth;
     private final FirebaseStorage storage;
 
-    private ValueEventListener appListListener;
-
     private final DatabaseReference appListReference;
     private final DatabaseReference usersReference;
     private final StorageReference appDataReference;
@@ -139,14 +137,6 @@ public class MainViewModel extends AndroidViewModel {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        appListReference.addListenerForSingleValueEvent(appListListener);
-    }
-
-    public void removeAppListListener() {
-        if (appListListener != null) {
-            appListReference.removeEventListener(appListListener);
-            appListListener = null;
-        }
     }
 
     public void getUserById(String id, UserListener listener) {
