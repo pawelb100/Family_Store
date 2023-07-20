@@ -13,13 +13,22 @@
         <action
             android:id="@+id/action_homeFragment_to_appFragment"
             app:destination="@id/appFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/appFragment"
         android:name="com.familystore.familystore.fragments.AppFragment"
         android:label="appFragment"
-        tools:layout="@layout/fragment_app" />
+        tools:layout="@layout/fragment_app">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:action="ACTION_VIEW"
+            app:uri="familystore.com/app/{id}" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.familystore.familystore.fragments.SettingsFragment"

@@ -1,5 +1,6 @@
 package com.familystore.familystore.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,10 @@ public class AppFragment extends Fragment {
         viewModel = viewModelProvider.get(MainViewModel.class);
 
         String id = getArguments().getString("appId");
+        if (id == null) {
+            Intent intent = getActivity().getIntent();
+            id = intent.getData().getLastPathSegment();
+        }
 
         viewModel.getAppById(id, app -> {
             binding.name.setText(app.getName());
@@ -101,4 +106,6 @@ public class AppFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 }
