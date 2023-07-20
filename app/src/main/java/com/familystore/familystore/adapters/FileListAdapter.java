@@ -79,6 +79,11 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         diffResult.dispatchUpdatesTo(this);
     }
 
+    public void removeItem(int position) {
+        files.remove(position);
+        this.notifyItemRemoved(position);
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView filename;
