@@ -10,6 +10,9 @@
     <string name="author_info">Autor: %1$s</string>
     <string name="last_updated_date">Ostatnia aktualizacja: %1$s</string>
     <string name="changelog_title">Lista zmian:</string>
+    <string name="sort_order">Kolejność:</string>
+    <string name="sort_published">Data publikacji</string>
+    <string name="sort_last_updated">Ostatnia aktualizacja</string>
 
     <!-- Files fragment -->
     <string name="download_date_info">Pobrano: %1$s</string>

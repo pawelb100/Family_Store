@@ -1,5 +1,6 @@
 package com.familystore.familystore.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.familystore.familystore.listeners.lists.AppListClickListener;
 import com.familystore.familystore.models.AppPreview;
 import com.squareup.picasso.Picasso;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHolder>  {
@@ -77,6 +79,29 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
         appPreviewList = newData;
         if (position != -1) {
             this.notifyItemChanged(position);
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void sort(AppPreview.Order order) {
+        switch (order) {
+            case PUBLISHED:
+                appPreviewList.sort((first, second) -> {
+                    int id1 = Integer.parseInt(first.getId());
+                    int id2 = Integer.parseInt(second.getId());
+                    return -Integer.compare(id1, id2);
+                });
+                this.notifyDataSetChanged();
+                break;
+            case LAST_UPDATED:
+                appPreviewList.sort((first, second) -> {
+                    long timestamp1 = first.getLastUpdated();
+                    long timestamp2 = second.getLastUpdated();
+                    return -Long.compare(timestamp1, timestamp2);
+                });
+                this.notifyDataSetChanged();
+                break;
+            default:
         }
     }
 

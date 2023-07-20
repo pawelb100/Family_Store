@@ -46,6 +46,9 @@ public class HomeFragment extends Fragment {
                 adapter.updateData(result, changedItemId);
         });
 
+        binding.btnSortPublished.setOnClickListener(view -> adapter.sort(AppPreview.Order.PUBLISHED));
+        binding.btnSortPublished.setOnClickListener(view -> adapter.sort(AppPreview.Order.LAST_UPDATED));
+        binding.btnSortLastUpdated.performClick();
         return binding.getRoot();
     }
 
@@ -70,5 +73,6 @@ public class HomeFragment extends Fragment {
             binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
         }
     }
+
 
 }

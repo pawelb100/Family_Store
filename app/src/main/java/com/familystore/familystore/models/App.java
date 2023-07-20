@@ -8,8 +8,6 @@ public class App extends AppPreview {
 
     private String authorId;
 
-    private long lastUpdated = -1;
-
     private String description = "";
 
     private String changelog = "";
@@ -23,9 +21,8 @@ public class App extends AppPreview {
     }
 
     public App(String id, String name, String pictureUrl, String version, String author, long lastUpdated, String description, String changelog, List<String> pictureUrls, String downloadUrl) {
-        super(id, name, pictureUrl, version);
+        super(id, name, pictureUrl, version, lastUpdated);
         this.authorId = author;
-        this.lastUpdated = lastUpdated;
         this.description = description;
         this.changelog = changelog;
         this.pictureUrls = pictureUrls;
@@ -40,13 +37,6 @@ public class App extends AppPreview {
         this.authorId = authorId;
     }
 
-    public long getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(long lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
 
     public String getDescription() {
         return description;
