@@ -40,22 +40,10 @@ public class HomeFragment extends Fragment {
 
         viewModel.addAppListListener((result, changedItemId) -> {
 
-            if (adapter == null) {
-
-                adapter = new AppListAdapter(getContext(), result, id -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("appId", id);
-
-                    Navigation.findNavController(binding.getRoot())
-                            .navigate(R.id.action_homeFragment_to_appFragment, bundle);
-                });
-
-                binding.rvAppList.setAdapter(adapter);
-                binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
-            }
-            else {
+            if (adapter == null)
+                setAdapter(result);
+            else
                 adapter.updateData(result, changedItemId);
-            }
         });
 
         return binding.getRoot();
@@ -66,4 +54,21 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    private void setAdapter(List<AppPreview> apps) {
+
+        if (binding != null) {
+            adapter = new AppListAdapter(getContext(), apps, id -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("appId", id);
+
+                Navigation.findNavController(binding.getRoot())
+                        .navigate(R.id.action_homeFragment_to_appFragment, bundle);
+            });
+
+            binding.rvAppList.setAdapter(adapter);
+            binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
+        }
+    }
+
 }
