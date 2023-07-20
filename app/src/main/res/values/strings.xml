@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Family Store</string>
     <string name="coming_soon">Dostępne wkrótce</string>
+    <string name="yes">Tak</string>
+    <string name="cancel">Anuluj</string>
 
     <!-- App list tile and fragment -->
     <string name="version_info">Wersja: %1$s</string>
@@ -9,13 +11,9 @@
     <string name="last_updated_date">Ostatnia aktualizacja: %1$s</string>
     <string name="changelog_title">Lista zmian:</string>
 
-    <!-- Files cards -->
+    <!-- Files fragment -->
     <string name="download_date_info">Pobrano: %1$s</string>
-
-    <!-- bottom menu -->
-    <string name="apps">Aplikacje</string>
-    <string name="downloads">Pobrane</string>
-    <string name="settings">Ustawienia</string>
+    <string name="delete_file_prompt">Czy chcesz to usunąć?</string>
 
     <!-- settings fragment -->
     <string name="interface_label">Interfejs</string>
@@ -35,5 +33,10 @@
     <string name="deepblue_color">Pełny niebieski</string>
     <string name="deeporange_color">Pełny pomarańczowy</string>
     <string name="deepgreen_color">Pełny zielony</string>
+
+    <!-- bottom menu -->
+    <string name="apps">Aplikacje</string>
+    <string name="downloads">Pobrane</string>
+    <string name="settings">Ustawienia</string>
 
 </resources>

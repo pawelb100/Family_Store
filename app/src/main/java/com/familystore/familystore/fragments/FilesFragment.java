@@ -1,7 +1,6 @@
 package com.familystore.familystore.fragments;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.FileListAdapter;
 import com.familystore.familystore.databinding.FragmentFilesBinding;
 import com.familystore.familystore.listeners.lists.FileListClickListener;
 import com.familystore.familystore.utils.FileManager;
-import com.familystore.familystore.viewmodels.MainViewModel;
 
 import java.io.File;
 
@@ -44,20 +42,17 @@ public class FilesFragment extends Fragment {
             public void onLongClick(File file, int position) {
 
                 new AlertDialog.Builder(getContext())
-                        .setTitle("Czy chcesz to usunąć?")
+                        .setTitle(getString(R.string.delete_file_prompt))
                         .setMessage(file.getName())
-                        .setPositiveButton("Tak", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                if (fileManager.deleteFile(file)) {
-                                    Toast.makeText(getContext(), "Plik usunięty", Toast.LENGTH_SHORT).show();
-                                    refreshList(position);
-                                }
-                                else
-                                    Toast.makeText(getContext(), "Plik nie został usunięty", Toast.LENGTH_SHORT).show();
+                        .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+                            if (fileManager.deleteFile(file)) {
+                                Toast.makeText(getContext(), "Plik usunięty", Toast.LENGTH_SHORT).show();
+                                refreshList(position);
                             }
+                            else
+                                Toast.makeText(getContext(), "Plik nie został usunięty", Toast.LENGTH_SHORT).show();
                         })
-                        .setNegativeButton("Nie", null)
+                        .setNegativeButton(getString(R.string.cancel), null)
                         .create().show();
             }
         });
