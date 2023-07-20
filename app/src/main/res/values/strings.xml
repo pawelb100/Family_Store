@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Family Store</string>
+    <string name="coming_soon">Dostępne wkrótce</string>
 
     <!-- App list tile and fragment -->
     <string name="version_info">Wersja: %1$s</string>
@@ -16,14 +17,23 @@
     <string name="downloads">Pobrane</string>
     <string name="settings">Ustawienia</string>
 
+    <!-- settings fragment -->
+    <string name="interface_label">Interfejs</string>
+    <string name="theme">Motyw</string>
+    <string name="color">Kolor</string>
+    <string name="notifs_label">Powiadomienia</string>
+    <string name="receive_notifs">Otrzymuj powiadomienia</string>
+
     <!-- Theme strings -->
     <string name="system_theme">Systemowy</string>
     <string name="light_theme">Jasny</string>
     <string name="dark_theme">Ciemny</string>
     <string name="classic_color">Klasyczny</string>
     <string name="blue_color">Niebieski</string>
+    <string name="bluegrey_color">Niebiesko-szary</string>
     <string name="orange_color">Pomarańczowy</string>
     <string name="deepblue_color">Pełny niebieski</string>
     <string name="deeporange_color">Pełny pomarańczowy</string>
+    <string name="deepgreen_color">Pełny zielony</string>
 
 </resources>
