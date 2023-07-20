@@ -3,17 +3,15 @@ package com.familystore.familystore.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.familystore.familystore.R;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.familystore.familystore.adapters.FileListAdapter;
 import com.familystore.familystore.databinding.FragmentFilesBinding;
 import com.familystore.familystore.listeners.lists.FileListClickListener;
@@ -26,8 +24,6 @@ public class FilesFragment extends Fragment {
 
     private FragmentFilesBinding binding;
 
-    private MainViewModel viewModel;
-
     private FileManager fileManager;
 
     private FileListAdapter adapter;
@@ -35,9 +31,6 @@ public class FilesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFilesBinding.inflate(inflater, container, false);
-
-        ViewModelProvider viewModelProvider = new ViewModelProvider(requireActivity());
-        viewModel = viewModelProvider.get(MainViewModel.class);
 
         fileManager = new FileManager(getContext());
 
@@ -82,7 +75,7 @@ public class FilesFragment extends Fragment {
 
     private void refreshList(int position) {
         if (adapter != null) {
-            adapter.updateData(fileManager.getFiles());
+            adapter.removeItem(position);
         }
     }
 }
