@@ -10,22 +10,24 @@
         <item>dark</item>
     </string-array>
 
-    <string-array name="color_light_entries">
+    <string-array name="color_entries">
         <item>Klasyczny</item>
         <item>Niebieski</item>
         <item>Pomarańczowy</item>
+        <item>Pełny niebieski</item>
+        <item>Pełny pomarańczowy</item>
+        <item>Pełny zielony</item>
+        <item>Niebiesko-szary</item>
+
     </string-array>
-    <string-array name="color_light_values">
+    <string-array name="color_values">
         <item>classic</item>
         <item>blue</item>
         <item>orange</item>
-    </string-array>
-
-    <string-array name="color_dark_entries">
-        <item>Niebieski</item>
-    </string-array>
-    <string-array name="color_dark_values">
-        <item>blue</item>
+        <item>deepblue</item>
+        <item>deeporange</item>
+        <item>deepgreen</item>
+        <item>bluegrey</item>
     </string-array>
 
 </resources>

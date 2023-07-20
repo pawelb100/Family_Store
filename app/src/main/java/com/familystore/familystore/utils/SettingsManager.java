@@ -35,21 +35,7 @@ public class SettingsManager {
         }
 
         // Color set
-        int nightModeFlags = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-
-        switch (nightModeFlags) {
-            case Configuration.UI_MODE_NIGHT_YES:
-                setDarkColor();
-                break;
-            case Configuration.UI_MODE_NIGHT_NO:
-                setLightColor();
-                break;
-            default:
-        }
-    }
-
-    private void setLightColor() {
-        switch (sharedPref.getString("color_light", "classic")) {
+        switch (sharedPref.getString("color", "classic")) {
             case "classic":
                 context.setTheme(R.style.Theme_FamilyStoreClassic);
                 break;
@@ -59,17 +45,19 @@ public class SettingsManager {
             case "orange":
                 context.setTheme(R.style.Theme_FamilyStoreOrange);
                 break;
-            default:
-        }
-    }
-
-    private void setDarkColor() {
-        switch (sharedPref.getString("color_dark", "blue")) {
-            case "blue":
-                context.setTheme(R.style.Theme_FamilyStoreBlue);
+            case "deepblue":
+                context.setTheme(R.style.Theme_FamilyStoreDeepBlue);
+                break;
+            case "deeporange":
+                context.setTheme(R.style.Theme_FamilyStoreDeepOrange);
+                break;
+            case "bluegrey":
+                context.setTheme(R.style.Theme_FamilyStoreBlueGrey);
+                break;
+            case "deepgreen":
+                context.setTheme(R.style.Theme_FamilyStoreDeepGreen);
                 break;
             default:
         }
     }
-
 }
