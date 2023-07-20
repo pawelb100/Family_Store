@@ -54,11 +54,7 @@ public class HomeFragment extends Fragment {
                 binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
             }
             else {
-                adapter.updateData(result);
-                // refresh app logo
-                if (changedItemId != -1) {
-                    adapter.notifyItemChanged(changedItemId);
-                }
+                adapter.updateData(result, changedItemId);
             }
         });
 
@@ -68,7 +64,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        viewModel.removeAppListListener();
         binding = null;
     }
 }
