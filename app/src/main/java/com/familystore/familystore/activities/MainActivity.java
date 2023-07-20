@@ -1,9 +1,10 @@
 package com.familystore.familystore.activities;
 
 import android.Manifest;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -40,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
         viewModel = viewModelProvider.get(MainViewModel.class);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+        navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
+
+            if (navDestination.getId() == R.id.appFragment) {
+                binding.bottomNavigationView.setVisibility(View.GONE);
+            }
+            else
+                binding.bottomNavigationView.setVisibility(View.VISIBLE);
+        });
+
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
         requestPermissions();
@@ -63,5 +74,11 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Navigation.findNavController(binding.getRoot()).handleDeepLink(intent);
     }
 }
