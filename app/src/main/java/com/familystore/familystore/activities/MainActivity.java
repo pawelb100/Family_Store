@@ -19,12 +19,15 @@ import com.familystore.familystore.R;
 import com.familystore.familystore.databinding.ActivityMainBinding;
 import com.familystore.familystore.utils.SettingsManager;
 import com.familystore.familystore.viewmodels.MainViewModel;
+import com.onesignal.OneSignal;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
     private MainViewModel viewModel;
+
+    private static final String ONESIGNAL_APP_ID = "89f2f3d2-146a-4d89-b1e3-c1c4abc405b3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         requestPermissions();
 
-
-
-
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
+        OneSignal.promptForPushNotifications();
     }
 
     @Override
