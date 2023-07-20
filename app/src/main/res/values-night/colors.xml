@@ -38,4 +38,22 @@
     <color name="bottomnav_deeporange">#402017</color>
     <color name="navbar_deeporange">#000000</color>
     <color name="text_accent_deeporange">#d84315</color> <!-- deep orange 800 -->
+
+    <!-- Blue Grey theme -->
+    <color name="primary_bluegrey">#78909C</color> <!-- blue grey 400 -->
+    <color name="status_bar_bluegrey">#000000</color>
+    <color name="background_card_bluegrey">#37474F</color> <!-- blue grey 800 -->
+    <color name="background_bluegrey">#455A64</color> <!-- blue grey 700 -->
+    <color name="bottomnav_bluegrey">#263238</color> <!-- blue grey 900 -->
+    <color name="navbar_bluegrey">#000000</color>
+    <color name="text_accent_bluegrey">#FFFFFF</color>
+
+    <!-- Green theme -->
+    <color name="primary_green">#00381E</color>
+    <color name="status_bar_green">#000000</color>
+    <color name="background_card_green">#0B1F0C</color>
+    <color name="background_green">#060F06</color>
+    <color name="bottomnav_green">#00381E</color>
+    <color name="navbar_green">#000000</color>
+    <color name="text_accent_green">#00E676</color>
 </resources>
