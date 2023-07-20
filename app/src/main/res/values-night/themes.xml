@@ -70,4 +70,35 @@
         <item name="cardBackgroundColor">@color/background_card_deeporange</item>
     </style>
 
+    <!-- Blue Grey theme -->
+    <style name="Theme.FamilyStoreBlueGrey" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_bluegrey</item>
+        <item name="colorSecondary">@color/text_accent_bluegrey</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/status_bar_bluegrey</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleBlueGrey</item>
+        <item name="android:windowBackground">@color/background_bluegrey</item>
+        <item name="colorSurface">@color/bottomnav_bluegrey</item>
+        <item name="android:navigationBarColor">@color/navbar_bluegrey</item>
+    </style>
+    <style name="CardViewStyleBlueGrey" parent="BaseCardViewStyle">
+        <item name="cardBackgroundColor">@color/background_card_bluegrey</item>
+    </style>
+
+    <!-- Deep Green theme -->
+    <style name="Theme.FamilyStoreDeepGreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/text_accent_green</item>
+        <item name="colorOnPrimary">@color/text_title</item>
+        <item name="colorSecondary">@color/text_accent_green</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/status_bar_green</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleGreen</item>
+        <item name="android:windowBackground">@color/background_green</item>
+        <item name="colorSurface">@color/bottomnav_green</item>
+        <item name="android:navigationBarColor">@color/navbar_green</item>
+    </style>
+    <style name="CardViewStyleGreen" parent="BaseCardViewStyle">
+        <item name="cardBackgroundColor">@color/background_card_green</item>
+    </style>
+
 </resources>
