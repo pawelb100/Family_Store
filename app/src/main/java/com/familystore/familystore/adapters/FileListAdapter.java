@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
@@ -57,6 +58,16 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
         viewHolder.view.setOnClickListener(view -> listener.onClick(currentItem));
 
+        viewHolder.view.setOnLongClickListener(view -> {
+            listener.onLongClick(currentItem, position);
+            return true;
+        });
+
+    }
+
+    public void removeItem(int position) {
+        files.remove(position);
+        this.notifyItemRemoved(position);
     }
 
 

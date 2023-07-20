@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.familystore.familystore.R;
 import com.familystore.familystore.listeners.lists.AppListClickListener;
 import com.familystore.familystore.models.AppPreview;
-import com.familystore.familystore.utils.AppListDiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -71,13 +70,11 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
         });
     }
 
-    public void updateData(List<AppPreview> newData) {
-
-        AppListDiffUtilCallback diffUtilCallback = new AppListDiffUtilCallback(appPreviewList, newData);
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback);
-
+    public void updateData(List<AppPreview> newData, int position) {
         appPreviewList = newData;
-        diffResult.dispatchUpdatesTo(this);
+        if (position != -1) {
+            this.notifyItemChanged(position);
+        }
     }
 
 
