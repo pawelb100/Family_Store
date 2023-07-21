@@ -1,6 +1,5 @@
 package com.familystore.familystore.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.familystore.familystore.R;
 import com.familystore.familystore.listeners.lists.AppListClickListener;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.utils.AppPreviewDiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHolder>  {
@@ -82,24 +82,42 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    private void calculateDiff(List<AppPreview> oldData, List<AppPreview> newData) {
+        AppPreviewDiffUtilCallback appPreviewDiffUtilCallback = new AppPreviewDiffUtilCallback(oldData, newData);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(appPreviewDiffUtilCallback);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
     public void sort(AppPreview.Order order) {
+
+        if (appPreviewList.isEmpty())
+            return;
+
+        List<AppPreview> oldData = new ArrayList<>(appPreviewList);
+
         switch (order) {
             case PUBLISHED:
                 appPreviewList.sort((first, second) -> {
                     int id1 = Integer.parseInt(first.getId());
                     int id2 = Integer.parseInt(second.getId());
-                    return -Integer.compare(id1, id2);
+                    return Integer.compare(id2, id1);
                 });
-                this.notifyDataSetChanged();
+                calculateDiff(oldData, appPreviewList);
                 break;
             case LAST_UPDATED:
                 appPreviewList.sort((first, second) -> {
                     long timestamp1 = first.getLastUpdated();
                     long timestamp2 = second.getLastUpdated();
-                    return -Long.compare(timestamp1, timestamp2);
+
+                    if (timestamp1 == timestamp2) {
+                        int id1 = Integer.parseInt(first.getId());
+                        int id2 = Integer.parseInt(second.getId());
+                        return Integer.compare(id2, id1);
+                    }
+                    else
+                        return Long.compare(timestamp2, timestamp1);
                 });
-                this.notifyDataSetChanged();
+                calculateDiff(oldData, appPreviewList);
                 break;
             default:
         }

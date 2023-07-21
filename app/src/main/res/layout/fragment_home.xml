@@ -6,32 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment">
 
-    <RelativeLayout
-        android:id="@+id/sortLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/sortLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sort_order"
-            android:textColor="@color/text_primary"
-            android:textSize="13sp"
-            android:layout_centerVertical="true"
-
-            />
-
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/sortBtnToggleGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            app:selectionRequired="true"
-            app:singleSelection="true"
+            android:layout_margin="5dp"
 
-            android:layout_toEndOf="@id/sortLabel"
-            >
+            app:selectionRequired="true"
+            app:singleSelection="true">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSortPublished"
@@ -55,11 +38,6 @@
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
-    </RelativeLayout>
-
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAppList"
         android:layout_width="match_parent"
@@ -70,7 +48,7 @@
         android:divider="@null"
         android:dividerHeight="0dp"
 
-        android:layout_below="@id/sortLayout"
+        android:layout_below="@id/sortBtnToggleGroup"
         />
 
 </RelativeLayout>
