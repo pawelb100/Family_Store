@@ -2,18 +2,15 @@ package com.familystore.familystore.utils;
 
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.familystore.familystore.models.AppPreview;
-
 import java.util.List;
-import java.util.Objects;
 
 
-public class AppPreviewDiffUtilCallback extends DiffUtil.Callback {
+public class DiffUtilCallback<T> extends DiffUtil.Callback {
 
-    private List<AppPreview> oldList;
-    private List<AppPreview> newList;
+    private List<T> oldList;
+    private List<T> newList;
 
-    public AppPreviewDiffUtilCallback(List<AppPreview> oldList, List<AppPreview> newList) {
+    public DiffUtilCallback(List<T> oldList, List<T> newList) {
         this.oldList = oldList;
         this.newList = newList;
     }
@@ -30,7 +27,7 @@ public class AppPreviewDiffUtilCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return Objects.equals(oldList.get(oldItemPosition).getId(), newList.get(newItemPosition).getId());
+        return oldList.get(oldItemPosition).equals(newList.get(newItemPosition));
     }
 
     @Override
