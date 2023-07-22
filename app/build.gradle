@@ -4,6 +4,13 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            storeFile file(properties.getProperty('debug.keystore.file'))
+        }
+    }
     namespace 'com.familystore.familystore'
     compileSdk 33
 
