@@ -11,13 +11,16 @@ public class AppPreview {
 
     private String version = "";
 
+    private long lastUpdated = -1;
+
     public AppPreview() {}
 
-    public AppPreview(String id, String name, String pictureUrl, String version) {
+    public AppPreview(String id, String name, String logoUrl, String version, long lastUpdated) {
         this.id = id;
         this.name = name;
-        this.logoUrl = pictureUrl;
+        this.logoUrl = logoUrl;
         this.version = version;
+        this.lastUpdated = lastUpdated;
     }
 
     public String getId() {
@@ -52,6 +55,13 @@ public class AppPreview {
         this.version = version;
     }
 
+    public long getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(long lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -65,4 +75,11 @@ public class AppPreview {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
+    public enum Order {
+        PUBLISHED,
+        LAST_UPDATED,
+    }
+
 }

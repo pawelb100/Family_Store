@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.familystore.familystore.R;
 import com.familystore.familystore.listeners.lists.AppListClickListener;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.utils.DiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHolder>  {
@@ -78,6 +80,46 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
         if (position != -1) {
             this.notifyItemChanged(position);
         }
+    }
+
+    private void calculateDiff(List<AppPreview> oldData, List<AppPreview> newData) {
+        DiffUtilCallback<AppPreview> diffUtilCallback = new DiffUtilCallback<>(oldData, newData);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+    public void sort(AppPreview.Order order) {
+
+        if (appPreviewList.isEmpty())
+            return;
+
+        List<AppPreview> oldData = new ArrayList<>(appPreviewList);
+
+        switch (order) {
+            case PUBLISHED:
+                appPreviewList.sort((first, second) -> {
+                    int id1 = Integer.parseInt(first.getId());
+                    int id2 = Integer.parseInt(second.getId());
+                    return Integer.compare(id2, id1);
+                });
+                break;
+            case LAST_UPDATED:
+                appPreviewList.sort((first, second) -> {
+                    long timestamp1 = first.getLastUpdated();
+                    long timestamp2 = second.getLastUpdated();
+
+                    if (timestamp1 == timestamp2) {
+                        int id1 = Integer.parseInt(first.getId());
+                        int id2 = Integer.parseInt(second.getId());
+                        return Integer.compare(id2, id1);
+                    }
+                    else
+                        return Long.compare(timestamp2, timestamp1);
+                });
+                break;
+            default:
+        }
+        calculateDiff(oldData, appPreviewList);
     }
 
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.familystore.familystore.R;
 import com.familystore.familystore.listeners.lists.FileListClickListener;
 import com.familystore.familystore.utils.DateUtils;
+import com.familystore.familystore.utils.DiffUtilCallback;
 
 import java.io.File;
 import java.util.List;
@@ -68,9 +69,11 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     }
 
-    public void removeItem(int position) {
-        files.remove(position);
-        this.notifyItemRemoved(position);
+    public void updateData(List<File> newData) {
+        DiffUtilCallback<File> diffUtilCallback = new DiffUtilCallback<>(files, newData);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback);
+        files = newData;
+        diffResult.dispatchUpdatesTo(this);
     }
 
 

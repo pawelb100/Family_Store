@@ -1,21 +1,18 @@
 package com.familystore.familystore.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.AppListAdapter;
 import com.familystore.familystore.databinding.FragmentHomeBinding;
-import com.familystore.familystore.listeners.database.AppListListener;
-import com.familystore.familystore.listeners.lists.AppListClickListener;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
@@ -46,6 +43,9 @@ public class HomeFragment extends Fragment {
                 adapter.updateData(result, changedItemId);
         });
 
+        binding.btnSortPublished.setOnClickListener(view -> adapter.sort(AppPreview.Order.PUBLISHED));
+        binding.btnSortLastUpdated.setOnClickListener(view -> adapter.sort(AppPreview.Order.LAST_UPDATED));
+
         return binding.getRoot();
     }
 
@@ -68,7 +68,13 @@ public class HomeFragment extends Fragment {
 
             binding.rvAppList.setAdapter(adapter);
             binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
+
+//            IMPORTANT:
+//            Uncomment when appList return only once
+//            binding.btnSortPublished.performClick(); // perform click action works only visually
+//            adapter.sort(AppPreview.Order.PUBLISHED); // default sort type, SettingsManager will handle this later
         }
     }
+
 
 }

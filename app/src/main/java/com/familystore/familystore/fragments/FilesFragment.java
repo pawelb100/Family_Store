@@ -18,8 +18,6 @@ import com.familystore.familystore.utils.FileManager;
 
 import java.io.File;
 
-import java.io.File;
-
 public class FilesFragment extends Fragment {
 
     private FragmentFilesBinding binding;
@@ -53,7 +51,7 @@ public class FilesFragment extends Fragment {
                                         getString(R.string.file_deleted_confirmation),
                                         Toast.LENGTH_SHORT
                                 ).show();
-                                refreshList(position);
+                                updateList();
                             }
                             else
                                 Toast.makeText(
@@ -78,9 +76,9 @@ public class FilesFragment extends Fragment {
         binding = null;
     }
 
-    private void refreshList(int position) {
+    private void updateList() {
         if (adapter != null) {
-            adapter.removeItem(position);
+            adapter.updateData(fileManager.getFiles());
         }
     }
 }
