@@ -102,7 +102,6 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
                     int id2 = Integer.parseInt(second.getId());
                     return Integer.compare(id2, id1);
                 });
-                calculateDiff(oldData, appPreviewList);
                 break;
             case LAST_UPDATED:
                 appPreviewList.sort((first, second) -> {
@@ -117,10 +116,10 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
                     else
                         return Long.compare(timestamp2, timestamp1);
                 });
-                calculateDiff(oldData, appPreviewList);
                 break;
             default:
         }
+        calculateDiff(oldData, appPreviewList);
     }
 
 
