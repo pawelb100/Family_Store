@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.familystore.familystore.R;
 import com.familystore.familystore.listeners.lists.AppPreviewListClickListener;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.utils.BaseDateUtils;
 import com.familystore.familystore.utils.DiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
@@ -62,6 +63,13 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
                 R.string.version_info,
                 currentItem.getVersion()
         ));
+        if (currentItem.getLastUpdated() != -1)
+            viewHolder.tvLastUpdated.setText(context.getString(
+                    R.string.last_updated_date,
+                    BaseDateUtils.getTimeDifferenceString(
+                            currentItem.getLastUpdated(), System.currentTimeMillis()
+                    )
+            ));
 
         // callback is necessary to display logos which urls are
         // loaded with delay
@@ -126,6 +134,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
         private final ImageView ivLogo;
         private final TextView tvName;
         private final TextView tvVersion;
+        private final TextView tvLastUpdated;
         private final View parentView;
 
         public ViewHolder(@NonNull View view) {
@@ -134,6 +143,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
             this.ivLogo = view.findViewById(R.id.logo);
             this.tvName = view.findViewById(R.id.name);
             this.tvVersion = view.findViewById(R.id.version);
+            this.tvLastUpdated = view.findViewById(R.id.lastUpdated);
         }
 
     }

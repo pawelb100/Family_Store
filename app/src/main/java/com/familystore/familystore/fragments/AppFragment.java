@@ -15,7 +15,7 @@ import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.PictureListAdapter;
 import com.familystore.familystore.databinding.FragmentAppBinding;
 import com.familystore.familystore.utils.ApkDownloader;
-import com.familystore.familystore.utils.DateUtils;
+import com.familystore.familystore.utils.BaseDateUtils;
 import com.familystore.familystore.viewmodels.MainViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -60,7 +60,7 @@ public class AppFragment extends Fragment {
             } else {
                 binding.lastUpdated.setText(getString(
                         R.string.last_updated_date,
-                        DateUtils.getDateStrFromEpochMilli(app.getLastUpdated())
+                        BaseDateUtils.getDateStrFromEpochMilli(app.getLastUpdated())
                 ));
             }
 

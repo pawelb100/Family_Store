@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
 import com.familystore.familystore.listeners.lists.FileListClickListener;
-import com.familystore.familystore.utils.DateUtils;
+import com.familystore.familystore.utils.BaseDateUtils;
 import com.familystore.familystore.utils.DiffUtilCallback;
 
 import java.io.File;
@@ -57,7 +57,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         viewHolder.filename.setText(currentItem.getName().replace(".apk", ""));
         viewHolder.downloadDate.setText(context.getString(
                 R.string.download_date_info,
-                DateUtils.getDateStrFromEpochMilli(currentItem.lastModified())
+                BaseDateUtils.getDateStrFromEpochMilli(currentItem.lastModified())
         ));
 
         viewHolder.view.setOnClickListener(view -> listener.onClick(currentItem));
