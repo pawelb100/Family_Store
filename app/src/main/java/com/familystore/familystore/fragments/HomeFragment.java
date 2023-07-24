@@ -11,9 +11,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.adapters.AppListAdapter;
+import com.familystore.familystore.adapters.AppPreviewListAdapter;
 import com.familystore.familystore.databinding.FragmentHomeBinding;
-import com.familystore.familystore.listeners.database.AppListListener;
+import com.familystore.familystore.listeners.database.AppPreviewListListener;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
 
     private MainViewModel viewModel;
 
-    private AppListAdapter adapter;
+    private AppPreviewListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
 
         adapter = null;
 
-        viewModel.addAppListListener(new AppListListener() {
+        viewModel.addAppPreviewListListener(new AppPreviewListListener() {
             @Override
             public void onResult(List<AppPreview> result) {
                 setAdapter(result);
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
     private void setAdapter(List<AppPreview> apps) {
 
         if (binding != null) {
-            adapter = new AppListAdapter(getContext(), apps, id -> {
+            adapter = new AppPreviewListAdapter(getContext(), apps, id -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("appId", id);
 

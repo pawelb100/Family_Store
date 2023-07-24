@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.familystore.familystore.listeners.database.AppListListener;
+import com.familystore.familystore.listeners.database.AppPreviewListListener;
 import com.familystore.familystore.listeners.database.SingleAppListener;
 import com.familystore.familystore.listeners.database.UserListener;
 import com.familystore.familystore.models.App;
@@ -45,7 +45,7 @@ public class MainViewModel extends AndroidViewModel {
         appDataReference = storage.getReference().child("Family Store 2/Apps");
     }
 
-    public void addAppListListener(AppListListener listener) {
+    public void addAppPreviewListListener(AppPreviewListListener listener) {
         appListReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

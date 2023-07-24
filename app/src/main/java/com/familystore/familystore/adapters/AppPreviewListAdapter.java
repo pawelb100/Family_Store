@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.listeners.lists.AppListClickListener;
+import com.familystore.familystore.listeners.lists.AppPreviewListClickListener;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.utils.DiffUtilCallback;
 import com.squareup.picasso.Picasso;
@@ -20,14 +20,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHolder>  {
+public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAdapter.ViewHolder>  {
 
     private final Context context;
     private List<AppPreview> appPreviewList;
-    private final AppListClickListener listener;
+    private final AppPreviewListClickListener listener;
 
 
-    public AppListAdapter(Context context, List<AppPreview> appPreviewList, AppListClickListener listener) {
+    public AppPreviewListAdapter(Context context, List<AppPreview> appPreviewList, AppPreviewListClickListener listener) {
         this.context = context;
         this.appPreviewList = appPreviewList;
         this.listener = listener;
