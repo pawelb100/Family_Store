@@ -52,10 +52,19 @@ public class MainViewModel extends AndroidViewModel {
                 List<AppPreview> apps = new ArrayList<>();
 
                 if (snapshot.exists()) {
-                    int i = 0;
+                    // initial list load
                     for (DataSnapshot child : snapshot.getChildren()) {
                         AppPreview app = child.getValue(AppPreview.class);
                         assert app != null;
+                        apps.add(app);
+                    }
+                    listener.onResult(apps);
+
+                    // load logos
+                    // has to be invoked after apps are loaded to the adapter
+                    // to enable default sorting
+                    for (int i = 0; i < apps.size(); i++) {
+                        AppPreview app = apps.get(i);
                         int finalI = i;
                         appDataReference
                                 .child(app.getId())
@@ -66,11 +75,7 @@ public class MainViewModel extends AndroidViewModel {
                                     app.setLogoUrl(uri.toString());
                                     listener.onLogoUrlLoaded(finalI);
                                 });
-                        apps.add(app);
-                        i++;
                     }
-                    // initial list load
-                    listener.onResult(apps);
                 }
             }
 

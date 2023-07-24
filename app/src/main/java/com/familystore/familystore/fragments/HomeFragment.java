@@ -75,10 +75,8 @@ public class HomeFragment extends Fragment {
             binding.rvAppList.setAdapter(adapter);
             binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//            IMPORTANT:
-//            Uncomment when appList return only once
-//            binding.btnSortPublished.performClick(); // perform click action works only visually
-//            adapter.sort(AppPreview.Order.PUBLISHED); // default sort type, SettingsManager will handle this later
+            binding.btnSortPublished.performClick(); // perform click action works only visually
+            adapter.sort(AppPreview.Order.PUBLISHED); // default sort type, SettingsManager will handle this later
         }
     }
 
