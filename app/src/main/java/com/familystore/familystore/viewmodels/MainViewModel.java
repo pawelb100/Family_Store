@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.familystore.familystore.BuildConfig;
-import com.familystore.familystore.listeners.UpdateListener;
+import com.familystore.familystore.listeners.database.UpdateListener;
 import com.familystore.familystore.listeners.database.AppListListener;
 import com.familystore.familystore.listeners.database.SingleAppListener;
 import com.familystore.familystore.listeners.database.UserListener;

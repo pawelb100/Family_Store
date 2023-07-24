@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         OneSignal.setAppId(ONESIGNAL_APP_ID);
         OneSignal.promptForPushNotifications();
 
-        if (BuildConfig.BUILD_TYPE.equals("release"))
+        if (!BuildConfig.DEBUG)
             viewModel.checkAvailableUpdate(this::showAvailableUpdate);
     }
 
