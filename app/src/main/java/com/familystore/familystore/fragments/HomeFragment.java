@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.familystore.familystore.R;
@@ -15,6 +16,7 @@ import com.familystore.familystore.adapters.AppPreviewListAdapter;
 import com.familystore.familystore.databinding.FragmentHomeBinding;
 import com.familystore.familystore.listeners.database.AppPreviewListListener;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.utils.SettingsManager;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
 import java.util.List;
@@ -75,8 +77,21 @@ public class HomeFragment extends Fragment {
             binding.rvAppList.setAdapter(adapter);
             binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-            binding.btnSortPublished.performClick(); // perform click action works only visually
-            adapter.sort(AppPreview.Order.PUBLISHED); // default sort type, SettingsManager will handle this later
+            // default sorting
+            SettingsManager settingsManager = new SettingsManager(
+                    PreferenceManager.getDefaultSharedPreferences(getContext()),
+                    getContext()
+            );
+            AppPreview.Order defaultSorting = settingsManager.getDefaultAppSorting();
+            switch (defaultSorting) {
+                case PUBLISHED:
+                    binding.btnSortPublished.performClick();
+                    break;
+                case LAST_UPDATED:
+                    binding.btnSortLastUpdated.performClick();
+                    break;
+            }
+            adapter.sort(defaultSorting);
         }
     }
 

@@ -18,6 +18,14 @@
             app:title="@string/color"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            app:defaultValue="PUBLISHED"
+            app:entries="@array/sorting_entries"
+            app:entryValues="@array/sorting_values"
+            app:key="default_app_sort"
+            app:title="@string/default_app_sort"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/notifs_label">
