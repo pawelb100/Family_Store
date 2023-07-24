@@ -73,7 +73,6 @@ public class MainViewModel extends AndroidViewModel {
                                 .addOnSuccessListener(uri -> {
                                     // refresh logo
                                     app.setLogoUrl(uri.toString());
-                                    listener.onLogoUrlLoaded(finalI);
                                 });
                     }
                 }

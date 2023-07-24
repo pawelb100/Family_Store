@@ -38,18 +38,7 @@ public class HomeFragment extends Fragment {
 
         adapter = null;
 
-        viewModel.addAppPreviewListListener(new AppPreviewListListener() {
-            @Override
-            public void onResult(List<AppPreview> result) {
-                setAdapter(result);
-            }
-
-            @Override
-            public void onLogoUrlLoaded(int position) {
-                if (adapter != null)
-                    adapter.notifyItemChanged(position);
-            }
-        });
+        viewModel.addAppPreviewListListener(this::setAdapter);
 
         binding.btnSortPublished.setOnClickListener(view -> adapter.sort(AppPreview.Order.PUBLISHED));
         binding.btnSortLastUpdated.setOnClickListener(view -> adapter.sort(AppPreview.Order.LAST_UPDATED));

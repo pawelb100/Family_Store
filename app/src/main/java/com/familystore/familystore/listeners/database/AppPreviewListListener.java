@@ -6,7 +6,4 @@ import java.util.List;
 
 public interface AppPreviewListListener {
      void onResult(List<AppPreview> result);
-
-     void onLogoUrlLoaded(int position);
-
 }

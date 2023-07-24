@@ -63,10 +63,18 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
                 currentItem.getVersion()
         ));
 
-        if (!"".equals(currentItem.getLogoUrl()))
+        // callback is necessary to display logos which urls are
+        // loaded with delay
+        currentItem.setLogoUpdateCallback(() -> {
             Picasso.get()
                     .load(currentItem.getLogoUrl())
                     .into(viewHolder.ivLogo);
+        });
+        // if logo url is instantly available, callback has to be
+        // called manually
+        if (!currentItem.getLogoUrl().equals("")) {
+            currentItem.getLogoUpdateCallback().call();
+        }
 
         viewHolder.parentView.setOnClickListener(v -> {
             listener.onClick(currentItem.getId());

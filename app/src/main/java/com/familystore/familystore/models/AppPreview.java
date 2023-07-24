@@ -1,6 +1,9 @@
 package com.familystore.familystore.models;
 
+import com.familystore.familystore.utils.Callback;
+
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 public class AppPreview {
 
@@ -12,6 +15,8 @@ public class AppPreview {
     private String version = "";
 
     private long lastUpdated = -1;
+
+    private Callback logoUpdateCallback = null;
 
     public AppPreview() {}
 
@@ -43,8 +48,15 @@ public class AppPreview {
         return logoUrl;
     }
 
+    public Callback getLogoUpdateCallback() {
+        return logoUpdateCallback;
+    }
+
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+        if (this.logoUpdateCallback != null) {
+            this.logoUpdateCallback.call();
+        }
     }
 
     public String getVersion() {
@@ -61,6 +73,10 @@ public class AppPreview {
 
     public void setLastUpdated(long lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    public void setLogoUpdateCallback(Callback logoUpdateCallback) {
+        this.logoUpdateCallback = logoUpdateCallback;
     }
 
     @Override
