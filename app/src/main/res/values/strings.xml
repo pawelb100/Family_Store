@@ -39,6 +39,10 @@
     <string name="deeporange_color">Pełny pomarańczowy</string>
     <string name="deepgreen_color">Pełny zielony</string>
 
+    <!-- Update strings -->
+    <string name="update_dialog_title">Dostępna aktualizacja</string>
+    <string name="update_dialog_message">Czy chcesz pobrać wersję %1$s aplikacji Family Store? Plik instalacyjny będzie dostępny w katalogu pobranych.</string>
+
     <!-- bottom menu -->
     <string name="apps">Aplikacje</string>
     <string name="downloads">Pobrane</string>

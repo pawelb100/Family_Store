@@ -5,13 +5,14 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.familystore.familystore.BuildConfig;
+import com.familystore.familystore.listeners.UpdateListener;
 import com.familystore.familystore.listeners.database.AppListListener;
 import com.familystore.familystore.listeners.database.SingleAppListener;
 import com.familystore.familystore.listeners.database.UserListener;
 import com.familystore.familystore.models.App;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.models.User;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,24 +26,23 @@ import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
 
-    private final FirebaseDatabase database;
-    private final FirebaseAuth auth;
-    private final FirebaseStorage storage;
-
     private final DatabaseReference appListReference;
     private final DatabaseReference usersReference;
     private final StorageReference appDataReference;
 
+    private final StorageReference updateReference;
+
     public MainViewModel(@NonNull Application application) {
         super(application);
-        database = FirebaseDatabase.getInstance();
-        auth = FirebaseAuth.getInstance();
-        storage = FirebaseStorage.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
 
         appListReference = database.getReference().child("Family Store 2/Apps");
         usersReference = database.getReference().child("Family Store 2/Users");
 
         appDataReference = storage.getReference().child("Family Store 2/Apps");
+        updateReference = storage.getReference().child("Family Store 2/Releases");
+
     }
 
     public void addAppListListener(AppListListener listener) {
@@ -154,4 +154,26 @@ public class MainViewModel extends AndroidViewModel {
         });
 
     }
+
+    public void checkAvailableUpdate(UpdateListener listener) {
+        updateReference
+                .listAll()
+                .addOnSuccessListener(listResult -> {
+                    if (listResult.getItems().size() != 0) {
+
+                        String currentVersion = BuildConfig.VERSION_NAME;
+                        StorageReference reference = listResult.getItems().get(0);
+
+                        if (!reference.getName().equals("fs-" + currentVersion + ".apk")) {
+                            reference.getDownloadUrl().addOnSuccessListener(downloadUrl -> {
+
+                                String updateVersion = reference.getName().replace("fs-", "").replace(".apk", "");
+                                listener.onUpdateAvailable(downloadUrl, updateVersion);
+                            });
+                        }
+                    }
+                });
+    }
+
+
 }
