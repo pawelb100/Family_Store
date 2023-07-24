@@ -68,18 +68,9 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
                     .load(currentItem.getLogoUrl())
                     .into(viewHolder.ivLogo);
 
-
-
         viewHolder.parentView.setOnClickListener(v -> {
             listener.onClick(currentItem.getId());
         });
-    }
-
-    public void updateData(List<AppPreview> newData, int position) {
-        appPreviewList = newData;
-        if (position != -1) {
-            this.notifyItemChanged(position);
-        }
     }
 
     private void calculateDiff(List<AppPreview> oldData, List<AppPreview> newData) {

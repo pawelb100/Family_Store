@@ -5,6 +5,8 @@ import com.familystore.familystore.models.AppPreview;
 import java.util.List;
 
 public interface AppListListener {
-     void onResult(List<AppPreview> result, int changedItemId);
+     void onResult(List<AppPreview> result);
+
+     void onLogoUrlLoaded(int position);
 
 }

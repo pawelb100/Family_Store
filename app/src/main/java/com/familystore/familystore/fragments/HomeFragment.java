@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.AppListAdapter;
 import com.familystore.familystore.databinding.FragmentHomeBinding;
+import com.familystore.familystore.listeners.database.AppListListener;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
@@ -35,12 +36,17 @@ public class HomeFragment extends Fragment {
 
         adapter = null;
 
-        viewModel.addAppListListener((result, changedItemId) -> {
-
-            if (adapter == null)
+        viewModel.addAppListListener(new AppListListener() {
+            @Override
+            public void onResult(List<AppPreview> result) {
                 setAdapter(result);
-            else
-                adapter.updateData(result, changedItemId);
+            }
+
+            @Override
+            public void onLogoUrlLoaded(int position) {
+                if (adapter != null)
+                    adapter.notifyItemChanged(position);
+            }
         });
 
         binding.btnSortPublished.setOnClickListener(view -> adapter.sort(AppPreview.Order.PUBLISHED));
