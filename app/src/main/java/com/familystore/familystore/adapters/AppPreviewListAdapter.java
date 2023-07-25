@@ -63,13 +63,18 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
                 R.string.version_info,
                 currentItem.getVersion()
         ));
-        if (currentItem.getLastUpdated() != -1)
+        if (currentItem.getLastUpdated() != -1) {
             viewHolder.tvLastUpdated.setText(context.getString(
                     R.string.last_updated_date,
                     BaseDateUtils.getTimeDifferenceString(
                             currentItem.getLastUpdated(), System.currentTimeMillis()
                     )
             ));
+            viewHolder.tvLastUpdated.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.tvLastUpdated.setText("");
+            viewHolder.tvLastUpdated.setVisibility(View.GONE);
+        }
 
         // callback is necessary to display logos which urls are
         // loaded with delay
