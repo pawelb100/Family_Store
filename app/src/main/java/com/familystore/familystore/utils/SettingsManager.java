@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.familystore.familystore.R;
+import com.familystore.familystore.models.AppPreview;
 
 public class SettingsManager {
 
@@ -17,6 +18,11 @@ public class SettingsManager {
     public SettingsManager(SharedPreferences sharedPreferences, Context context) {
         this.sharedPref = sharedPreferences;
         this.context = context;
+    }
+
+    public AppPreview.Order getDefaultAppSorting() {
+        return AppPreview.Order.valueOf(
+                sharedPref.getString("default_app_sort", "PUBLISHED"));
     }
 
     public void setTheme() {

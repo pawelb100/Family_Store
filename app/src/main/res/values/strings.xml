@@ -24,6 +24,7 @@
     <string name="interface_label">Interfejs</string>
     <string name="theme">Motyw</string>
     <string name="color">Kolor</string>
+    <string name="default_app_sort">Domyślne sortowanie aplikacji</string>
     <string name="notifs_label">Powiadomienia</string>
     <string name="receive_notifs">Otrzymuj powiadomienia</string>
 

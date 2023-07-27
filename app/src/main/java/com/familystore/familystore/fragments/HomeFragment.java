@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.adapters.AppListAdapter;
+import com.familystore.familystore.adapters.AppPreviewListAdapter;
 import com.familystore.familystore.databinding.FragmentHomeBinding;
+import com.familystore.familystore.listeners.database.AppPreviewListListener;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.utils.SettingsManager;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
 import java.util.List;
@@ -24,7 +27,7 @@ public class HomeFragment extends Fragment {
 
     private MainViewModel viewModel;
 
-    private AppListAdapter adapter;
+    private AppPreviewListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,13 +38,7 @@ public class HomeFragment extends Fragment {
 
         adapter = null;
 
-        viewModel.addAppListListener((result, changedItemId) -> {
-
-            if (adapter == null)
-                setAdapter(result);
-            else
-                adapter.updateData(result, changedItemId);
-        });
+        viewModel.addAppPreviewListListener(this::setAdapter);
 
         binding.btnSortPublished.setOnClickListener(view -> adapter.sort(AppPreview.Order.PUBLISHED));
         binding.btnSortLastUpdated.setOnClickListener(view -> adapter.sort(AppPreview.Order.LAST_UPDATED));
@@ -58,7 +55,7 @@ public class HomeFragment extends Fragment {
     private void setAdapter(List<AppPreview> apps) {
 
         if (binding != null) {
-            adapter = new AppListAdapter(getContext(), apps, id -> {
+            adapter = new AppPreviewListAdapter(getContext(), apps, id -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("appId", id);
 
@@ -69,10 +66,21 @@ public class HomeFragment extends Fragment {
             binding.rvAppList.setAdapter(adapter);
             binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//            IMPORTANT:
-//            Uncomment when appList return only once
-//            binding.btnSortPublished.performClick(); // perform click action works only visually
-//            adapter.sort(AppPreview.Order.PUBLISHED); // default sort type, SettingsManager will handle this later
+            // default sorting
+            SettingsManager settingsManager = new SettingsManager(
+                    PreferenceManager.getDefaultSharedPreferences(getContext()),
+                    getContext()
+            );
+            AppPreview.Order defaultSorting = settingsManager.getDefaultAppSorting();
+            switch (defaultSorting) {
+                case PUBLISHED:
+                    binding.btnSortPublished.performClick();
+                    break;
+                case LAST_UPDATED:
+                    binding.btnSortLastUpdated.performClick();
+                    break;
+            }
+            adapter.sort(defaultSorting);
         }
     }
 

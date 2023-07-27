@@ -5,9 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.familystore.familystore.listeners.database.AppPreviewListListener;
 import com.familystore.familystore.BuildConfig;
 import com.familystore.familystore.listeners.database.UpdateListener;
-import com.familystore.familystore.listeners.database.AppListListener;
 import com.familystore.familystore.listeners.database.SingleAppListener;
 import com.familystore.familystore.listeners.database.UserListener;
 import com.familystore.familystore.models.App;
@@ -45,33 +45,36 @@ public class MainViewModel extends AndroidViewModel {
 
     }
 
-    public void addAppListListener(AppListListener listener) {
+    public void addAppPreviewListListener(AppPreviewListListener listener) {
         appListReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<AppPreview> apps = new ArrayList<>();
 
                 if (snapshot.exists()) {
-                    int i = 0;
+                    // initial list load
                     for (DataSnapshot child : snapshot.getChildren()) {
                         AppPreview app = child.getValue(AppPreview.class);
                         assert app != null;
+                        apps.add(app);
+                    }
+                    listener.onResult(apps);
 
+                    // load logos
+                    // has to be invoked after apps are loaded to the adapter
+                    // to enable default sorting
+                    for (int i = 0; i < apps.size(); i++) {
+                        AppPreview app = apps.get(i);
                         int finalI = i;
                         appDataReference
                                 .child(app.getId())
                                 .child("logo.png")
                                 .getDownloadUrl()
                                 .addOnSuccessListener(uri -> {
-                                    app.setLogoUrl(uri.toString());
                                     // refresh logo
-                                    listener.onResult(apps, finalI);
+                                    app.setLogoUrl(uri.toString());
                                 });
-                        apps.add(app);
-                        i++;
                     }
-                    // initial list load
-                    listener.onResult(apps, -1);
                 }
             }
 

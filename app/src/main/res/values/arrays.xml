@@ -29,4 +29,12 @@
         <item>deepgreen</item>
     </string-array>
 
+    <string-array name="sorting_entries">
+        <item>@string/sort_published</item>
+        <item>@string/sort_last_updated</item>
+    </string-array>
+    <string-array name="sorting_values">
+        <item>PUBLISHED</item>
+        <item>LAST_UPDATED</item>
+    </string-array>
 </resources>

@@ -12,22 +12,23 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.listeners.lists.AppListClickListener;
+import com.familystore.familystore.listeners.lists.AppPreviewListClickListener;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.utils.BaseDateUtils;
 import com.familystore.familystore.utils.DiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHolder>  {
+public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAdapter.ViewHolder>  {
 
     private final Context context;
     private List<AppPreview> appPreviewList;
-    private final AppListClickListener listener;
+    private final AppPreviewListClickListener listener;
 
 
-    public AppListAdapter(Context context, List<AppPreview> appPreviewList, AppListClickListener listener) {
+    public AppPreviewListAdapter(Context context, List<AppPreview> appPreviewList, AppPreviewListClickListener listener) {
         this.context = context;
         this.appPreviewList = appPreviewList;
         this.listener = listener;
@@ -62,24 +63,35 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
                 R.string.version_info,
                 currentItem.getVersion()
         ));
+        if (currentItem.getLastUpdated() != -1) {
+            viewHolder.tvLastUpdated.setText(context.getString(
+                    R.string.last_updated_date,
+                    BaseDateUtils.getTimeDifferenceString(
+                            currentItem.getLastUpdated(), System.currentTimeMillis()
+                    )
+            ));
+            viewHolder.tvLastUpdated.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.tvLastUpdated.setText("");
+            viewHolder.tvLastUpdated.setVisibility(View.GONE);
+        }
 
-        if (!"".equals(currentItem.getLogoUrl()))
+        // callback is necessary to display logos which urls are
+        // loaded with delay
+        currentItem.setLogoUpdateCallback(() -> {
             Picasso.get()
                     .load(currentItem.getLogoUrl())
                     .into(viewHolder.ivLogo);
-
-
+        });
+        // if logo url is instantly available, callback has to be
+        // called manually
+        if (!currentItem.getLogoUrl().equals("")) {
+            currentItem.getLogoUpdateCallback().call();
+        }
 
         viewHolder.parentView.setOnClickListener(v -> {
             listener.onClick(currentItem.getId());
         });
-    }
-
-    public void updateData(List<AppPreview> newData, int position) {
-        appPreviewList = newData;
-        if (position != -1) {
-            this.notifyItemChanged(position);
-        }
     }
 
     private void calculateDiff(List<AppPreview> oldData, List<AppPreview> newData) {
@@ -127,6 +139,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
         private final ImageView ivLogo;
         private final TextView tvName;
         private final TextView tvVersion;
+        private final TextView tvLastUpdated;
         private final View parentView;
 
         public ViewHolder(@NonNull View view) {
@@ -135,6 +148,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
             this.ivLogo = view.findViewById(R.id.logo);
             this.tvName = view.findViewById(R.id.name);
             this.tvVersion = view.findViewById(R.id.version);
+            this.tvLastUpdated = view.findViewById(R.id.lastUpdated);
         }
 
     }
