@@ -38,7 +38,8 @@ public class FileManager {
     }
 
     public void installApk(File file) {
-        Uri fileUri = FileProvider.getUriForFile(context, "com.familystore.familystore.fileprovider", file);
+        Uri fileUri = FileProvider.getUriForFile(
+                context, context.getPackageName() + ".fileprovider", file);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
