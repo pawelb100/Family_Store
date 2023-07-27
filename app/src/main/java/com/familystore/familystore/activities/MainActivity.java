@@ -1,8 +1,10 @@
 package com.familystore.familystore.activities;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,7 +18,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
 import com.familystore.familystore.R;
+import com.familystore.familystore.BuildConfig;
 import com.familystore.familystore.databinding.ActivityMainBinding;
+import com.familystore.familystore.utils.ApkDownloader;
 import com.familystore.familystore.utils.SettingsManager;
 import com.familystore.familystore.viewmodels.MainViewModel;
 import com.onesignal.OneSignal;
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         OneSignal.initWithContext(this);
         OneSignal.setAppId(ONESIGNAL_APP_ID);
         OneSignal.promptForPushNotifications();
+
+        if (!BuildConfig.DEBUG)
+            viewModel.checkAvailableUpdate(this::showAvailableUpdate);
     }
 
     @Override
@@ -83,5 +90,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         Navigation.findNavController(binding.getRoot()).handleDeepLink(intent);
+    }
+
+    private void showAvailableUpdate(Uri downloadUrl, String updateVersion) {
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.update_dialog_title)
+                .setIcon(R.mipmap.ic_launcher_foreground)
+                .setMessage(getString(R.string.update_dialog_message, updateVersion))
+                .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+
+                    ApkDownloader apkDownloader = new ApkDownloader(this, downloadUrl.toString(), "Family Store", updateVersion);
+                    apkDownloader.download();
+
+                })
+                .setNegativeButton(getString(R.string.cancel), null)
+                .create().show();
     }
 }
