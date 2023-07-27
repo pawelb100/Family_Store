@@ -27,7 +27,7 @@ public class SettingsManager {
 
     public void setTheme() {
         // Theme set
-        switch (sharedPref.getString("theme", "light")) {
+        switch (sharedPref.getString("theme", "system")) {
             case "light":
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
