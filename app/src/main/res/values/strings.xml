@@ -27,6 +27,8 @@
     <string name="default_app_sort">Domyślne sortowanie aplikacji</string>
     <string name="notifs_label">Powiadomienia</string>
     <string name="receive_notifs">Otrzymuj powiadomienia</string>
+    <string name="about_app">O aplikacji</string>
+    <string name="version">Wersja</string>
 
     <!-- Theme strings -->
     <string name="system_theme">Systemowy</string>

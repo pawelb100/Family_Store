@@ -36,7 +36,7 @@ android {
         }
         debug {
             applicationIdSuffix '.debug'
-            versionNameSuffix '-DEBUG'
+            versionNameSuffix '-debug'
             manifestPlaceholders = [appName: "Family Store Debug"]
         }
     }
