@@ -9,8 +9,8 @@ import java.io.File;
 
 public class ApkDownloader {
 
-    private DownloadManager downloadManager;
-    private DownloadManager.Request request;
+    private final DownloadManager downloadManager;
+    private final DownloadManager.Request request;
 
     private final String subPath;
 

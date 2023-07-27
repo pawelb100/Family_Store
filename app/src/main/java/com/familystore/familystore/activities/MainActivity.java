@@ -17,8 +17,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
-import com.familystore.familystore.R;
 import com.familystore.familystore.BuildConfig;
+import com.familystore.familystore.R;
 import com.familystore.familystore.databinding.ActivityMainBinding;
 import com.familystore.familystore.utils.ApkDownloader;
 import com.familystore.familystore.utils.SettingsManager;

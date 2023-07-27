@@ -22,7 +22,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     private final Context context;
     private List<File> files;
-    private FileListClickListener listener;
+    private final FileListClickListener listener;
 
     public FileListAdapter(Context context, List<File> files, FileListClickListener listener) {
         this.context = context;

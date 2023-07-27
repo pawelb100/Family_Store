@@ -17,7 +17,7 @@ import java.util.List;
 public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.ViewHolder>  {
 
     private final Context context;
-    private List<String> pictureUrls;
+    private final List<String> pictureUrls;
 
 
     public PictureListAdapter(Context context, List<String> pictureUrls) {

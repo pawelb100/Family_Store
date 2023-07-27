@@ -7,8 +7,8 @@ import java.util.List;
 
 public class DiffUtilCallback<T> extends DiffUtil.Callback {
 
-    private List<T> oldList;
-    private List<T> newList;
+    private final List<T> oldList;
+    private final List<T> newList;
 
     public DiffUtilCallback(List<T> oldList, List<T> newList) {
         this.oldList = oldList;

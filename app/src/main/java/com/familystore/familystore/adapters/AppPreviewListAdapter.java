@@ -24,7 +24,7 @@ import java.util.List;
 public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAdapter.ViewHolder>  {
 
     private final Context context;
-    private List<AppPreview> appPreviewList;
+    private final List<AppPreview> appPreviewList;
     private final AppPreviewListClickListener listener;
 
 

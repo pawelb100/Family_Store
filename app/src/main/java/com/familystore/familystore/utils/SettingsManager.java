@@ -2,7 +2,6 @@ package com.familystore.familystore.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -11,9 +10,9 @@ import com.familystore.familystore.models.AppPreview;
 
 public class SettingsManager {
 
-    private SharedPreferences sharedPref;
+    private final SharedPreferences sharedPref;
 
-    private Context context;
+    private final Context context;
 
     public SettingsManager(SharedPreferences sharedPreferences, Context context) {
         this.sharedPref = sharedPreferences;

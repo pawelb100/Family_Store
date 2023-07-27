@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- base card style -->
     <style name="BaseCardViewStyle" parent="CardView">
         <item name="cardCornerRadius">8dp</item>

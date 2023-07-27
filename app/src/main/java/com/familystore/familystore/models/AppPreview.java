@@ -3,7 +3,6 @@ package com.familystore.familystore.models;
 import com.familystore.familystore.utils.Callback;
 
 import java.util.Objects;
-import java.util.concurrent.Callable;
 
 public class AppPreview {
 
