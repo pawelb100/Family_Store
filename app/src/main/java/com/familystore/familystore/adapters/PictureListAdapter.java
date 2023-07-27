@@ -35,8 +35,9 @@ public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.
         return 0;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater
                         .from(context)

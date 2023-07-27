@@ -40,8 +40,9 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         return 0;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater
                         .from(context)

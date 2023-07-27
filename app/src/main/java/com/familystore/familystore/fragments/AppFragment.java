@@ -1,5 +1,6 @@
 package com.familystore.familystore.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class AppFragment extends Fragment {
         ViewModelProvider viewModelProvider = new ViewModelProvider(requireActivity());
         viewModel = viewModelProvider.get(MainViewModel.class);
 
+        assert getArguments() != null;
         String id = getArguments().getString("appId");
         if (id == null) {
             Intent intent = getActivity().getIntent();

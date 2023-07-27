@@ -19,7 +19,8 @@ public class FileManager {
     private final Context context;
 
     public FileManager(Context context) {
-        directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/FamilyStore");
+        directory = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOWNLOADS) + "/FamilyStore");
         this.context = context;
     }
 

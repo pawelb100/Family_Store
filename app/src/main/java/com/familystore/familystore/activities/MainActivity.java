@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private MainViewModel viewModel;
-
     private static final String ONESIGNAL_APP_ID = "89f2f3d2-146a-4d89-b1e3-c1c4abc405b3";
 
     @Override
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.topAppBar);
 
         ViewModelProvider viewModelProvider = new ViewModelProvider(this);
-        viewModel = viewModelProvider.get(MainViewModel.class);
+        MainViewModel viewModel = viewModelProvider.get(MainViewModel.class);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 

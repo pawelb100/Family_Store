@@ -1,10 +1,12 @@
 package com.familystore.familystore.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -24,16 +26,14 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
-    private MainViewModel viewModel;
-
     private AppPreviewListAdapter adapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         ViewModelProvider viewModelProvider = new ViewModelProvider(requireActivity());
-        viewModel = viewModelProvider.get(MainViewModel.class);
+        MainViewModel viewModel = viewModelProvider.get(MainViewModel.class);
 
         adapter = null;
 
@@ -66,8 +66,10 @@ public class HomeFragment extends Fragment {
             binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
 
             // default sorting
+            Context ctx = getContext();
+            assert ctx != null;
             SettingsManager settingsManager = new SettingsManager(
-                    PreferenceManager.getDefaultSharedPreferences(getContext()),
+                    PreferenceManager.getDefaultSharedPreferences(ctx),
                     getContext()
             );
             AppPreview.Order defaultSorting = settingsManager.getDefaultAppSorting();
