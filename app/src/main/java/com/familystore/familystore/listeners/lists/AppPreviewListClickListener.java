@@ -1,6 +1,6 @@
 package com.familystore.familystore.listeners.lists;
 
-public interface AppListClickListener {
+public interface AppPreviewListClickListener {
      void onClick(String id);
 
 }

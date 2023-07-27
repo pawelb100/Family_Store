@@ -5,16 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.listeners.lists.AppListClickListener;
-import com.familystore.familystore.models.AppPreview;
-import com.familystore.familystore.utils.AppListDiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,7 +17,7 @@ import java.util.List;
 public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.ViewHolder>  {
 
     private final Context context;
-    private List<String> pictureUrls;
+    private final List<String> pictureUrls;
 
 
     public PictureListAdapter(Context context, List<String> pictureUrls) {
@@ -40,8 +35,9 @@ public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.
         return 0;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater
                         .from(context)

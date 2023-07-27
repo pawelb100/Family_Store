@@ -1,5 +1,7 @@
 package com.familystore.familystore.models;
 
+import com.familystore.familystore.utils.Callback;
+
 import java.util.Objects;
 
 public class AppPreview {
@@ -7,17 +9,22 @@ public class AppPreview {
     private String id;
     private String name;
 
-    private String logoUrl;
+    private String logoUrl = "";
 
-    private String version;
+    private String version = "";
+
+    private long lastUpdated = -1;
+
+    private Callback logoUpdateCallback = null;
 
     public AppPreview() {}
 
-    public AppPreview(String id, String name, String pictureUrl, String version) {
+    public AppPreview(String id, String name, String logoUrl, String version, long lastUpdated) {
         this.id = id;
         this.name = name;
-        this.logoUrl = pictureUrl;
+        this.logoUrl = logoUrl;
         this.version = version;
+        this.lastUpdated = lastUpdated;
     }
 
     public String getId() {
@@ -40,8 +47,15 @@ public class AppPreview {
         return logoUrl;
     }
 
+    public Callback getLogoUpdateCallback() {
+        return logoUpdateCallback;
+    }
+
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+        if (this.logoUpdateCallback != null) {
+            this.logoUpdateCallback.call();
+        }
     }
 
     public String getVersion() {
@@ -52,6 +66,17 @@ public class AppPreview {
         this.version = version;
     }
 
+    public long getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(long lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public void setLogoUpdateCallback(Callback logoUpdateCallback) {
+        this.logoUpdateCallback = logoUpdateCallback;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -65,4 +90,11 @@ public class AppPreview {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
+    public enum Order {
+        PUBLISHED,
+        LAST_UPDATED,
+    }
+
 }

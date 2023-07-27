@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="grey_700">#FF616161</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#616161</color>
+    <color name="text_accent">#03DAC5</color>
+    <color name="text_title">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
+
+    <!-- Classic theme -->
+    <color name="primary_classic">#6600CD</color>
+    <color name="status_bar_classic">#6600CD</color>
+    <color name="background_card_classic">#ede7f6</color>
+
+    <!-- Blue theme -->
+    <color name="primary_blue">#2196f3</color> <!-- blue 500 -->
+    <color name="status_bar_blue">#1976d2</color> <!-- blue 700 -->
+    <color name="background_card_blue">#e3f2fd</color> <!-- blue 50 -->
+
+    <!-- Orange theme -->
+    <color name="primary_orange">#ff9800</color> <!-- orange 500 -->
+    <color name="status_bar_orange">#f57c00</color> <!-- orange 700 -->
+    <color name="background_card_orange">#fff3e0</color> <!-- orange 50 -->
+
+    <!-- Deep Blue theme -->
+    <color name="primary_deepblue">#1565c0</color> <!-- blue 800 -->
+    <color name="status_bar_deepblue">#0d47a1</color> <!-- blue 900 -->
+    <color name="background_card_deepblue">#90caf9</color> <!-- blue 200 -->
+    <color name="background_deepblue">#bbdefb</color> <!-- blue 100 -->
+    <color name="bottomnav_deepblue">#bbdefb</color> <!-- blue 100 -->
+    <color name="navbar_deepblue">#90caf9</color> <!-- blue 200 -->
+    <color name="text_accent_deepblue">#42a5f5</color> <!-- blue 400 -->
+
+    <!-- Deep Orange theme -->
+    <color name="primary_deeporange">#d84315</color> <!-- deep orange 800 -->
+    <color name="status_bar_deeporange">#bf360c</color> <!-- deep orange 900 -->
+    <color name="background_card_deeporange">#ffab91</color> <!-- deep orange 200 -->
+    <color name="background_deeporange">#ffccbc</color> <!-- deep orange 100 -->
+    <color name="bottomnav_deeporange">#ffccbc</color> <!-- deep orange 100 -->
+    <color name="navbar_deeporange">#ffab91</color> <!-- deep orange 200 -->
+    <color name="text_accent_deeporange">#ff7043</color> <!-- deep orange 800 -->
+
+    <!-- Blue Grey theme -->
+    <color name="primary_bluegrey">#37474F</color> <!-- blue grey 800 -->
+    <color name="status_bar_bluegrey">#263238</color> <!-- blue grey 900 -->
+    <color name="background_card_bluegrey">#B0BEC5</color> <!-- blue grey 200 -->
+    <color name="background_bluegrey">#CFD8DC</color> <!-- blue grey 100 -->
+    <color name="bottomnav_bluegrey">#90A4AE</color> <!-- blue grey 300 -->
+    <color name="navbar_bluegrey">#78909C</color> <!-- blue grey 400 -->
+    <color name="text_accent_bluegrey">#212121</color> <!-- grey 900 -->
+
+    <!-- Deep Green theme -->
+    <color name="primary_green">#2E7D32</color> <!-- green 800 -->
+    <color name="status_bar_green">#1B5E20</color> <!-- green 900 -->
+    <color name="background_card_green">#A5D6A7</color> <!-- green 200 -->
+    <color name="background_green">#C8E6C9</color> <!-- green 100 -->
+    <color name="bottomnav_green">#81C784</color> <!-- green 300 -->
+    <color name="navbar_green">#66BB6A</color> <!-- green 400 -->
+    <color name="text_accent_green">#1B5E20</color> <!-- green 900 -->
 </resources>

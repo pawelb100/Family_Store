@@ -1,35 +1,53 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    <PreferenceCategory app:title="@string/messages_header">-->
+    <PreferenceCategory app:title="@string/interface_label">
 
-<!--        <EditTextPreference-->
-<!--            app:key="signature"-->
-<!--            app:title="@string/signature_title"-->
-<!--            app:useSimpleSummaryProvider="true" />-->
+        <ListPreference
+            app:defaultValue="system"
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values"
+            app:key="theme"
+            app:title="@string/theme"
+            app:useSimpleSummaryProvider="true" />
 
-<!--        <ListPreference-->
-<!--            app:defaultValue="reply"-->
-<!--            app:entries="@array/reply_entries"-->
-<!--            app:entryValues="@array/reply_values"-->
-<!--            app:key="reply"-->
-<!--            app:title="@string/reply_title"-->
-<!--            app:useSimpleSummaryProvider="true" />-->
+        <ListPreference
+            app:defaultValue="classic"
+            app:entries="@array/color_entries"
+            app:entryValues="@array/color_values"
+            app:key="color"
+            app:title="@string/color"
+            app:useSimpleSummaryProvider="true" />
 
-<!--    </PreferenceCategory>-->
+        <ListPreference
+            app:defaultValue="PUBLISHED"
+            app:entries="@array/sorting_entries"
+            app:entryValues="@array/sorting_values"
+            app:key="default_app_sort"
+            app:title="@string/default_app_sort"
+            app:useSimpleSummaryProvider="true" />
 
-<!--    <PreferenceCategory app:title="@string/sync_header">-->
+    </PreferenceCategory>
 
-<!--        <SwitchPreferenceCompat-->
-<!--            app:key="sync"-->
-<!--            app:title="@string/sync_title" />-->
+    <PreferenceCategory app:title="@string/notifs_label">
 
-<!--        <SwitchPreferenceCompat-->
-<!--            app:dependency="sync"-->
-<!--            app:key="attachment"-->
-<!--            app:summaryOff="@string/attachment_summary_off"-->
-<!--            app:summaryOn="@string/attachment_summary_on"-->
-<!--            app:title="@string/attachment_title" />-->
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="@string/receive_notifs"
+            app:defaultValue="false"
+            app:enabled="false"
+            app:summaryOff="@string/coming_soon"
+            />
 
-<!--    </PreferenceCategory>-->
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/about_app">
+
+        <Preference
+            app:key="app_version"
+            app:title="@string/version"
+            android:summary=""/>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

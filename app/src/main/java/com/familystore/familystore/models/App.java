@@ -1,5 +1,6 @@
 package com.familystore.familystore.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class App extends AppPreview {
@@ -7,24 +8,21 @@ public class App extends AppPreview {
 
     private String authorId;
 
-    private int lastUpdated;
+    private String description = "";
 
-    private String description;
+    private String changelog = "";
 
-    private String changelog;
+    private List<String> pictureUrls = new ArrayList<>();
 
-    private List<String> pictureUrls;
-
-    private String downloadUrl;
+    private String downloadUrl = "";
 
     public App() {
         super();
     }
 
-    public App(String id, String name, String pictureUrl, String version, String author, int lastUpdated, String description, String changelog, List<String> pictureUrls, String downloadUrl) {
-        super(id, name, pictureUrl, version);
+    public App(String id, String name, String pictureUrl, String version, String author, long lastUpdated, String description, String changelog, List<String> pictureUrls, String downloadUrl) {
+        super(id, name, pictureUrl, version, lastUpdated);
         this.authorId = author;
-        this.lastUpdated = lastUpdated;
         this.description = description;
         this.changelog = changelog;
         this.pictureUrls = pictureUrls;
@@ -39,13 +37,6 @@ public class App extends AppPreview {
         this.authorId = authorId;
     }
 
-    public int getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(int lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
 
     public String getDescription() {
         return description;

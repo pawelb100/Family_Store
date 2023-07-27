@@ -1,12 +1,40 @@
 <resources>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="theme_entries">
+        <item>@string/system_theme</item>
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>system</item>
+        <item>light</item>
+        <item>dark</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="color_entries">
+        <item>@string/classic_color</item>
+        <item>@string/blue_color</item>
+        <item>@string/bluegrey_color</item>
+        <item>@string/orange_color</item>
+        <item>@string/deepblue_color</item>
+        <item>@string/deeporange_color</item>
+        <item>@string/deepgreen_color</item>
+    </string-array>
+    <string-array name="color_values">
+        <item>classic</item>
+        <item>blue</item>
+        <item>bluegrey</item>
+        <item>orange</item>
+        <item>deepblue</item>
+        <item>deeporange</item>
+        <item>deepgreen</item>
+    </string-array>
+
+    <string-array name="sorting_entries">
+        <item>@string/sort_published</item>
+        <item>@string/sort_last_updated</item>
+    </string-array>
+    <string-array name="sorting_values">
+        <item>PUBLISHED</item>
+        <item>LAST_UPDATED</item>
     </string-array>
 </resources>
