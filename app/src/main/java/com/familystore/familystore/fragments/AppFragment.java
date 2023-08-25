@@ -51,9 +51,9 @@ public class AppFragment extends Fragment {
             ));
             binding.description.setText(app.getDescription());
 
-            viewModel.getUserById(
+            viewModel.getBrandById(
                     app.getAuthorId(),
-                    user -> binding.author.setText(getString(R.string.author_info, user.getName()))
+                    brand -> binding.author.setText(getString(R.string.author_info, brand.getName()))
             );
             // last updated
             if (app.getLastUpdated() == -1) {
