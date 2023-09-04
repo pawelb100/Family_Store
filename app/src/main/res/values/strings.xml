@@ -51,5 +51,6 @@
     <string name="apps">Aplikacje</string>
     <string name="downloads">Pobrane</string>
     <string name="settings">Ustawienia</string>
+    <string name="app_logo">App logo</string>
 
 </resources>
