@@ -15,15 +15,18 @@ public class AppPreview {
 
     private long lastUpdated = -1;
 
+    private String authorId;
+
     private Callback logoUpdateCallback = null;
 
     public AppPreview() {}
 
-    public AppPreview(String id, String name, String logoUrl, String version, long lastUpdated) {
+    public AppPreview(String id, String name, String logoUrl, String version, String authorId, long lastUpdated) {
         this.id = id;
         this.name = name;
         this.logoUrl = logoUrl;
         this.version = version;
+        this.authorId = authorId;
         this.lastUpdated = lastUpdated;
     }
 
@@ -45,6 +48,14 @@ public class AppPreview {
 
     public String getLogoUrl() {
         return logoUrl;
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
     public Callback getLogoUpdateCallback() {

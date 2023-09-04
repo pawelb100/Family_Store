@@ -28,6 +28,10 @@
             android:id="@+id/deepLink"
             app:action="ACTION_VIEW"
             app:uri="familystore.com/app/{id}" />
+        <action
+            android:id="@+id/action_appFragment_to_brandAppsFragment"
+            app:destination="@id/brandAppsFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -38,4 +42,14 @@
         android:name="com.familystore.familystore.fragments.FilesFragment"
         android:label="filesFragment"
         tools:layout="@layout/fragment_files" />
+    <fragment
+        android:id="@+id/brandAppsFragment"
+        android:name="com.familystore.familystore.fragments.BrandAppsFragment"
+        android:label="fragment_brand_apps"
+        tools:layout="@layout/fragment_brand_apps" >
+        <action
+            android:id="@+id/action_brandAppsFragment_to_appFragment"
+            app:destination="@id/appFragment"
+            app:launchSingleTop="true" />
+    </fragment>
 </navigation>
