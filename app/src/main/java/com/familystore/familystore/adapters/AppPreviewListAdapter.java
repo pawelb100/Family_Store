@@ -20,11 +20,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAdapter.ViewHolder>  {
 
     private final Context context;
-    private final List<AppPreview> appPreviewList;
+    private List<AppPreview> appPreviewList;
     private final AppPreviewListClickListener listener;
 
 
@@ -133,6 +134,12 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
             default:
         }
         calculateDiff(oldData, appPreviewList);
+    }
+
+    public void filterByBrandId(String brandId) {
+        if (appPreviewList.isEmpty())
+            return;
+        appPreviewList = appPreviewList.stream().filter(appPreview -> appPreview.getAuthorId().equals(brandId)).collect(Collectors.toList());
     }
 
 

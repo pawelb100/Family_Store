@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App extends AppPreview {
-
-
-    private String authorId;
-
     private String description = "";
 
     private String changelog = "";
@@ -20,23 +16,13 @@ public class App extends AppPreview {
         super();
     }
 
-    public App(String id, String name, String pictureUrl, String version, String author, long lastUpdated, String description, String changelog, List<String> pictureUrls, String downloadUrl) {
-        super(id, name, pictureUrl, version, lastUpdated);
-        this.authorId = author;
+    public App(String id, String name, String pictureUrl, String version, String authorId, long lastUpdated, String description, String changelog, List<String> pictureUrls, String downloadUrl) {
+        super(id, name, pictureUrl, version, authorId, lastUpdated);
         this.description = description;
         this.changelog = changelog;
         this.pictureUrls = pictureUrls;
         this.downloadUrl = downloadUrl;
     }
-
-    public String getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
-    }
-
 
     public String getDescription() {
         return description;

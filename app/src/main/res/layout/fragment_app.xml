@@ -59,7 +59,7 @@
                 android:text=""
                 android:textColor="@color/text_primary"
                 android:textSize="20sp"
-
+                android:clickable="true"
                 />
 
         </RelativeLayout>

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.familystore.familystore.R;
@@ -43,6 +44,8 @@ public class AppFragment extends Fragment {
             id = intent.getData().getLastPathSegment();
         }
 
+        boolean isFromBrand = getArguments().getBoolean("fromBrand");
+
         viewModel.getAppById(id, app -> {
             binding.name.setText(app.getName());
             binding.version.setText(getString(
@@ -53,7 +56,20 @@ public class AppFragment extends Fragment {
 
             viewModel.getBrandById(
                     app.getAuthorId(),
-                    brand -> binding.author.setText(getString(R.string.author_info, brand.getName()))
+                    brand -> {
+                        binding.author.setText(getString(R.string.author_info, brand.getName()));
+                        // brand onClick
+                        if (isFromBrand)
+                            binding.author.setClickable(false);
+                        else
+                            binding.author.setOnClickListener(view -> {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("brandId", app.getAuthorId());
+                                bundle.putString("brandName", brand.getName());
+                                Navigation.findNavController(binding.getRoot())
+                                        .navigate(R.id.action_appFragment_to_brandAppsFragment, bundle);
+                            });
+                    }
             );
             // last updated
             if (app.getLastUpdated() == -1) {
@@ -97,7 +113,6 @@ public class AppFragment extends Fragment {
                         view.setEnabled(false);
                     });
                 }
-
         });
         return binding.getRoot();
     }
