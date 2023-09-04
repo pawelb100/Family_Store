@@ -20,11 +20,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAdapter.ViewHolder>  {
+public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAdapter.ViewHolder> {
 
     private final Context context;
-    private final List<AppPreview> appPreviewList;
+    private List<AppPreview> appPreviewList;
     private final AppPreviewListClickListener listener;
 
 
@@ -79,20 +80,20 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
 
         // callback is necessary to display logos which urls are
         // loaded with delay
-        currentItem.setLogoUpdateCallback(() -> {
-            Picasso.get()
-                    .load(currentItem.getLogoUrl())
-                    .into(viewHolder.ivLogo);
-        });
+        currentItem.setLogoUpdateCallback(() ->
+                Picasso.get()
+                        .load(currentItem.getLogoUrl())
+                        .into(viewHolder.ivLogo)
+        );
         // if logo url is instantly available, callback has to be
         // called manually
         if (!currentItem.getLogoUrl().equals("")) {
             currentItem.getLogoUpdateCallback().call();
         }
 
-        viewHolder.parentView.setOnClickListener(v -> {
-            listener.onClick(currentItem.getId());
-        });
+        viewHolder.parentView.setOnClickListener(v ->
+                listener.onClick(currentItem.getId())
+        );
     }
 
     private void calculateDiff(List<AppPreview> oldData, List<AppPreview> newData) {
@@ -125,14 +126,19 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
                         int id1 = Integer.parseInt(first.getId());
                         int id2 = Integer.parseInt(second.getId());
                         return Integer.compare(id2, id1);
-                    }
-                    else
+                    } else
                         return Long.compare(timestamp2, timestamp1);
                 });
                 break;
             default:
         }
         calculateDiff(oldData, appPreviewList);
+    }
+
+    public void filterByBrandId(String brandId) {
+        if (appPreviewList.isEmpty())
+            return;
+        appPreviewList = appPreviewList.stream().filter(appPreview -> appPreview.getAuthorId().equals(brandId)).collect(Collectors.toList());
     }
 
 

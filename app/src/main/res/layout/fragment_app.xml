@@ -21,7 +21,8 @@
                 android:id="@+id/logo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/app_logo" />
 
             <TextView
                 android:id="@+id/name"
@@ -59,7 +60,7 @@
                 android:text=""
                 android:textColor="@color/text_primary"
                 android:textSize="20sp"
-
+                android:clickable="true"
                 />
 
         </RelativeLayout>

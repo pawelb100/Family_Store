@@ -13,6 +13,7 @@
     <string name="sort_order">Kolejność:</string>
     <string name="sort_published">Data publikacji</string>
     <string name="sort_last_updated">Ostatnia aktualizacja</string>
+    <string name="brand_title">Aplikacje %1$s:</string>
 
     <!-- Files fragment -->
     <string name="download_date_info">Pobrano: %1$s</string>
@@ -50,5 +51,6 @@
     <string name="apps">Aplikacje</string>
     <string name="downloads">Pobrane</string>
     <string name="settings">Ustawienia</string>
+    <string name="app_logo">App logo</string>
 
 </resources>

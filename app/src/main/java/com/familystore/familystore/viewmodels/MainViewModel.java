@@ -7,12 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.familystore.familystore.BuildConfig;
 import com.familystore.familystore.listeners.database.AppPreviewListListener;
+import com.familystore.familystore.listeners.database.BrandListener;
 import com.familystore.familystore.listeners.database.SingleAppListener;
 import com.familystore.familystore.listeners.database.UpdateListener;
-import com.familystore.familystore.listeners.database.UserListener;
 import com.familystore.familystore.models.App;
 import com.familystore.familystore.models.AppPreview;
-import com.familystore.familystore.models.User;
+import com.familystore.familystore.models.Brand;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +27,7 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
 
     private final DatabaseReference appListReference;
-    private final DatabaseReference usersReference;
+    private final DatabaseReference brandsReference;
     private final StorageReference appDataReference;
 
     private final StorageReference updateReference;
@@ -38,7 +38,7 @@ public class MainViewModel extends AndroidViewModel {
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         appListReference = database.getReference().child("Family Store 2/Apps");
-        usersReference = database.getReference().child("Family Store 2/Users");
+        brandsReference = database.getReference().child("Family Store 2/Brands");
 
         appDataReference = storage.getReference().child("Family Store 2/Apps");
         updateReference = storage.getReference().child("Family Store 2/Releases");
@@ -142,13 +142,13 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public void getUserById(String id, UserListener listener) {
+    public void getBrandById(String id, BrandListener listener) {
 
-        usersReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        brandsReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                listener.onResult(user);
+                Brand brand = snapshot.getValue(Brand.class);
+                listener.onResult(brand);
             }
 
             @Override
