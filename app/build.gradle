@@ -3,12 +3,13 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+Properties localProperties = new Properties()
+localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     signingConfigs {
         debug {
-            Properties properties = new Properties()
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            storeFile file(properties.getProperty('debug.keystore.file'))
+            storeFile file(localProperties.getProperty('debug.keystore.file'))
         }
     }
     namespace 'com.familystore.familystore'
@@ -33,11 +34,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [appName: "Family Store"]
+            buildConfigField("String", "ONESIGNAL_APP_ID",
+                    "\"" + localProperties["onesignal.appid"] + "\"")
         }
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix '-debug'
             manifestPlaceholders = [appName: "Family Store Debug"]
+            buildConfigField("String", "ONESIGNAL_APP_ID",
+                    "\"" + localProperties["onesignal.appid"] + "\"")
         }
     }
     compileOptions {
