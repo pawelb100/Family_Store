@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private static final String ONESIGNAL_APP_ID = "89f2f3d2-146a-4d89-b1e3-c1c4abc405b3";
+    private static final String ONESIGNAL_APP_ID = BuildConfig.ONESIGNAL_APP_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

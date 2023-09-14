@@ -3,12 +3,13 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+Properties localProperties = new Properties()
+localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     signingConfigs {
         debug {
-            Properties properties = new Properties()
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            storeFile file(properties.getProperty('debug.keystore.file'))
+            storeFile file(localProperties.getProperty('debug.keystore.file'))
         }
     }
     namespace 'com.familystore.familystore'
@@ -19,7 +20,7 @@ android {
         minSdk 29
         targetSdk 33
         versionCode 1
-        versionName "3.1"  // last changed: 25/08/2023
+        versionName "3.2"  // last changed: 14/09/2023
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,16 +34,20 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [appName: "Family Store"]
+            buildConfigField("String", "ONESIGNAL_APP_ID",
+                    "\"" + localProperties["onesignal.appid"] + "\"")
         }
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix '-debug'
             manifestPlaceholders = [appName: "Family Store Debug"]
+            buildConfigField("String", "ONESIGNAL_APP_ID",
+                    "\"" + localProperties["onesignal.appid"] + "\"")
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
