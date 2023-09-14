@@ -46,8 +46,14 @@ public class HomeFragment extends Fragment {
                 )
         );
 
-        binding.btnSortPublished.setOnClickListener(view -> adapter.sort(AppPreview.Order.PUBLISHED));
-        binding.btnSortLastUpdated.setOnClickListener(view -> adapter.sort(AppPreview.Order.LAST_UPDATED));
+        binding.btnSortPublished.setOnClickListener(view -> {
+            if (adapter != null)
+                adapter.sort(AppPreview.Order.PUBLISHED);
+        });
+        binding.btnSortLastUpdated.setOnClickListener(view -> {
+            if (adapter != null)
+                adapter.sort(AppPreview.Order.LAST_UPDATED);
+        });
 
         return binding.getRoot();
     }
