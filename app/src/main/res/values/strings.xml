@@ -1,13 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Family Store</string>
     <string name="coming_soon">Dostępne wkrótce</string>
     <string name="yes">Tak</string>
     <string name="cancel">Anuluj</string>
+    <string name="unknown">Nieznany</string>
 
     <!-- App list tile and fragment -->
     <string name="version_info">Wersja: %1$s</string>
     <string name="download_button">Pobierz</string>
-    <string name="author_info">Autor: %1$s</string>
+    <string name="author_info" tools:ignore="Typos">Autor: %1$s</string>
     <string name="last_updated_date">Ostatnia aktualizacja: %1$s</string>
     <string name="changelog_title">Lista zmian:</string>
     <string name="sort_order">Kolejność:</string>
@@ -52,5 +53,6 @@
     <string name="downloads">Pobrane</string>
     <string name="settings">Ustawienia</string>
     <string name="app_logo">App logo</string>
+    <string name="app_logo_description">App logo</string>
 
 </resources>

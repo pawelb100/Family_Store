@@ -16,7 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.AppPreviewListAdapter;
 import com.familystore.familystore.databinding.FragmentHomeBinding;
+import com.familystore.familystore.listeners.database.AppPreviewListListener;
+import com.familystore.familystore.listeners.database.BrandListListener;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.models.Brand;
 import com.familystore.familystore.utils.SettingsManager;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
@@ -37,7 +40,11 @@ public class HomeFragment extends Fragment {
 
         adapter = null;
 
-        viewModel.addAppPreviewListListener(this::setAdapter);
+        viewModel.getBrandList(brands ->
+                viewModel.addAppPreviewListListener(apps ->
+                        setAdapter(apps, brands)
+                )
+        );
 
         binding.btnSortPublished.setOnClickListener(view -> adapter.sort(AppPreview.Order.PUBLISHED));
         binding.btnSortLastUpdated.setOnClickListener(view -> adapter.sort(AppPreview.Order.LAST_UPDATED));
@@ -51,10 +58,10 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    private void setAdapter(List<AppPreview> apps) {
+    private void setAdapter(List<AppPreview> apps, List<Brand> brands) {
 
         if (binding != null) {
-            adapter = new AppPreviewListAdapter(getContext(), apps, id -> {
+            adapter = new AppPreviewListAdapter(getContext(), apps, brands, id -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("appId", id);
 
