@@ -19,7 +19,7 @@ android {
         minSdk 29
         targetSdk 33
         versionCode 1
-        versionName "3.1"  // last changed: 25/08/2023
+        versionName "3.2"  // last changed: 14/09/2023
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,8 +41,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 

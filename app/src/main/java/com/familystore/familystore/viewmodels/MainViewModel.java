@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.familystore.familystore.BuildConfig;
 import com.familystore.familystore.listeners.database.AppPreviewListListener;
+import com.familystore.familystore.listeners.database.BrandListListener;
 import com.familystore.familystore.listeners.database.BrandListener;
 import com.familystore.familystore.listeners.database.SingleAppListener;
 import com.familystore.familystore.listeners.database.UpdateListener;
@@ -65,7 +66,6 @@ public class MainViewModel extends AndroidViewModel {
                     // to enable default sorting
                     for (int i = 0; i < apps.size(); i++) {
                         AppPreview app = apps.get(i);
-                        int finalI = i;
                         appDataReference
                                 .child(app.getId())
                                 .child("logo.png")
@@ -156,6 +156,28 @@ public class MainViewModel extends AndroidViewModel {
             }
         });
 
+    }
+
+    public void getBrandList(BrandListListener listener) {
+        brandsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Brand> brands = new ArrayList<>();
+
+                if (snapshot.exists()) {
+                    for (DataSnapshot child : snapshot.getChildren()) {
+                        Brand brand = child.getValue(Brand.class);
+                        assert brand != null;
+                        brands.add(brand);
+                    }
+                    listener.onResult(brands);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     public void checkAvailableUpdate(UpdateListener listener) {

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.familystore.familystore.R;
 import com.familystore.familystore.listeners.lists.AppPreviewListClickListener;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.models.Brand;
 import com.familystore.familystore.utils.BaseDateUtils;
 import com.familystore.familystore.utils.DiffUtilCallback;
 import com.squareup.picasso.Picasso;
@@ -26,12 +27,14 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
 
     private final Context context;
     private List<AppPreview> appPreviewList;
+    private final List<Brand> brandList;
     private final AppPreviewListClickListener listener;
 
 
-    public AppPreviewListAdapter(Context context, List<AppPreview> appPreviewList, AppPreviewListClickListener listener) {
+    public AppPreviewListAdapter(Context context, List<AppPreview> appPreviewList, List<Brand> brandList, AppPreviewListClickListener listener) {
         this.context = context;
         this.appPreviewList = appPreviewList;
+        this.brandList = brandList;
         this.listener = listener;
     }
 
@@ -59,12 +62,15 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         AppPreview currentItem = appPreviewList.get(position);
+        String author = brandList.stream()
+                .filter(brand -> brand.getId().equals(currentItem.getAuthorId()))
+                .findFirst()
+                .orElse(new Brand("0", context.getString(R.string.unknown)))
+                .getName();
 
         viewHolder.tvName.setText(currentItem.getName());
-        viewHolder.tvVersion.setText(context.getString(
-                R.string.version_info,
-                currentItem.getVersion()
-        ));
+        viewHolder.tvAuthor.setText(author);
+
         if (currentItem.getLastUpdated() != -1) {
             viewHolder.tvLastUpdated.setText(context.getString(
                     R.string.last_updated_date,
@@ -145,7 +151,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView ivLogo;
         private final TextView tvName;
-        private final TextView tvVersion;
+        private final TextView tvAuthor;
         private final TextView tvLastUpdated;
         private final View parentView;
 
@@ -154,7 +160,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
             this.parentView = view;
             this.ivLogo = view.findViewById(R.id.logo);
             this.tvName = view.findViewById(R.id.name);
-            this.tvVersion = view.findViewById(R.id.version);
+            this.tvAuthor = view.findViewById(R.id.author);
             this.tvLastUpdated = view.findViewById(R.id.lastUpdated);
         }
 
