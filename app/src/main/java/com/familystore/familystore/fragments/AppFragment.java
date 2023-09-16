@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -47,9 +48,22 @@ public class AppFragment extends Fragment {
         boolean isFromBrand = getArguments().getBoolean("fromBrand");
 
         viewModel.getAppById(id, app -> {
+            // without this check application sometimes crashes when opened using deep links
             if (binding == null) {
                 return;
             }
+            // handle app with given id not being found (can occur when using deeplinks)
+            if (app == null) {
+                Navigation.findNavController(binding.getRoot())
+                        .navigate(R.id.action_appFragment_to_homeFragment);
+                Toast.makeText(
+                        getContext(),
+                        getString(R.string.app_not_found),
+                        Toast.LENGTH_SHORT
+                ).show();
+                return;
+            }
+
             binding.name.setText(app.getName());
             binding.version.setText(getString(
                     R.string.version_info,

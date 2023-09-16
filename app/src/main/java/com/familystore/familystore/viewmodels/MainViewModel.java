@@ -89,12 +89,13 @@ public class MainViewModel extends AndroidViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 App app = snapshot.getValue(App.class);
-                // just in case to avoid crashes
+                // initial load
+                listener.onResult(app);
+                // this is executed after listener.onResult to notify the
+                // fragment that there is no app with this id
                 if (app == null) {
                     return;
                 }
-                // initial load
-                listener.onResult(app);
                 // add download urls for missing properties
                 // logo
                 appDataReference
