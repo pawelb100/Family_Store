@@ -1,6 +1,6 @@
 package com.familystore.familystore.fragments;
 
-import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,16 +36,21 @@ public class AppFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAppBinding.inflate(inflater, container, false);
 
-        ViewModelProvider viewModelProvider = new ViewModelProvider(requireActivity());
+        FragmentActivity activity = requireActivity();
+        ViewModelProvider viewModelProvider = new ViewModelProvider(activity);
         viewModel = viewModelProvider.get(MainViewModel.class);
 
         assert getArguments() != null;
         String id = getArguments().getString("appId");
+        // id == null when opened using deep link
         if (id == null) {
-            Intent intent = getActivity().getIntent();
-            id = intent.getData().getLastPathSegment();
+            Uri uri = activity.getIntent().getData();
+            assert uri != null;
+            id = uri.getLastPathSegment();
         }
 
+        // check whether this fragment has been launched from the brand fragment
+        // (to later disable author label click action)
         boolean isFromBrand = getArguments().getBoolean("fromBrand");
 
         viewModel.getAppById(id, app -> {
@@ -120,11 +126,10 @@ public class AppFragment extends Fragment {
                     false
             ));
 
-
             // app downloader
             if (apkDownloader == null)
                 if (!app.getDownloadUrl().equals("")) {
-                    apkDownloader = new ApkDownloader(getContext(), app.getDownloadUrl(), app.getName(), app.getVersion());
+                    apkDownloader = new ApkDownloader(requireContext(), app.getDownloadUrl(), app.getName(), app.getVersion());
                     binding.download.setOnClickListener(view -> {
                         apkDownloader.download();
                         view.setEnabled(false);
@@ -139,6 +144,4 @@ public class AppFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-
 }
