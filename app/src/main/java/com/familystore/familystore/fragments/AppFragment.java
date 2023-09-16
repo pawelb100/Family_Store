@@ -47,6 +47,9 @@ public class AppFragment extends Fragment {
         boolean isFromBrand = getArguments().getBoolean("fromBrand");
 
         viewModel.getAppById(id, app -> {
+            if (binding == null) {
+                return;
+            }
             binding.name.setText(app.getName());
             binding.version.setText(getString(
                     R.string.version_info,
