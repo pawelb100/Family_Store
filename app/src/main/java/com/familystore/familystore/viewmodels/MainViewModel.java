@@ -6,10 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.familystore.familystore.BuildConfig;
-import com.familystore.familystore.listeners.database.AppPreviewListListener;
-import com.familystore.familystore.listeners.database.BrandListListener;
-import com.familystore.familystore.listeners.database.BrandListener;
-import com.familystore.familystore.listeners.database.SingleAppListener;
+import com.familystore.familystore.listeners.database.ResultListener;
 import com.familystore.familystore.listeners.database.UpdateListener;
 import com.familystore.familystore.models.App;
 import com.familystore.familystore.models.AppPreview;
@@ -46,7 +43,7 @@ public class MainViewModel extends AndroidViewModel {
 
     }
 
-    public void addAppPreviewListListener(AppPreviewListListener listener) {
+    public void addAppPreviewListListener(ResultListener<List<AppPreview>> listener) {
         appListReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -86,7 +83,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
-    public void getAppById(String id, SingleAppListener listener) {
+    public void getAppById(String id, ResultListener<App> listener) {
 
         appListReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -142,7 +139,7 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public void getBrandById(String id, BrandListener listener) {
+    public void getBrandById(String id, ResultListener<Brand> listener) {
 
         brandsReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -158,7 +155,7 @@ public class MainViewModel extends AndroidViewModel {
 
     }
 
-    public void getBrandList(BrandListListener listener) {
+    public void getBrandList(ResultListener<List<Brand>> listener) {
         brandsReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
