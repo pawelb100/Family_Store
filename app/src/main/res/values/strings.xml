@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Family Store</string>
+    <string name="app_name" translatable="false">Family Store</string>
     <string name="coming_soon">Dostępne wkrótce</string>
     <string name="yes">Tak</string>
     <string name="cancel">Anuluj</string>
@@ -54,7 +54,7 @@
     <string name="apps">Aplikacje</string>
     <string name="downloads">Pobrane</string>
     <string name="settings">Ustawienia</string>
-    <string name="app_logo">App logo</string>
-    <string name="app_logo_description">App logo</string>
+    <string name="app_logo" translatable="false">App logo</string>
+    <string name="app_logo_description" translatable="false">App logo</string>
 
 </resources>
