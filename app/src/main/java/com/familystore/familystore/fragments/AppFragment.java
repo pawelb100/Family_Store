@@ -132,6 +132,11 @@ public class AppFragment extends Fragment {
                     apkDownloader = new ApkDownloader(requireContext(), app.getDownloadUrl(), app.getName(), app.getVersion());
                     binding.download.setOnClickListener(view -> {
                         apkDownloader.download();
+                        Toast.makeText(
+                                getContext(),
+                                getString(R.string.download_started_info),
+                                Toast.LENGTH_SHORT
+                        ).show();
                         view.setEnabled(false);
                     });
                 }
