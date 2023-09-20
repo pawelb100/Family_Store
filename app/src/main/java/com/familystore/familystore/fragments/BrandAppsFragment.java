@@ -18,7 +18,6 @@ import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.models.Brand;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BrandAppsFragment extends Fragment {

@@ -40,4 +40,6 @@
     <string name="apps">Apps</string>
     <string name="downloads">Downloads</string>
     <string name="settings">Settings</string>
+    <string name="app_not_found">App not found</string>
+    <string name="download_started_info">Downloading…</string>
 </resources>

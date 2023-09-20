@@ -1,13 +1,15 @@
 package com.familystore.familystore.fragments;
 
-import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,22 +36,40 @@ public class AppFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAppBinding.inflate(inflater, container, false);
 
-        ViewModelProvider viewModelProvider = new ViewModelProvider(requireActivity());
+        FragmentActivity activity = requireActivity();
+        ViewModelProvider viewModelProvider = new ViewModelProvider(activity);
         viewModel = viewModelProvider.get(MainViewModel.class);
 
         assert getArguments() != null;
         String id = getArguments().getString("appId");
+        // id == null when opened using deep link
         if (id == null) {
-            Intent intent = getActivity().getIntent();
-            id = intent.getData().getLastPathSegment();
+            Uri uri = activity.getIntent().getData();
+            assert uri != null;
+            id = uri.getLastPathSegment();
         }
 
+        // check whether this fragment has been launched from the brand fragment
+        // (to later disable author label click action)
         boolean isFromBrand = getArguments().getBoolean("fromBrand");
 
         viewModel.getAppById(id, app -> {
+            // without this check application sometimes crashes when opened using deep links
             if (binding == null) {
                 return;
             }
+            // handle app with given id not being found (can occur when using deeplinks)
+            if (app == null) {
+                Navigation.findNavController(binding.getRoot())
+                        .navigate(R.id.action_appFragment_to_homeFragment);
+                Toast.makeText(
+                        getContext(),
+                        getString(R.string.app_not_found),
+                        Toast.LENGTH_SHORT
+                ).show();
+                return;
+            }
+
             binding.name.setText(app.getName());
             binding.version.setText(getString(
                     R.string.version_info,
@@ -106,13 +126,17 @@ public class AppFragment extends Fragment {
                     false
             ));
 
-
             // app downloader
             if (apkDownloader == null)
                 if (!app.getDownloadUrl().equals("")) {
-                    apkDownloader = new ApkDownloader(getContext(), app.getDownloadUrl(), app.getName(), app.getVersion());
+                    apkDownloader = new ApkDownloader(requireContext(), app.getDownloadUrl(), app.getName(), app.getVersion());
                     binding.download.setOnClickListener(view -> {
                         apkDownloader.download();
+                        Toast.makeText(
+                                getContext(),
+                                getString(R.string.download_started_info),
+                                Toast.LENGTH_SHORT
+                        ).show();
                         view.setEnabled(false);
                     });
                 }
@@ -125,6 +149,4 @@ public class AppFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-
 }
