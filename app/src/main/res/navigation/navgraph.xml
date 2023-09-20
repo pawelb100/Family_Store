@@ -28,11 +28,14 @@
             android:id="@+id/deepLink"
             android:autoVerify="true"
             app:action="ACTION_VIEW"
-            app:uri="https://family-store-dev.vercel.app/apps/{id}" />
+            app:uri="https://family-store.vercel.app/apps/{id}" />
         <action
             android:id="@+id/action_appFragment_to_brandAppsFragment"
             app:destination="@id/brandAppsFragment"
             app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_appFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

@@ -15,7 +15,7 @@ public class ApkDownloader {
     private final String subPath;
 
     public ApkDownloader(Context context, String url, String appName, String appVersion) {
-        String fileName = appName + " wersja " + appVersion + ".apk";
+        String fileName = appName + " (" + appVersion + ").apk";
         Uri uri = Uri.parse(url);
         subPath = "/FamilyStore/" + fileName;
 

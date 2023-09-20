@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.AppPreviewListAdapter;
 import com.familystore.familystore.databinding.FragmentHomeBinding;
-import com.familystore.familystore.listeners.database.AppPreviewListListener;
-import com.familystore.familystore.listeners.database.BrandListListener;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.models.Brand;
 import com.familystore.familystore.utils.SettingsManager;
