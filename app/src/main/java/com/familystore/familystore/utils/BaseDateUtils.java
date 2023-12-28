@@ -17,7 +17,7 @@ public class BaseDateUtils {
         }
         Instant instant = Instant.ofEpochMilli(epochMilli);
         OffsetDateTime dateTime = OffsetDateTime.ofInstant(instant, ZoneId.systemDefault());
-        return dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
+        return dateTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     public static String getTimeDifferenceString(long fromMilli, long toMilli) {
