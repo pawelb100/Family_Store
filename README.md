@@ -2,9 +2,6 @@
 
 #### by [pawelb100](https://github.com/pawelb100) & [maciejors](https://github.com/maciejors)
 
-Icon:
-<a href="https://www.flaticon.com/free-icons/vomit" title="vomit icons">Vomit icons created by Freepik - Flaticon</a>
-
 *DISCLAIMER: this is a personal project*
 
 ## Overview
