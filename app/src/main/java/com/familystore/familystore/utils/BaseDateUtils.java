@@ -8,7 +8,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Utility class for date operations, mainly converstion between timestamp and date
+ * Utility class for date operations, mainly conversion between timestamp and date
  */
 public class BaseDateUtils {
     public static String getDateStrFromEpochMilli(long epochMilli) {

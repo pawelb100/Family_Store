@@ -80,6 +80,8 @@ public class AppFragment extends Fragment {
             viewModel.getBrandById(
                     app.getAuthorId(),
                     brand -> {
+                        if (binding == null)
+                            return;
                         binding.author.setText(getString(R.string.author_info, brand.getName()));
                         // brand onClick
                         if (isFromBrand)
