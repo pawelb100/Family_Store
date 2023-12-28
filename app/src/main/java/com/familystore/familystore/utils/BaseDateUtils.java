@@ -8,7 +8,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Utility class for date operations, mainly converstion between timestamp and date
+ * Utility class for date operations, mainly conversion between timestamp and date
  */
 public class BaseDateUtils {
     public static String getDateStrFromEpochMilli(long epochMilli) {
@@ -17,7 +17,7 @@ public class BaseDateUtils {
         }
         Instant instant = Instant.ofEpochMilli(epochMilli);
         OffsetDateTime dateTime = OffsetDateTime.ofInstant(instant, ZoneId.systemDefault());
-        return dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
+        return dateTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     public static String getTimeDifferenceString(long fromMilli, long toMilli) {
