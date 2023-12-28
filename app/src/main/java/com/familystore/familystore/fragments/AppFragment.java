@@ -95,9 +95,8 @@ public class AppFragment extends Fragment {
                     }
             );
             // last updated
-            if (app.getLastUpdated() == -1) {
-                binding.lastUpdated.setVisibility(View.GONE);
-            } else {
+            if (app.getLastUpdated() != -1) {
+                binding.lastUpdated.setVisibility(View.VISIBLE);
                 binding.lastUpdated.setText(getString(
                         R.string.last_updated_date,
                         BaseDateUtils.getDateStrFromEpochMilli(app.getLastUpdated())
@@ -105,9 +104,8 @@ public class AppFragment extends Fragment {
             }
 
             // changelog
-            if (app.getChangelog().equals("")) {
-                binding.changelogCard.setVisibility(View.GONE);
-            } else {
+            if (!app.getChangelog().equals("")) {
+                binding.changelogCard.setVisibility(View.VISIBLE);
                 binding.changelogContent.setText(app.getChangelog());
             }
 
