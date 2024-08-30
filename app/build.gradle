@@ -20,7 +20,7 @@ android {
         minSdk 29
         targetSdk 33
         versionCode 1
-        versionName "3.2.2"  // last changed: 28/12/2023
+        versionName "3.2.3"  // last changed: 30/08/2024
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
