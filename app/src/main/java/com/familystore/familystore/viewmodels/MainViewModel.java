@@ -1,6 +1,7 @@
 package com.familystore.familystore.viewmodels;
 
 import android.app.Application;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -11,6 +12,7 @@ import com.familystore.familystore.listeners.database.UpdateListener;
 import com.familystore.familystore.models.App;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.models.Brand;
+import com.familystore.familystore.viewmodels.supabaseclient.UpdaterClient;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +30,7 @@ public class MainViewModel extends AndroidViewModel {
     private final DatabaseReference brandsReference;
     private final StorageReference appDataReference;
 
-    private final StorageReference updateReference;
+    private final UpdaterClient updaterClient;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -39,8 +41,7 @@ public class MainViewModel extends AndroidViewModel {
         brandsReference = database.getReference().child("Family Store 2/Brands");
 
         appDataReference = storage.getReference().child("Family Store 2/Apps");
-        updateReference = storage.getReference().child("Family Store 2/Releases");
-
+        updaterClient = new UpdaterClient();
     }
 
     public void addAppPreviewListListener(ResultListener<List<AppPreview>> listener) {
@@ -179,24 +180,15 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void checkAvailableUpdate(UpdateListener listener) {
-        updateReference
-                .listAll()
-                .addOnSuccessListener(listResult -> {
-                    if (listResult.getItems().size() != 0) {
-
-                        String currentVersion = BuildConfig.VERSION_NAME;
-                        StorageReference reference = listResult.getItems().get(0);
-
-                        if (!reference.getName().equals("fs-" + currentVersion + ".apk")) {
-                            reference.getDownloadUrl().addOnSuccessListener(downloadUrl -> {
-
-                                String updateVersion = reference.getName().replace("fs-", "").replace(".apk", "");
-                                listener.onUpdateAvailable(downloadUrl, updateVersion);
-                            });
-                        }
-                    }
-                });
+        updaterClient.fetchLatestFsRelease(fsReleaseData -> {
+            String currentVersion = BuildConfig.VERSION_NAME;
+            if (fsReleaseData.releaseId().equals(currentVersion)) {
+                return;
+            }
+            listener.onUpdateAvailable(
+                    Uri.parse(fsReleaseData.downloadUrl()),
+                    fsReleaseData.releaseId()
+            );
+        });
     }
-
-
 }
