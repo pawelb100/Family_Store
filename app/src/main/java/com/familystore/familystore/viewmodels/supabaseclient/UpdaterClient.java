@@ -3,12 +3,12 @@ package com.familystore.familystore.viewmodels.supabaseclient;
 import androidx.annotation.NonNull;
 
 import com.familystore.familystore.BuildConfig;
-import com.familystore.familystore.listeners.database.ResultListener;
 import com.familystore.familystore.models.FSReleaseData;
 import com.familystore.familystore.viewmodels.retrofitapi.UpdaterApi;
 import com.familystore.familystore.viewmodels.supabaseclient.common.BaseClient;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,7 +21,7 @@ public class UpdaterClient extends BaseClient {
         updaterApi = retrofitDb.create(UpdaterApi.class);
     }
 
-    public void fetchLatestFsRelease(ResultListener<FSReleaseData> resultListener) {
+    public void fetchLatestFsRelease(Consumer<FSReleaseData> resultListener) {
         Callback<List<FSReleaseData>> responseCallback = new Callback<>() {
             @Override
             public void onResponse(
@@ -31,7 +31,7 @@ public class UpdaterClient extends BaseClient {
                 if (tableRows == null || tableRows.isEmpty()) {
                     return;
                 }
-                resultListener.onResult(tableRows.get(0));
+                resultListener.accept(tableRows.get(0));
             }
 
             @Override

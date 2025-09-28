@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.FileListAdapter;
 import com.familystore.familystore.databinding.FragmentFilesBinding;
-import com.familystore.familystore.listeners.lists.FileListClickListener;
+import com.familystore.familystore.listeners.FileListClickListener;
 import com.familystore.familystore.utils.FileManager;
 
 import java.io.File;

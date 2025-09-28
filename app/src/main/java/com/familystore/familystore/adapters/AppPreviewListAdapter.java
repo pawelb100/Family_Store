@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.listeners.lists.AppPreviewListClickListener;
+import com.familystore.familystore.listeners.AppPreviewListClickListener;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.models.AppSortOrder;
 import com.familystore.familystore.utils.BaseDateUtils;

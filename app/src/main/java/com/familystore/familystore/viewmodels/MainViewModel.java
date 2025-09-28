@@ -1,20 +1,19 @@
 package com.familystore.familystore.viewmodels;
 
 import android.app.Application;
-import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.familystore.familystore.BuildConfig;
-import com.familystore.familystore.listeners.database.ResultListener;
-import com.familystore.familystore.listeners.database.UpdateListener;
 import com.familystore.familystore.models.App;
 import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.models.FSReleaseData;
 import com.familystore.familystore.viewmodels.supabaseclient.AppsClient;
 import com.familystore.familystore.viewmodels.supabaseclient.UpdaterClient;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -27,24 +26,21 @@ public class MainViewModel extends AndroidViewModel {
         appsClient = new AppsClient();
     }
 
-    public void addAppPreviewListListener(ResultListener<List<AppPreview>> listener) {
+    public void getAppPreviewList(Consumer<List<AppPreview>> listener) {
         appsClient.fetchAppPreviews(listener);
     }
 
-    public void getAppById(int id, ResultListener<App> listener) {
+    public void getAppById(int id, Consumer<App> listener) {
         appsClient.fetchAppById(id, listener);
     }
 
-    public void checkAvailableUpdate(UpdateListener listener) {
+    public void checkAvailableUpdate(Consumer<FSReleaseData> onUpdateAvailable) {
         updaterClient.fetchLatestFsRelease(fsReleaseData -> {
             String currentVersion = BuildConfig.VERSION_NAME;
             if (fsReleaseData.releaseId().equals(currentVersion)) {
                 return;
             }
-            listener.onUpdateAvailable(
-                    Uri.parse(fsReleaseData.downloadUrl()),
-                    fsReleaseData.releaseId()
-            );
+            onUpdateAvailable.accept(fsReleaseData);
         });
     }
 }

@@ -39,7 +39,7 @@ public class BrandAppsFragment extends Fragment {
         String brandName = getArguments().getString("brandName");
         binding.tvBrand.setText(getString(R.string.brand_title, brandName));
 
-        viewModel.addAppPreviewListListener(result -> setAdapter(result, id));
+        viewModel.getAppPreviewList(result -> setAdapter(result, id));
 
         return binding.getRoot();
     }

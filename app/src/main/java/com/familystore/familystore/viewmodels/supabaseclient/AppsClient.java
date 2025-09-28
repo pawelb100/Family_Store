@@ -3,7 +3,6 @@ package com.familystore.familystore.viewmodels.supabaseclient;
 import androidx.annotation.NonNull;
 
 import com.familystore.familystore.BuildConfig;
-import com.familystore.familystore.listeners.database.ResultListener;
 import com.familystore.familystore.models.App;
 import com.familystore.familystore.models.AppPreview;
 import com.familystore.familystore.models.StorageObject;
@@ -14,6 +13,7 @@ import com.familystore.familystore.viewmodels.supabaseclient.common.BaseClient;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;
@@ -29,7 +29,7 @@ public class AppsClient extends BaseClient {
         this.storageApi = retrofitStorage.create(StorageApi.class);
     }
 
-    public void fetchAppPreviews(ResultListener<List<AppPreview>> onAppPreviewsFetched) {
+    public void fetchAppPreviews(Consumer<List<AppPreview>> onAppPreviewsFetched) {
         Callback<List<AppPreview>> responseCallback = new Callback<>() {
             @Override
             public void onResponse(
@@ -41,12 +41,12 @@ public class AppsClient extends BaseClient {
                 }
                 appPreviews.forEach(app -> app.setLogoUrl(
                         storageApi.getDownloadUrl("Apps/" + app.getId() + "/logo.png")));
-                onAppPreviewsFetched.onResult(appPreviews);
+                onAppPreviewsFetched.accept(appPreviews);
             }
 
             @Override
             public void onFailure(@NonNull Call<List<AppPreview>> call, @NonNull Throwable t) {
-                onAppPreviewsFetched.onResult(Collections.emptyList());
+                onAppPreviewsFetched.accept(Collections.emptyList());
             }
         };
         List<String> select = List.of(
@@ -62,7 +62,7 @@ public class AppsClient extends BaseClient {
                 .enqueue(responseCallback);
     }
 
-    private void fetchAppPictureUrls(int id, ResultListener<List<String>> onAppPicturesUrls) {
+    private void fetchAppPictureUrls(int id, Consumer<List<String>> onAppPicturesUrls) {
         String pictureFolderPath = "Apps/" + id + "/pictures/";
 
         Callback<List<StorageObject>> responseCallback = new Callback<>() {
@@ -80,12 +80,12 @@ public class AppsClient extends BaseClient {
                                     .getDownloadUrl(pictureFolderPath + obj.name()))
                             .collect(Collectors.toList());
                 }
-                onAppPicturesUrls.onResult(pictureUrls);
+                onAppPicturesUrls.accept(pictureUrls);
             }
 
             @Override
             public void onFailure(@NonNull Call<List<StorageObject>> call, @NonNull Throwable t) {
-                onAppPicturesUrls.onResult(Collections.emptyList());
+                onAppPicturesUrls.accept(Collections.emptyList());
             }
         };
         Map<String, Object> body = Map.of("prefix", pictureFolderPath);
@@ -97,7 +97,7 @@ public class AppsClient extends BaseClient {
      * Note: onAppFetched will be called twice - once when the initial data is available,
      * and the second time once app pictures are available
      */
-    public void fetchAppById(int id, ResultListener<App> onAppFetched) {
+    public void fetchAppById(int id, Consumer<App> onAppFetched) {
         Callback<List<App>> responseCallback = new Callback<>() {
             @Override
             public void onResponse(
@@ -105,17 +105,17 @@ public class AppsClient extends BaseClient {
                     @NonNull Response<List<App>> response) {
                 List<App> responseBody = response.body();
                 if (responseBody == null || responseBody.isEmpty()) {
-                    onAppFetched.onResult(null);
+                    onAppFetched.accept(null);
                     return;
                 }
                 App app = responseBody.get(0);
                 app.setLogoUrl(storageApi.getDownloadUrl("Apps/" + id + "/logo.png"));
                 app.setDownloadUrl(storageApi.getDownloadUrl("Apps/" + id + "/latest.apk"));
+                onAppFetched.accept(app);
                 fetchAppPictureUrls(id, pictureUrls -> {
                     app.setPictureUrls(pictureUrls);
-                    onAppFetched.onResult(app);
+                    onAppFetched.accept(app);
                 });
-                onAppFetched.onResult(app);
             }
 
             @Override

@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
         MainViewModel viewModel = viewModelProvider.get(MainViewModel.class);
 
         adapter = null;
-        viewModel.addAppPreviewListListener(this::setAdapter);
+        viewModel.getAppPreviewList(this::setAdapter);
 
         binding.btnSortPublished.setOnClickListener(view -> {
             if (adapter != null)
