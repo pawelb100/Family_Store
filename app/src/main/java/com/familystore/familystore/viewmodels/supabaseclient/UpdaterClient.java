@@ -6,6 +6,7 @@ import com.familystore.familystore.BuildConfig;
 import com.familystore.familystore.listeners.database.ResultListener;
 import com.familystore.familystore.models.FSReleaseData;
 import com.familystore.familystore.viewmodels.retrofitapi.UpdaterApi;
+import com.familystore.familystore.viewmodels.supabaseclient.common.BaseClient;
 
 import java.util.List;
 

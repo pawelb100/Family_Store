@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.models.AppPreview;
+import com.familystore.familystore.models.AppSortOrder;
 
 public class SettingsManager {
 
@@ -19,8 +19,8 @@ public class SettingsManager {
         this.context = context;
     }
 
-    public AppPreview.Order getDefaultAppSorting() {
-        return AppPreview.Order.valueOf(
+    public AppSortOrder getDefaultAppSorting() {
+        return AppSortOrder.valueOf(
                 sharedPref.getString("default_app_sort", "PUBLISHED"));
     }
 

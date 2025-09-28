@@ -26,8 +26,6 @@ public class AppFragment extends Fragment {
 
     private FragmentAppBinding binding;
 
-    private MainViewModel viewModel;
-
     private PictureListAdapter adapter;
 
     private ApkDownloader apkDownloader;
@@ -38,15 +36,16 @@ public class AppFragment extends Fragment {
 
         FragmentActivity activity = requireActivity();
         ViewModelProvider viewModelProvider = new ViewModelProvider(activity);
-        viewModel = viewModelProvider.get(MainViewModel.class);
+        MainViewModel viewModel = viewModelProvider.get(MainViewModel.class);
 
         assert getArguments() != null;
-        String id = getArguments().getString("appId");
+        int id = getArguments().getInt("appId", -1);
         // id == null when opened using deep link
-        if (id == null) {
+        if (id == -1) {
             Uri uri = activity.getIntent().getData();
             assert uri != null;
-            id = uri.getLastPathSegment();
+            assert uri.getLastPathSegment() != null;
+            id = Integer.parseInt(uri.getLastPathSegment());
         }
 
         // check whether this fragment has been launched from the brand fragment
@@ -58,7 +57,7 @@ public class AppFragment extends Fragment {
             if (binding == null) {
                 return;
             }
-            // handle app with given id not being found (can occur when using deeplinks)
+            // handle app with given id not being found (can occur when using deep links)
             if (app == null) {
                 Navigation.findNavController(binding.getRoot())
                         .navigate(R.id.action_appFragment_to_homeFragment);
@@ -75,47 +74,39 @@ public class AppFragment extends Fragment {
                     R.string.version_info,
                     app.getVersion()
             ));
-            binding.description.setText(app.getDescription());
+            Picasso.get()
+                    .load(app.getLogoUrl())
+                    .into(binding.logo);
 
-            viewModel.getBrandById(
-                    app.getAuthorId(),
-                    brand -> {
-                        if (binding == null)
-                            return;
-                        binding.author.setText(getString(R.string.author_info, brand.getName()));
-                        // brand onClick
-                        if (isFromBrand)
-                            binding.author.setClickable(false);
-                        else
-                            binding.author.setOnClickListener(view -> {
-                                Bundle bundle = new Bundle();
-                                bundle.putString("brandId", app.getAuthorId());
-                                bundle.putString("brandName", brand.getName());
-                                Navigation.findNavController(binding.getRoot())
-                                        .navigate(R.id.action_appFragment_to_brandAppsFragment, bundle);
-                            });
-                    }
-            );
-            // last updated
-            if (app.getLastUpdated() != -1) {
+            binding.author.setText(getString(R.string.author_info, app.getBrand().name()));
+            // brand onClick
+            if (isFromBrand)
+                binding.author.setClickable(false);
+            else
+                binding.author.setOnClickListener(view -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("brandId", app.getBrand().id());
+                    bundle.putString("brandName", app.getBrand().name());
+                    Navigation.findNavController(binding.getRoot())
+                            .navigate(R.id.action_appFragment_to_brandAppsFragment, bundle);
+                });
+
+            if (app.getDescription() != null) {
+                binding.description.setVisibility(View.VISIBLE);
+                binding.description.setText(app.getDescription());
+            }
+            if (app.getLastUpdated() != null) {
                 binding.lastUpdated.setVisibility(View.VISIBLE);
                 binding.lastUpdated.setText(getString(
                         R.string.last_updated_date,
-                        BaseDateUtils.getDateStrFromEpochMilli(app.getLastUpdated())
+                        BaseDateUtils.getDateStrFromEpochMilli(
+                                app.getLastUpdated().toInstant().toEpochMilli())
                 ));
             }
-
-            // changelog
-            if (!app.getChangelog().equals("")) {
+            if (app.getChangelog() != null) {
                 binding.changelogCard.setVisibility(View.VISIBLE);
                 binding.changelogContent.setText(app.getChangelog());
             }
-
-            // app logo
-            if (!"".equals(app.getLogoUrl()))
-                Picasso.get()
-                        .load(app.getLogoUrl())
-                        .into(binding.logo);
 
             // app pictures
             adapter = new PictureListAdapter(getContext(), app.getPictureUrls());
@@ -127,19 +118,19 @@ public class AppFragment extends Fragment {
             ));
 
             // app downloader
-            if (apkDownloader == null)
-                if (!app.getDownloadUrl().equals("")) {
-                    apkDownloader = new ApkDownloader(requireContext(), app.getDownloadUrl(), app.getName(), app.getVersion());
-                    binding.download.setOnClickListener(view -> {
-                        apkDownloader.download();
-                        Toast.makeText(
-                                getContext(),
-                                getString(R.string.download_started_info),
-                                Toast.LENGTH_SHORT
-                        ).show();
-                        view.setEnabled(false);
-                    });
-                }
+            if (apkDownloader == null) {
+                apkDownloader = new ApkDownloader(
+                        requireContext(), app.getDownloadUrl(), app.getName(), app.getVersion());
+                binding.download.setOnClickListener(view -> {
+                    apkDownloader.download();
+                    Toast.makeText(
+                            getContext(),
+                            getString(R.string.download_started_info),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    view.setEnabled(false);
+                });
+            }
         });
         return binding.getRoot();
     }
