@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.listeners.lists.FileListClickListener;
+import com.familystore.familystore.listeners.FileListClickListener;
 import com.familystore.familystore.utils.BaseDateUtils;
 import com.familystore.familystore.utils.DiffUtilCallback;
 

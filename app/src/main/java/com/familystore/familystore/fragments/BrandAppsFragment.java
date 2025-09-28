@@ -15,7 +15,7 @@ import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.AppPreviewListAdapter;
 import com.familystore.familystore.databinding.FragmentBrandAppsBinding;
 import com.familystore.familystore.models.AppPreview;
-import com.familystore.familystore.models.Brand;
+import com.familystore.familystore.models.AppSortOrder;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
 import java.util.List;
@@ -35,11 +35,11 @@ public class BrandAppsFragment extends Fragment {
         adapter = null;
 
         assert getArguments() != null;
-        String id = getArguments().getString("brandId");
+        int id = getArguments().getInt("brandId");
         String brandName = getArguments().getString("brandName");
         binding.tvBrand.setText(getString(R.string.brand_title, brandName));
 
-        viewModel.addAppPreviewListListener(result -> setAdapter(result, new Brand(id, brandName)));
+        viewModel.getAppPreviewList(result -> setAdapter(result, id));
 
         return binding.getRoot();
     }
@@ -50,22 +50,19 @@ public class BrandAppsFragment extends Fragment {
         binding = null;
     }
 
-    private void setAdapter(List<AppPreview> apps, Brand brand) {
+    private void setAdapter(List<AppPreview> apps, int brandId) {
 
         if (binding != null) {
-
-            List<Brand> brands = List.of(brand);
-
-            adapter = new AppPreviewListAdapter(getContext(), apps, brands, id -> {
+            adapter = new AppPreviewListAdapter(getContext(), apps, id -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("appId", id);
+                bundle.putInt("appId", id);
                 bundle.putBoolean("fromBrand", true);
 
                 Navigation.findNavController(binding.getRoot())
                         .navigate(R.id.action_brandAppsFragment_to_appFragment, bundle);
             });
-            adapter.filterByBrandId(brand.getId());
-            adapter.sort(AppPreview.Order.PUBLISHED);
+            adapter.filterByBrandId(brandId);
+            adapter.sort(AppSortOrder.PUBLISHED);
 
             binding.rvAppList.setAdapter(adapter);
             binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));

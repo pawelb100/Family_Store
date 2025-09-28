@@ -12,31 +12,26 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.familystore.familystore.R;
-import com.familystore.familystore.listeners.lists.AppPreviewListClickListener;
+import com.familystore.familystore.listeners.AppPreviewListClickListener;
 import com.familystore.familystore.models.AppPreview;
-import com.familystore.familystore.models.Brand;
+import com.familystore.familystore.models.AppSortOrder;
 import com.familystore.familystore.utils.BaseDateUtils;
 import com.familystore.familystore.utils.DiffUtilCallback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAdapter.ViewHolder> {
 
     private final Context context;
     private List<AppPreview> appPreviewList;
-    private final List<Brand> brandList;
     private final AppPreviewListClickListener listener;
-
-
-    public AppPreviewListAdapter(Context context, List<AppPreview> appPreviewList, List<Brand> brandList, AppPreviewListClickListener listener) {
-        this.context = context;
-        this.appPreviewList = appPreviewList;
-        this.brandList = brandList;
-        this.listener = listener;
-    }
 
     @Override
     public int getItemCount() {
@@ -60,22 +55,17 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-
         AppPreview currentItem = appPreviewList.get(position);
-        String author = brandList.stream()
-                .filter(brand -> brand.getId().equals(currentItem.getAuthorId()))
-                .findFirst()
-                .orElse(new Brand("0", context.getString(R.string.unknown)))
-                .getName();
 
         viewHolder.tvName.setText(currentItem.getName());
-        viewHolder.tvAuthor.setText(author);
+        viewHolder.tvAuthor.setText(currentItem.getBrand().name());
 
-        if (currentItem.getLastUpdated() != -1) {
+        if (currentItem.getLastUpdated() != null) {
             viewHolder.tvLastUpdated.setText(context.getString(
                     R.string.last_updated_date,
                     BaseDateUtils.getTimeDifferenceString(
-                            currentItem.getLastUpdated(), System.currentTimeMillis()
+                            currentItem.getLastUpdated().toInstant().toEpochMilli(),
+                            System.currentTimeMillis()
                     )
             ));
             viewHolder.tvLastUpdated.setVisibility(View.VISIBLE);
@@ -84,18 +74,9 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
             viewHolder.tvLastUpdated.setVisibility(View.GONE);
         }
 
-        // callback is necessary to display logos which urls are
-        // loaded with delay
-        currentItem.setLogoUpdateCallback(() ->
-                Picasso.get()
-                        .load(currentItem.getLogoUrl())
-                        .into(viewHolder.ivLogo)
-        );
-        // if logo url is instantly available, callback has to be
-        // called manually
-        if (!currentItem.getLogoUrl().equals("")) {
-            currentItem.getLogoUpdateCallback().call();
-        }
+        Picasso.get()
+                .load(currentItem.getLogoUrl())
+                .into(viewHolder.ivLogo);
 
         viewHolder.parentView.setOnClickListener(v ->
                 listener.onClick(currentItem.getId())
@@ -108,7 +89,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
         diffResult.dispatchUpdatesTo(this);
     }
 
-    public void sort(AppPreview.Order order) {
+    public void sort(AppSortOrder order) {
 
         if (appPreviewList.isEmpty())
             return;
@@ -116,37 +97,21 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
         List<AppPreview> oldData = new ArrayList<>(appPreviewList);
 
         switch (order) {
-            case PUBLISHED:
-                appPreviewList.sort((first, second) -> {
-                    int id1 = Integer.parseInt(first.getId());
-                    int id2 = Integer.parseInt(second.getId());
-                    return Integer.compare(id2, id1);
-                });
-                break;
-            case LAST_UPDATED:
-                appPreviewList.sort((first, second) -> {
-                    long timestamp1 = first.getLastUpdated();
-                    long timestamp2 = second.getLastUpdated();
-
-                    if (timestamp1 == timestamp2) {
-                        int id1 = Integer.parseInt(first.getId());
-                        int id2 = Integer.parseInt(second.getId());
-                        return Integer.compare(id2, id1);
-                    } else
-                        return Long.compare(timestamp2, timestamp1);
-                });
-                break;
-            default:
+            case PUBLISHED -> appPreviewList.sort(Comparator
+                    .comparing(AppPreview::getCreatedAt)
+                    .reversed());
+            case LAST_UPDATED -> appPreviewList.sort(Comparator
+                    .comparing(AppPreview::getLastUpdated)
+                    .reversed());
         }
         calculateDiff(oldData, appPreviewList);
     }
 
-    public void filterByBrandId(String brandId) {
-        if (appPreviewList.isEmpty())
-            return;
-        appPreviewList = appPreviewList.stream().filter(appPreview -> appPreview.getAuthorId().equals(brandId)).collect(Collectors.toList());
+    public void filterByBrandId(int brandId) {
+        appPreviewList = appPreviewList.stream()
+                .filter(appPreview -> appPreview.getBrand().id() == brandId)
+                .collect(Collectors.toList());
     }
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView ivLogo;
@@ -163,8 +128,6 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
             this.tvAuthor = view.findViewById(R.id.author);
             this.tvLastUpdated = view.findViewById(R.id.lastUpdated);
         }
-
     }
-
 }
 
