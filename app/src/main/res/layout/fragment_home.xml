@@ -17,21 +17,21 @@
             app:singleSelection="true">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSortPublished"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sort_published"
-                android:textAllCaps="false"
-                android:textColor="@color/text_primary"
-                android:textSize="11sp" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSortLastUpdated"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sort_last_updated"
+                android:textAllCaps="false"
+                android:textColor="@color/text_primary"
+                android:textSize="11sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSortPublished"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sort_published"
                 android:textAllCaps="false"
                 android:textColor="@color/text_primary"
                 android:textSize="11sp" />
