@@ -23,6 +23,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accept URLs like https://family-store.vercel.app/apps/{id} -->
+                <data
+                    android:scheme="https"
+                    android:host="family-store.vercel.app"
+                    android:pathPrefix="/apps" />
+            </intent-filter>
             <nav-graph android:value="@navigation/navgraph" />
         </activity>
         <provider

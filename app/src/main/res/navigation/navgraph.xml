@@ -27,7 +27,7 @@
         <deepLink
             android:id="@+id/deepLink"
             android:autoVerify="true"
-            app:action="ACTION_VIEW"
+            app:action="android.intent.action.VIEW"
             app:uri="https://family-store.vercel.app/apps/{id}" />
         <action
             android:id="@+id/action_appFragment_to_brandAppsFragment"

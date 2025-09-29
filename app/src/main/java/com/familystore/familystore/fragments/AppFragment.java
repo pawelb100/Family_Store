@@ -40,7 +40,7 @@ public class AppFragment extends Fragment {
 
         assert getArguments() != null;
         int id = getArguments().getInt("appId", -1);
-        // id == null when opened using deep link
+        // id == -1 when opened using deep link
         if (id == -1) {
             Uri uri = activity.getIntent().getData();
             assert uri != null;
