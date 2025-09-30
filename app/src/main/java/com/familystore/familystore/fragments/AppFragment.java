@@ -79,6 +79,16 @@ public class AppFragment extends Fragment {
                     .into(binding.logo);
 
             binding.author.setText(getString(R.string.author_info, app.getBrand().name()));
+            binding.lastUpdated.setText(getString(
+                    R.string.last_updated_date,
+                    BaseDateUtils.getDateStrFromEpochMilli(
+                            app.getLastUpdated().toInstant().toEpochMilli())
+            ));
+            binding.publishedDate.setText(getString(
+                    R.string.published_date,
+                    BaseDateUtils.getDateStrFromEpochMilli(
+                            app.getCreatedAt().toInstant().toEpochMilli())
+            ));
             // brand onClick
             if (isFromBrand)
                 binding.author.setClickable(false);
@@ -94,14 +104,6 @@ public class AppFragment extends Fragment {
             if (app.getDescription() != null) {
                 binding.description.setVisibility(View.VISIBLE);
                 binding.description.setText(app.getDescription());
-            }
-            if (app.getLastUpdated() != null) {
-                binding.lastUpdated.setVisibility(View.VISIBLE);
-                binding.lastUpdated.setText(getString(
-                        R.string.last_updated_date,
-                        BaseDateUtils.getDateStrFromEpochMilli(
-                                app.getLastUpdated().toInstant().toEpochMilli())
-                ));
             }
             if (app.getChangelog() != null) {
                 binding.changelogCard.setVisibility(View.VISIBLE);

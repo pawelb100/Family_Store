@@ -10,6 +10,7 @@
     <string name="download_button">Pobierz</string>
     <string name="author_info" tools:ignore="Typos">Autor: %1$s</string>
     <string name="last_updated_date">Ostatnia aktualizacja: %1$s</string>
+    <string name="published_date">Opublikowano: %1$s</string>
     <string name="changelog_title">Lista zmian:</string>
     <string name="sort_order">Kolejność:</string>
     <string name="sort_published">Data publikacji</string>

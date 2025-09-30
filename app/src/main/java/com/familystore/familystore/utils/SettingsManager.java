@@ -21,7 +21,7 @@ public class SettingsManager {
 
     public AppSortOrder getDefaultAppSorting() {
         return AppSortOrder.valueOf(
-                sharedPref.getString("default_app_sort", "PUBLISHED"));
+                sharedPref.getString("default_app_sort", "LAST_UPDATED"));
     }
 
     public void setTheme() {
