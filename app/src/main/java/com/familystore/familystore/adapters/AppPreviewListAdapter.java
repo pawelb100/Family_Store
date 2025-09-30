@@ -24,14 +24,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAdapter.ViewHolder> {
 
     private final Context context;
-    private List<AppPreview> appPreviewList;
+    private @NonNull List<AppPreview> appPreviewList;
     private final AppPreviewListClickListener listener;
+    private AppSortOrder currentSortOrder = null;
+    private static final Object PAYLOAD_SORT_ORDER = new Object();
 
     @Override
     public int getItemCount() {
@@ -54,25 +56,13 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder,
+                                 int position) {
         AppPreview currentItem = appPreviewList.get(position);
 
         viewHolder.tvName.setText(currentItem.getName());
         viewHolder.tvAuthor.setText(currentItem.getBrand().name());
-
-        if (currentItem.getLastUpdated() != null) {
-            viewHolder.tvLastUpdated.setText(context.getString(
-                    R.string.last_updated_date,
-                    BaseDateUtils.getTimeDifferenceString(
-                            currentItem.getLastUpdated().toInstant().toEpochMilli(),
-                            System.currentTimeMillis()
-                    )
-            ));
-            viewHolder.tvLastUpdated.setVisibility(View.VISIBLE);
-        } else {
-            viewHolder.tvLastUpdated.setText("");
-            viewHolder.tvLastUpdated.setVisibility(View.GONE);
-        }
+        bindDate(viewHolder.tvDate, currentItem);
 
         Picasso.get()
                 .load(currentItem.getLogoUrl())
@@ -83,6 +73,38 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
         );
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder,
+                                 int position,
+                                 @NonNull List<Object> payloads) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(viewHolder, position, payloads);
+        } else {
+            AppPreview currentItem = appPreviewList.get(position);
+            bindDate(viewHolder.tvDate, currentItem);
+        }
+    }
+
+    private void bindDate(TextView tvDate, AppPreview currentItem) {
+        switch (currentSortOrder) {
+            case LAST_UPDATED -> tvDate.setText(context.getString(
+                    R.string.last_updated_date,
+                    BaseDateUtils.getTimeDifferenceString(
+                            currentItem.getLastUpdated().toInstant().toEpochMilli(),
+                            System.currentTimeMillis()
+                    )
+            ));
+            case PUBLISHED -> tvDate.setText(context.getString(
+                    R.string.published_date,
+                    BaseDateUtils.getTimeDifferenceString(
+                            currentItem.getCreatedAt().toInstant().toEpochMilli(),
+                            System.currentTimeMillis()
+                    )
+            ));
+        }
+    }
+
+
     private void calculateDiff(List<AppPreview> oldData, List<AppPreview> newData) {
         DiffUtilCallback<AppPreview> diffUtilCallback = new DiffUtilCallback<>(oldData, newData);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback);
@@ -90,7 +112,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
     }
 
     public void sort(AppSortOrder order) {
-
+        currentSortOrder = order;
         if (appPreviewList.isEmpty())
             return;
 
@@ -105,6 +127,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
                     .reversed());
         }
         calculateDiff(oldData, appPreviewList);
+        notifyItemRangeChanged(0, appPreviewList.size(), PAYLOAD_SORT_ORDER);
     }
 
     public void filterByBrandId(int brandId) {
@@ -117,7 +140,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
         private final ImageView ivLogo;
         private final TextView tvName;
         private final TextView tvAuthor;
-        private final TextView tvLastUpdated;
+        private final TextView tvDate;
         private final View parentView;
 
         public ViewHolder(@NonNull View view) {
@@ -126,7 +149,7 @@ public class AppPreviewListAdapter extends RecyclerView.Adapter<AppPreviewListAd
             this.ivLogo = view.findViewById(R.id.logo);
             this.tvName = view.findViewById(R.id.name);
             this.tvAuthor = view.findViewById(R.id.author);
-            this.tvLastUpdated = view.findViewById(R.id.lastUpdated);
+            this.tvDate = view.findViewById(R.id.date);
         }
     }
 }

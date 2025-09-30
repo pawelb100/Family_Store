@@ -8,6 +8,7 @@
     <string name="download_button">Download</string>
     <string name="author_info">Author: %1$s</string>
     <string name="last_updated_date">Last updated: %1$s</string>
+    <string name="published_date">Published: %1$s</string>
     <string name="changelog_title">Changelog:</string>
     <string name="sort_order">Order:</string>
     <string name="sort_published">Date published</string>
