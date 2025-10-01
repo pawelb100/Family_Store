@@ -31,7 +31,7 @@ public class AppsClient extends BaseClient {
 
     public void fetchAppPreviews(
             Consumer<List<AppPreview>> onAppPreviewsFetched,
-            Runnable onFailure) {
+            Runnable onFetchError) {
 
         Callback<List<AppPreview>> responseCallback = new Callback<>() {
             @Override
@@ -50,7 +50,7 @@ public class AppsClient extends BaseClient {
             @Override
             public void onFailure(@NonNull Call<List<AppPreview>> call, @NonNull Throwable t) {
                 onAppPreviewsFetched.accept(Collections.emptyList());
-                onFailure.run();
+                onFetchError.run();
             }
         };
         List<String> select = List.of(
