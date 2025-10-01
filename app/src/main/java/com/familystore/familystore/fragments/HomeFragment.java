@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment {
         MainViewModel viewModel = viewModelProvider.get(MainViewModel.class);
 
         adapter = null;
-        viewModel.getAppPreviewList(this::setAdapter);
+        viewModel.getAppPreviewList(this::setAdapter, this::onFetchError);
 
         binding.btnSortPublished.setOnClickListener(view -> {
             if (adapter != null)
@@ -87,5 +88,13 @@ public class HomeFragment extends Fragment {
             }
             adapter.sort(defaultSorting);
         }
+    }
+
+    private void onFetchError() {
+        Toast.makeText(
+                getContext(),
+                getString(R.string.app_list_fetch_error),
+                Toast.LENGTH_SHORT
+        ).show();
     }
 }

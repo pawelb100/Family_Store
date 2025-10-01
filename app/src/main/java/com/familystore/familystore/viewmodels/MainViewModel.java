@@ -26,12 +26,14 @@ public class MainViewModel extends AndroidViewModel {
         appsClient = new AppsClient();
     }
 
-    public void getAppPreviewList(Consumer<List<AppPreview>> listener) {
-        appsClient.fetchAppPreviews(listener);
+    public void getAppPreviewList(
+            Consumer<List<AppPreview>> onAppListFetched, Runnable onFetchError) {
+        appsClient.fetchAppPreviews(onAppListFetched, onFetchError);
     }
 
-    public void getAppById(int id, Consumer<App> listener) {
-        appsClient.fetchAppById(id, listener);
+    public void getAppById(
+            int id, Consumer<App> onAppFetched, Runnable onAppNotFound, Runnable onFetchError) {
+        appsClient.fetchAppById(id, onAppFetched, onAppNotFound, onFetchError);
     }
 
     public void checkAvailableUpdate(Consumer<FSReleaseData> onUpdateAvailable) {
