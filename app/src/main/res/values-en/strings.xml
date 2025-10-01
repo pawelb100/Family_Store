@@ -43,4 +43,6 @@
     <string name="settings">Settings</string>
     <string name="app_not_found">App not found</string>
     <string name="download_started_info">Downloading…</string>
+    <string name="app_fetch_error">An error occurred while fetching the app\'s data</string>
+    <string name="app_list_fetch_error">An error occurred while fetching the app list</string>
 </resources>

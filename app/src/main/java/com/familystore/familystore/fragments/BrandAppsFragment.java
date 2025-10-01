@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,8 +40,10 @@ public class BrandAppsFragment extends Fragment {
         String brandName = getArguments().getString("brandName");
         binding.tvBrand.setText(getString(R.string.brand_title, brandName));
 
-        viewModel.getAppPreviewList(result -> setAdapter(result, id));
-
+        viewModel.getAppPreviewList(
+                result -> setAdapter(result, id),
+                this::onFetchError
+        );
         return binding.getRoot();
     }
 
@@ -67,5 +70,13 @@ public class BrandAppsFragment extends Fragment {
             binding.rvAppList.setAdapter(adapter);
             binding.rvAppList.setLayoutManager(new LinearLayoutManager(getContext()));
         }
+    }
+
+    private void onFetchError() {
+        Toast.makeText(
+                getContext(),
+                getString(R.string.app_list_fetch_error),
+                Toast.LENGTH_SHORT
+        ).show();
     }
 }

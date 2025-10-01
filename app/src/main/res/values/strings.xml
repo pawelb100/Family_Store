@@ -18,6 +18,8 @@
     <string name="brand_title">Aplikacje %1$s:</string>
     <string name="app_not_found">Nie znaleziono aplikacji</string>
     <string name="download_started_info">Pobieranie…</string>
+    <string name="app_fetch_error">Wystąpił błąd podczas pobierania danych o aplikacji</string>
+    <string name="app_list_fetch_error">Wystąpił błąd podczas pobierania listy aplikacji</string>
 
     <!-- Files fragment -->
     <string name="download_date_info">Pobrano: %1$s</string>

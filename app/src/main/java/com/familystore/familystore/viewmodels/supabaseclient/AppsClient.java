@@ -29,7 +29,10 @@ public class AppsClient extends BaseClient {
         this.storageApi = retrofitStorage.create(StorageApi.class);
     }
 
-    public void fetchAppPreviews(Consumer<List<AppPreview>> onAppPreviewsFetched) {
+    public void fetchAppPreviews(
+            Consumer<List<AppPreview>> onAppPreviewsFetched,
+            Runnable onFetchError) {
+
         Callback<List<AppPreview>> responseCallback = new Callback<>() {
             @Override
             public void onResponse(
@@ -47,6 +50,7 @@ public class AppsClient extends BaseClient {
             @Override
             public void onFailure(@NonNull Call<List<AppPreview>> call, @NonNull Throwable t) {
                 onAppPreviewsFetched.accept(Collections.emptyList());
+                onFetchError.run();
             }
         };
         List<String> select = List.of(
@@ -97,7 +101,8 @@ public class AppsClient extends BaseClient {
      * Note: onAppFetched will be called twice - once when the initial data is available,
      * and the second time once app pictures are available
      */
-    public void fetchAppById(int id, Consumer<App> onAppFetched) {
+    public void fetchAppById(
+            int id, Consumer<App> onAppFetched, Runnable onAppNotFound, Runnable onFetchError) {
         Callback<List<App>> responseCallback = new Callback<>() {
             @Override
             public void onResponse(
@@ -105,7 +110,7 @@ public class AppsClient extends BaseClient {
                     @NonNull Response<List<App>> response) {
                 List<App> responseBody = response.body();
                 if (responseBody == null || responseBody.isEmpty()) {
-                    onAppFetched.accept(null);
+                    onAppNotFound.run();
                     return;
                 }
                 App app = responseBody.get(0);
@@ -120,6 +125,7 @@ public class AppsClient extends BaseClient {
 
             @Override
             public void onFailure(@NonNull Call<List<App>> call, @NonNull Throwable t) {
+                onFetchError.run();
             }
         };
         List<String> select = List.of(
