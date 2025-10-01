@@ -20,7 +20,7 @@ android {
         minSdk 29
         targetSdk 33
         versionCode 1
-        versionName "3.2.4"  // last changed: 31/08/2025
+        versionName "3.2.5"  // last changed: 28/09/2025
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -74,12 +74,6 @@ dependencies {
     //Retrofit (HTTP client)
     implementation 'com.squareup.retrofit2:retrofit:3.0.0'
     implementation 'com.squareup.retrofit2:converter-gson:3.0.0'
-
-    //Firebase
-    implementation platform("com.google.firebase:firebase-bom:34.2.0")
-    implementation 'com.google.firebase:firebase-database'
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-storage'
 
     //JSONSerializer
     implementation 'com.google.code.gson:gson:2.13.1'

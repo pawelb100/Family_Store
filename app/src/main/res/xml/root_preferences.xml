@@ -29,18 +29,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/notifs_label">
-
-        <SwitchPreferenceCompat
-            app:key="notifications"
-            app:title="@string/receive_notifs"
-            app:defaultValue="false"
-            app:enabled="false"
-            app:summaryOff="@string/coming_soon"
-            />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/about_app">
 
         <Preference

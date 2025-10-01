@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,7 +18,7 @@ import com.familystore.familystore.R;
 import com.familystore.familystore.adapters.AppPreviewListAdapter;
 import com.familystore.familystore.databinding.FragmentHomeBinding;
 import com.familystore.familystore.models.AppPreview;
-import com.familystore.familystore.models.Brand;
+import com.familystore.familystore.models.AppSortOrder;
 import com.familystore.familystore.utils.SettingsManager;
 import com.familystore.familystore.viewmodels.MainViewModel;
 
@@ -37,20 +38,15 @@ public class HomeFragment extends Fragment {
         MainViewModel viewModel = viewModelProvider.get(MainViewModel.class);
 
         adapter = null;
-
-        viewModel.getBrandList(brands ->
-                viewModel.addAppPreviewListListener(apps ->
-                        setAdapter(apps, brands)
-                )
-        );
+        viewModel.getAppPreviewList(this::setAdapter, this::onFetchError);
 
         binding.btnSortPublished.setOnClickListener(view -> {
             if (adapter != null)
-                adapter.sort(AppPreview.Order.PUBLISHED);
+                adapter.sort(AppSortOrder.PUBLISHED);
         });
         binding.btnSortLastUpdated.setOnClickListener(view -> {
             if (adapter != null)
-                adapter.sort(AppPreview.Order.LAST_UPDATED);
+                adapter.sort(AppSortOrder.LAST_UPDATED);
         });
 
         return binding.getRoot();
@@ -62,13 +58,11 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    private void setAdapter(List<AppPreview> apps, List<Brand> brands) {
-
+    private void setAdapter(List<AppPreview> apps) {
         if (binding != null) {
-            adapter = new AppPreviewListAdapter(getContext(), apps, brands, id -> {
+            adapter = new AppPreviewListAdapter(getContext(), apps, id -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("appId", id);
-
+                bundle.putInt("appId", id);
                 Navigation.findNavController(binding.getRoot())
                         .navigate(R.id.action_homeFragment_to_appFragment, bundle);
             });
@@ -83,7 +77,7 @@ public class HomeFragment extends Fragment {
                     PreferenceManager.getDefaultSharedPreferences(ctx),
                     getContext()
             );
-            AppPreview.Order defaultSorting = settingsManager.getDefaultAppSorting();
+            AppSortOrder defaultSorting = settingsManager.getDefaultAppSorting();
             switch (defaultSorting) {
                 case PUBLISHED:
                     binding.btnSortPublished.performClick();
@@ -96,5 +90,11 @@ public class HomeFragment extends Fragment {
         }
     }
 
-
+    private void onFetchError() {
+        Toast.makeText(
+                getContext(),
+                getString(R.string.app_list_fetch_error),
+                Toast.LENGTH_SHORT
+        ).show();
+    }
 }

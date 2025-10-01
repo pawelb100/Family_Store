@@ -10,6 +10,7 @@
     <string name="download_button">Pobierz</string>
     <string name="author_info" tools:ignore="Typos">Autor: %1$s</string>
     <string name="last_updated_date">Ostatnia aktualizacja: %1$s</string>
+    <string name="published_date">Opublikowano: %1$s</string>
     <string name="changelog_title">Lista zmian:</string>
     <string name="sort_order">Kolejność:</string>
     <string name="sort_published">Data publikacji</string>
@@ -17,6 +18,8 @@
     <string name="brand_title">Aplikacje %1$s:</string>
     <string name="app_not_found">Nie znaleziono aplikacji</string>
     <string name="download_started_info">Pobieranie…</string>
+    <string name="app_fetch_error">Wystąpił błąd podczas pobierania danych o aplikacji</string>
+    <string name="app_list_fetch_error">Wystąpił błąd podczas pobierania listy aplikacji</string>
 
     <!-- Files fragment -->
     <string name="download_date_info">Pobrano: %1$s</string>
