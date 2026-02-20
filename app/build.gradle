@@ -6,10 +6,14 @@ plugins {
 Properties localProperties = new Properties()
 localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
 
+
 android {
     signingConfigs {
         debug {
-            storeFile file(localProperties.getProperty('debug.keystore.file'))
+            def debugKeystorePath = localProperties.getProperty('debug.keystore.file')
+            if (debugKeystorePath != null) {
+                storeFile file(debugKeystorePath)
+            }
         }
 
         release {
@@ -39,6 +43,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 
     buildTypes {
