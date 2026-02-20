@@ -3,7 +3,7 @@ name: Build new release
 
 on:
   push:
-    branches: [ main, feature/#71 ]
+    branches: [ main ]
 
 jobs:
   build:
