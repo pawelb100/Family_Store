@@ -6,7 +6,6 @@ plugins {
 Properties localProperties = new Properties()
 localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-
 android {
     signingConfigs {
         debug {
@@ -32,6 +31,9 @@ android {
         targetSdk 33
         versionCode 1
         versionName "3.2.6"  // last changed: 14/02/2026
+        base {
+            archivesName = "fs-" + versionName
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
