@@ -1,9 +1,9 @@
 # Credit: https://dev.to/ronynn/automating-android-apk-builds-with-github-actions-the-sane-way-1h95
-name: Build new release
+name: New release
 
 on:
   push:
-    branches: [ main, feature/#73 ]
+    branches: [ main ]
 
 jobs:
   build:
