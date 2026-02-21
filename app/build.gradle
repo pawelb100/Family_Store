@@ -26,21 +26,31 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.familystore.familystore"
+        applicationId 'com.familystore.familystore'
         minSdk 29
         targetSdk 33
         versionCode 1
-        versionName "3.2.6"  // last changed: 14/02/2026
+        versionName '3.2.6'  // last changed: 14/02/2026
         base {
-            archivesName = "fs-" + versionName
+            archivesName = 'fs-' + versionName
         }
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
-        buildConfigField("String", "SUPABASE_URL",
-                "\"${localProperties.getProperty('supabase.url') ?: ''}\"")
-        buildConfigField("String", "SUPABASE_PUBLISHABLE_KEY",
-                "\"${localProperties.getProperty('supabase.publishable.key') ?: ''}\"")
+        def requiredLocalProperties = [
+                'SUPABASE_URL'            : 'supabase.url',
+                'SUPABASE_PUBLISHABLE_KEY': 'supabase.publishable.key',
+                'ONESIGNAL_APP_ID'        : 'onesignal.appid',
+        ]
+        requiredLocalProperties.each { buildConfigFieldName, localPropertyId ->
+            def propertyValue = localProperties.getProperty(localPropertyId)
+            if (propertyValue == null) {
+                throw new RuntimeException(
+                        "Missing required field from localProperties: ${localPropertyId}"
+                )
+            }
+            buildConfigField('String', buildConfigFieldName, "\"$propertyValue\"")
+        }
     }
 
     buildFeatures {
@@ -54,16 +64,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [appName: "Family Store"]
-            buildConfigField("String", "ONESIGNAL_APP_ID",
-                    "\"" + localProperties["onesignal.appid"] + "\"")
         }
         debug {
             signingConfig signingConfigs.debug
             applicationIdSuffix '.debug'
             versionNameSuffix '-debug'
             manifestPlaceholders = [appName: "Family Store Debug"]
-            buildConfigField("String", "ONESIGNAL_APP_ID",
-                    "\"" + localProperties["onesignal.appid"] + "\"")
         }
     }
     compileOptions {
