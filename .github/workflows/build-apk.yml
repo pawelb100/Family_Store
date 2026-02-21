@@ -3,7 +3,7 @@ name: Build new release
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/#73 ]
 
 jobs:
   build:
@@ -28,6 +28,9 @@ jobs:
           echo "release.keystore.password=${{ secrets.KEYSTORE_PASSWORD }}" >> local.properties
           echo "release.key.alias=${{ secrets.KEY_ALIAS }}" >> local.properties
           echo "release.key.password=${{ secrets.KEY_PASSWORD }}" >> local.properties
+          echo "onesignal.appid=${{ vars.ONESIGNAL_APP_ID }}" >> local.properties
+          echo "supabase.url=${{ vars.SUPABASE_URL }}" >> local.properties
+          echo "supabase.publishable.key=${{ vars.SUPABASE_PUBLISHABLE_KEY }}" >> local.properties
 
       - name: Setup Gradle cache
         uses: gradle/actions/setup-gradle@v5
