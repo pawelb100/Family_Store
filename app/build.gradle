@@ -9,7 +9,17 @@ localProperties.load(project.rootProject.file('local.properties').newDataInputSt
 android {
     signingConfigs {
         debug {
-            storeFile file(localProperties.getProperty('debug.keystore.file'))
+            def debugKeystorePath = localProperties.getProperty('debug.keystore.file')
+            if (debugKeystorePath != null) {
+                storeFile file(debugKeystorePath)
+            }
+        }
+
+        release {
+            storeFile file(localProperties.getProperty('release.keystore.file'))
+            storePassword localProperties.getProperty('release.keystore.password')
+            keyAlias localProperties.getProperty('release.key.alias')
+            keyPassword localProperties.getProperty('release.key.password')
         }
     }
     namespace 'com.familystore.familystore'
@@ -21,6 +31,9 @@ android {
         targetSdk 33
         versionCode 1
         versionName "3.2.6"  // last changed: 14/02/2026
+        base {
+            archivesName = "fs-" + versionName
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -32,10 +45,12 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [appName: "Family Store"]
@@ -43,6 +58,7 @@ android {
                     "\"" + localProperties["onesignal.appid"] + "\"")
         }
         debug {
+            signingConfig signingConfigs.debug
             applicationIdSuffix '.debug'
             versionNameSuffix '-debug'
             manifestPlaceholders = [appName: "Family Store Debug"]
@@ -68,20 +84,20 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 
     //Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.38'
-    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
 
     //Retrofit (HTTP client)
     implementation 'com.squareup.retrofit2:retrofit:3.0.0'
     implementation 'com.squareup.retrofit2:converter-gson:3.0.0'
 
     //JSONSerializer
-    implementation 'com.google.code.gson:gson:2.13.1'
+    implementation 'com.google.code.gson:gson:2.13.2'
 
     //NavigationComponent
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.navigation:navigation-fragment:2.9.3'
-    implementation 'androidx.navigation:navigation-ui:2.9.3'
+    implementation 'androidx.navigation:navigation-fragment:2.9.7'
+    implementation 'androidx.navigation:navigation-ui:2.9.7'
 
     //sharedViewModel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
