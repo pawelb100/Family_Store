@@ -11,10 +11,15 @@
     <style name="Theme.FamilyStoreClassic" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_classic</item>
         <item name="colorOnPrimary">@color/text_title</item>
-        <item name="colorSecondary">@color/text_accent</item>
+        <item name="android:textColorPrimary">@color/text_primary</item> <!-- Settings names -->
+        <item name="colorSecondary">@color/text_secondary</item> <!-- Settings sections headers -->
+        <item name="android:textColorSecondary">@color/text_accent</item> <!-- Settings values -->
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_classic</item>
         <item name="materialCardViewStyle">@style/CardViewStyleClassic</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorSurface">@color/bottomnav</item>
+        <item name="android:navigationBarColor">@color/bottomnav</item>
     </style>
     <style name="CardViewStyleClassic" parent="BaseCardViewStyle">
         <item name="cardBackgroundColor">@color/background_card_classic</item>
@@ -24,10 +29,15 @@
     <style name="Theme.FamilyStoreBlue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_blue</item>
         <item name="colorOnPrimary">@color/text_title</item>
-        <item name="colorSecondary">@color/text_accent</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/text_secondary</item>
+        <item name="android:textColorSecondary">@color/text_accent</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_blue</item>
         <item name="materialCardViewStyle">@style/CardViewStyleBlue</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorSurface">@color/bottomnav</item>
+        <item name="android:navigationBarColor">@color/bottomnav</item>
     </style>
     <style name="CardViewStyleBlue" parent="BaseCardViewStyle">
         <item name="cardBackgroundColor">@color/background_card_blue</item>
@@ -37,10 +47,15 @@
     <style name="Theme.FamilyStoreOrange" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_orange</item>
         <item name="colorOnPrimary">@color/text_title</item>
-        <item name="colorSecondary">@color/text_accent</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/text_secondary</item>
+        <item name="android:textColorSecondary">@color/text_accent</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_orange</item>
         <item name="materialCardViewStyle">@style/CardViewStyleOrange</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorSurface">@color/bottomnav</item>
+        <item name="android:navigationBarColor">@color/bottomnav</item>
     </style>
     <style name="CardViewStyleOrange" parent="BaseCardViewStyle">
         <item name="cardBackgroundColor">@color/background_card_orange</item>
@@ -50,7 +65,9 @@
     <style name="Theme.FamilyStoreDeepBlue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_deepblue</item>
         <item name="colorOnPrimary">@color/text_title</item>
-        <item name="colorSecondary">@color/text_accent_deepblue</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/text_secondary_deepblue</item>
+        <item name="android:textColorSecondary">@color/text_accent</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_deepblue</item>
         <item name="materialCardViewStyle">@style/CardViewStyleFullBlue</item>
@@ -66,7 +83,9 @@
     <style name="Theme.FamilyStoreDeepOrange" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_deeporange</item>
         <item name="colorOnPrimary">@color/text_title</item>
-        <item name="colorSecondary">@color/text_accent_deeporange</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/text_secondary_deeporange</item>
+        <item name="android:textColorSecondary">@color/text_accent</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_deeporange</item>
         <item name="materialCardViewStyle">@style/CardViewStyleFullOrange</item>
@@ -82,7 +101,9 @@
     <style name="Theme.FamilyStoreBlueGrey" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_bluegrey</item>
         <item name="colorOnPrimary">@color/text_title</item>
-        <item name="colorSecondary">@color/text_accent_bluegrey</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/text_secondary_bluegrey</item>
+        <item name="android:textColorSecondary">@color/text_accent</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_bluegrey</item>
         <item name="materialCardViewStyle">@style/CardViewStyleBlueGrey</item>
@@ -98,7 +119,9 @@
     <style name="Theme.FamilyStoreDeepGreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_green</item>
         <item name="colorOnPrimary">@color/text_title</item>
-        <item name="colorSecondary">@color/text_accent_green</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/text_secondary_green</item>
+        <item name="android:textColorSecondary">@color/text_accent</item>
         <item name="colorOnSecondary">@color/text_primary</item>
         <item name="android:statusBarColor">@color/status_bar_green</item>
         <item name="materialCardViewStyle">@style/CardViewStyleGreen</item>
